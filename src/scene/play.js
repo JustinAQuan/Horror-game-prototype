@@ -21,5 +21,17 @@ class play extends Phaser.Scene {
         // have main camera follow mouse inputs
         this.cameras.main.startFollow(this.input);
         this.cameras.main.setBounds(-game.config.width / 10, -game.config.height / 20, game.config.width * 1.5, game.config.height * 1.1);
+
+        this.spaceKey = this.input.keyboard.addKey('SPACE');
+    }
+
+    update(){
+        if(this.spaceKey.isDown){
+            this.cameras.main.setBounds(-game.config.width / 10, -game.config.height / 20, game.config.width * 1.5, game.config.height * 1.1);
+        }
+
+        else{
+            this.cameras.main.setBounds(0, 0, game.config.width, game.config.height);
+        }
     }
 }
