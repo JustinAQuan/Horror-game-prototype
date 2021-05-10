@@ -5,7 +5,7 @@ class menu extends Phaser.Scene {
     
     preload() {
         // preload homescreen
-        this.load.image('homescreen', '/assets/Bliss.png');
+        this.load.image('homescreen', './assets/Bliss.png');
     }
 
     create() {

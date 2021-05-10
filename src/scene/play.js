@@ -5,7 +5,7 @@ class play extends Phaser.Scene {
 
     preload() {
         // Homescreen
-        this.load.image('homescreen', '/assets/Bliss.png');
+        this.load.image('homescreen', './assets/Bliss.png');
     }
 
     create() {
