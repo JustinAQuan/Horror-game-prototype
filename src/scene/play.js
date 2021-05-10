@@ -4,11 +4,15 @@ class play extends Phaser.Scene {
     }
 
     preload() {
-        // Homescreen
+        // loads homescreen
         this.load.image('homescreen', './assets/Bliss.png');
 
-        // room
+        // loads room
         this.load.image('room', './assets/room.png');
+
+        // loads outside
+        // NEEDS TO BE DONE
+
     }
 
     create() {
@@ -29,18 +33,25 @@ class play extends Phaser.Scene {
 
         // have main camera follow mouse inputs
         this.cameras.main.startFollow(this.input);
-        this.cameras.main.setBounds(-game.config.width / 10, -game.config.height / 20, game.config.width * 1.5, game.config.height * 1.1);
 
+        // initializing spacebar as a keyboard input
         this.spaceKey = this.input.keyboard.addKey('SPACE');
     }
 
     update(){
-        if(this.spaceKey.isDown){
-            this.cameras.main.setBounds(-game.config.width / 5, -game.config.height / 20, game.config.width * 1.5, game.config.height * 1.1);
+        if(this.spaceKey.isDown){   // able to look around the room when pressing space
+            this.cameras.main.setBounds(
+                -game.config.width / 5,     // x: -160
+                -game.config.height / 20,   // y: -30
+                game.config.width * 1.5,    // width: 1200 (therefore, can scroll right until 1040 pixels)
+                game.config.height * 1.1);  // height: 660 (therefore, can scroll down until 630 pixels)
         }
-
-        else{
-            this.cameras.main.setBounds(0, 0, game.config.width, game.config.height);
+        else{   // can only see screen monitor when not pressing space
+            this.cameras.main.setBounds(
+                0,                      // x: 0
+                0,                      // y: 0
+                game.config.width,      // width: 800
+                game.config.height);    // height: 600
         }
 
         //update outside sprite to creepy stuff when stuff happens
