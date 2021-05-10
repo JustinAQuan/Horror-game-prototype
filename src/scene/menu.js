@@ -20,5 +20,8 @@ class menu extends Phaser.Scene {
 
         // title
         this.add.text(game.config.width/2, game.config.height/2, "Horror Game", {fontSize: "50px", color: 0xffffff}).setOrigin(.5,.5);
+    
+        // go to play scene
+        this.scene.start("playScene");
     }
 }

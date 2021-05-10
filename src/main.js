@@ -4,7 +4,7 @@ let config = {
     type: Phaser.CANVAS,
     width: aspectSize * 4,
     height: aspectSize * 3,
-    scene: [menu],
+    scene: [menu, play],
 };
  
 let game = new Phaser.Game(config);
