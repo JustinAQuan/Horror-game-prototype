@@ -32,7 +32,7 @@ class play extends Phaser.Scene {
         this.add.rectangle(game.config.width - borderUISize - 10, 0, borderUISize + 10, game.config.height, 0xd4d4b8).setOrigin(0 ,0);
 
         // have main camera follow mouse inputs
-        this.cameras.main.startFollow(this.input);
+        this.cameras.main.startFollow(this.input, false, 0.01, 0.01);
 
         // initializing spacebar as a keyboard input
         this.spaceKey = this.input.keyboard.addKey('SPACE');
