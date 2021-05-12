@@ -9,12 +9,15 @@
  * Date Completed:  TBD
 **************************************************/
 
-let aspectSize = 200;
-
 let config = {
-    type: Phaser.CANVAS,
-    width: aspectSize * 4,
-    height: aspectSize * 3,
+    type: Phaser.AUTO,
+    scale: {
+        mode: Phaser.Scale.HEIGHT_CONTROLS_WIDTH,
+        parent: 'canvas',
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 800,
+        height: 600
+    },
     scene: [menu, play],
 };
  
