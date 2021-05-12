@@ -5,7 +5,9 @@ class play extends Phaser.Scene {
 
     preload() {
         // loads monitor
-        this.load.image('monitor', './assets/Bliss.png');
+        this.load.image('homescreen', './assets/Desktop_bg.png');
+        this.load.image('monitor_border', './assets/Monitor.png');
+        this.load.image('ie', './assets/Internet_explorer.png');
 
         // loads room
         this.load.image('room', './assets/room.png');
@@ -19,14 +21,18 @@ class play extends Phaser.Scene {
         // creates outside whenever we want
         // this.outside = this.add.tileSprite().setOrigin(0,0);
 
-        // this.monitor = this.group.add()
-
         // creates room
         this.room = this.add.sprite(-game.config.width / 5, -game.config.height / 20, 'room').setOrigin(0,0);
 
+        this.computer = this.add.container();
+
         // create monitor
-        this.monitor = this.add.sprite(0, 0, 'monitor').setOrigin(0,0);
-        this.monitor.setScale(.61);
+        this.monitor_border = this.add.sprite(0, 0, 'monitor_border').setOrigin(0,0);
+        this.homescreen = this.add.sprite(monitorBorderX, monitorBorderY, 'homescreen').setOrigin(0,0);
+        this.ie = this.add.sprite(200, 200, 'ie').setOrigin(0,0);
+
+        this.computer.add([this.monitor_border, this.homescreen, this.ie]);
+        this.computer.setActive(true);
 
         // have main camera follow mouse inputs
         this.cameras.main.startFollow(this.input, false, 0.01, 0.01);
@@ -42,10 +48,9 @@ class play extends Phaser.Scene {
                 -game.config.height / 20,   // y: -30
                 game.config.width * 1.5,    // width: 1200 (therefore, can scroll right until 1040 pixels)
                 game.config.height * 1.1);  // height: 660 (therefore, can scroll down until 630 pixels)
-            
-            this.monitor.setX(-50);
-            this.monitor.setY(150);
-            this.monitor.setScale(.5);
+                
+            this.computer.setY(180);    
+            this.computer.setScale(.75);
         }
         else{   // can only see screen monitor when not pressing space
             this.cameras.main.setBounds(
@@ -53,10 +58,14 @@ class play extends Phaser.Scene {
                 0,                      // y: 0
                 game.config.width,      // width: 800
                 game.config.height);    // height: 600
+            
 
-            this.monitor.setX(0);
-            this.monitor.setY(0);
-            this.monitor.setScale(.61);
+            this.monitor_border.setY(0);
+            this.homescreen.setX(monitorBorderX);
+            this.homescreen.setY(monitorBorderY);
+
+            this.computer.setY(0);
+            this.computer.setScale(1);
         }
 
         //update outside sprite to creepy stuff when stuff happens

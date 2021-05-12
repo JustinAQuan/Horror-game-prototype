@@ -18,10 +18,10 @@ let config = {
         width: 800,
         height: 600
     },
-    scene: [menu, play],
+    scene: [ play],
 };
  
 let game = new Phaser.Game(config);
 
-let borderUISize = game.config.height / 25;
-let borderPadding = borderUISize / 3;
+let monitorBorderX = 34;
+let monitorBorderY = 33;
