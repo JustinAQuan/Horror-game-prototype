@@ -10,7 +10,7 @@ class play extends Phaser.Scene {
 
     create() {
         // create homescreen
-        homescreen = game.add.tileSprite(0, 0, 640, 480, 'homescreen')
+        homescreen = game.add.tileSprite(0, 0, game.config.width, game.config.height, 'homescreen')
 
         // monitor borders
         this.add.rectangle(0, 0, game.config.width, borderUISize, 0x333333).setOrigin(0 ,0);
