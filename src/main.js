@@ -25,3 +25,5 @@ let game = new Phaser.Game(config);
 
 let monitorBorderX = 34;
 let monitorBorderY = 33;
+
+let now = Date.now();;
