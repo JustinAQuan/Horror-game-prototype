@@ -8,12 +8,15 @@ class play extends Phaser.Scene {
         this.load.image('homescreen', './assets/Desktop_bg.png');
         this.load.image('monitor_border', './assets/Monitor.png');
         this.load.image('ie', './assets/Internet_explorer.png');
+        this.load.image('recycle_bin', './assets/Recycle_bin.png');
+        this.load.image('inbox', './assets/Inbox.png');
+        this.load.image('my_pc', './assets/My_computer.png');
 
         // loads room
         this.load.image('room', './assets/room.png');
 
         // loads outside
-        // NEEDS TO BE DONE
+        this.load.image('test', './assets/test.png');
 
     }
 
@@ -29,10 +32,31 @@ class play extends Phaser.Scene {
         // create monitor
         this.monitor_border = this.add.sprite(0, 0, 'monitor_border').setOrigin(0,0);
         this.homescreen = this.add.sprite(monitorBorderX, monitorBorderY, 'homescreen').setOrigin(0,0);
-        this.ie = this.add.sprite(200, 200, 'ie').setOrigin(0,0);
 
-        this.computer.add([this.monitor_border, this.homescreen, this.ie]);
-        this.computer.setActive(true);
+        // monitor icons
+        this.myPC = this.add.sprite(monitorBorderX + 10, monitorBorderY + 20, 'my_pc').setOrigin(0,0);
+        this.inbox = this.add.sprite(monitorBorderX + 15, monitorBorderY * 2 + 40, 'inbox').setOrigin(0,0);
+        this.ie = this.add.sprite(monitorBorderX + 15, monitorBorderY * 4 + 20, 'ie').setOrigin(0,0);
+        this.rb = this.add.sprite(monitorBorderX + 15, monitorBorderY * 6 + 20, 'recycle_bin').setOrigin(0,0);
+
+        this.computer.add([this.monitor_border, this.homescreen, this.ie, this.rb, this.inbox, this.myPC]);
+
+        //prototype looking around and hearing sounds
+        this.time.delayedCall(3000, () => {
+            // add instruction text
+            this.instructions = this.add.text(
+                game.config.width / 2, 
+                game.config.height - monitorBorderY * 4, 
+                "Press Space to look around the room", 
+                {fontSize: "30px", color: 0xffffff}
+            ).setOrigin(0.5,0);
+
+            // play sound
+
+            // add something to window
+            this.beegyoshi = this.add.sprite(500, 0, 'test').setOrigin(0,0);
+            this.beegyoshi.setDepth(-1);
+        }, null, this);
 
         // have main camera follow mouse inputs
         this.cameras.main.startFollow(this.input, false, 0.01, 0.01);
@@ -51,6 +75,10 @@ class play extends Phaser.Scene {
                 
             this.computer.setY(180);    
             this.computer.setScale(.75);
+            
+            if(this.instructions){
+                this.instructions.destroy();
+            }
         }
         else{   // can only see screen monitor when not pressing space
             this.cameras.main.setBounds(
