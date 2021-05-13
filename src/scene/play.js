@@ -3,6 +3,10 @@ class play extends Phaser.Scene {
         super("playScene");
     }
 
+    init(data){
+        this.username = data.username;
+    }
+
     preload() {
         // loads monitor
         this.load.image('homescreen', './assets/Desktop_bg.png');

@@ -10,6 +10,9 @@ class menu extends Phaser.Scene {
 
         // load music
         this.load.audio('menu_music', './assets/testmenu.wav');
+
+        // load form
+        this.load.html("form", "form.html");
     }
 
     create() {
@@ -36,28 +39,43 @@ class menu extends Phaser.Scene {
         // title text (this can be made in combination with menu image)
         this.title = this.add.text(game.config.width/2, game.config.height/2, Title, {fontSize: "50px", color: 0xffffff}).setOrigin(.5,.5);
 
-        // play text (this can be made into an image instead)
-        this.play = this.add.text(game.config.width/2, game.config.height/1.5, "Start Game", {fontSize: "30px", color: 0xffffff}).setOrigin(.5,.5);
-        this.play.setInteractive({ cursor: 'pointer' });
+        // sets enter key as a valid key
+        this.returnKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
+        // after a 5 second delay
         this.time.delayedCall(5000, function() {
             scene.time.addEvent({
                 delay: 750,
+
+                // function gets a random char from letters
                 callback: function() {
                     let index = Math.floor(Math.random() * letters.length);
                     let i = Math.floor(Math.random() * Title.length);
+
+                    // replaces a random char from title with one from letters
                     Title = Title.replace(Title[i], letters.charAt(index));
                     scene.title.setText(Title);
                 },
                 loop: true,
             });
         });
-    
-        // makes play text clickable
-        this.play.on('pointerdown', function () {
-            scene.menu_bgm.stop();
-            scene.scene.sleep("menuScene");
-            scene.scene.start("playScene");
+
+        // creates the dom form
+        this.nameInput = this.add.dom(game.config.width / 2, game.config.height / 1.5).createFromCache("form");
+
+        // when player hits enter after filling out the form
+        this.returnKey.on("down", event => {
+            let name = this.nameInput.getChildByName("name");       // sets name variable to whatever player types in
+
+            console.log(name.value);
+            
+            // checks if player fills in something
+            if(name.value != ""){
+                scene.menu_bgm.stop();                              // stops menu music
+                scene.nameInput.destroy();                          // destroys dom element
+                scene.scene.sleep("menuScene");                     // puts menuScene to sleep
+                scene.scene.start("playScene", {username: name.value});   // starts playScene and passes name
+            }
         });
     }
 }

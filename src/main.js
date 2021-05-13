@@ -18,6 +18,10 @@ let config = {
         width: 800,
         height: 600
     },
+    dom: {
+        createContainer: true,
+        behindCanvas: true
+    },
     scene: [menu, play],
 };
  
@@ -26,4 +30,11 @@ let game = new Phaser.Game(config);
 let monitorBorderX = 34;
 let monitorBorderY = 33;
 
-let now = Date.now();;
+/**************************************************
+ *                 CREDIT
+ * 
+ * User login name form
+ * https://www.thepolyglotdeveloper.com/2020/09/accept-text-input-user-phaser-game/
+ * 
+ * 
+**************************************************/
