@@ -71,14 +71,6 @@ class play extends Phaser.Scene {
 
             if (pointer.leftButtonReleased()) {
                 console.log("left click")
-            } else if (pointer.rightButtonReleased()) {
-                console.log("right click")
-            } else if (pointer.middleButtonReleased()) {
-                console.log("middle click")
-            } else if (pointer.backButtonReleased()) {
-                console.log('Back Button was released');
-            } else if (pointer.forwardButtonReleased()) {
-                console.log('Forward Button was released');
             }
         });
     }
@@ -110,6 +102,18 @@ class play extends Phaser.Scene {
 
             this.computer.setY(0);
             this.computer.setScale(1);
+        }
+
+        //add pointer and asset click event
+        var pointer = this.input.activePointer;
+        if (pointer.worldX == monitorBorderX + 10 && pointer.worldY == monitorBorderY + 20) {
+            //transition scene to myPC
+        } else if (pointer.worldX == monitorBorderX + 15 && pointer.worldY == monitorBorderY * 2 + 40) {
+            //transition scene to inbox
+        } else if (pointer.worldX == monitorBorderX + 15 && pointer.worldY == monitorBorderY * 4 + 20) {
+            //transition scene to ie
+        } else if (pointer.worldX == monitorBorderX + 15 && pointer.worldY == monitorBorderY * 6 + 20) {
+            //transition scene rb
         }
 
         //update outside sprite to creepy stuff when stuff happens

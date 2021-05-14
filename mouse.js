@@ -2,7 +2,7 @@ var config = {
     width: 800,
     height: 600,
     type: Phaser.AUTO,
-    parent: 'mouse',
+    parent: 'phaser-mouse-example',
     scene: {
         preload: preload,
         create: create,
