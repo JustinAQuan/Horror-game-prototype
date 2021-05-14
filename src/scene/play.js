@@ -3,10 +3,6 @@ class play extends Phaser.Scene {
         super("playScene");
     }
 
-    init(data){
-        this.username = data.username;
-    }
-
     preload() {
         // loads monitor
         this.load.image('homescreen', './assets/Desktop_bg.png');
@@ -62,7 +58,7 @@ class play extends Phaser.Scene {
             this.beegyoshi.setDepth(-1);
         }, null, this);
 
-        // have main camera follow mouse inputs
+        // camera follows player's mouse
         this.cameras.main.startFollow(this.input, false, 0.01, 0.01);
 
         // initializing spacebar as a keyboard input
