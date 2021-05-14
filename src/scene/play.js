@@ -68,7 +68,7 @@ class play extends Phaser.Scene {
         this.spaceKey = this.input.keyboard.addKey('SPACE');
 
         //check if mouse click works, can be removed later
-        this.input.on('pointerdown', function(pointer) {
+        this.input.on('pointerup', function(pointer) {
 
             if (pointer.leftButtonReleased()) {
                 console.log("left click")
@@ -107,15 +107,19 @@ class play extends Phaser.Scene {
 
         //add pointer and asset click event
         var pointer = this.input.activePointer;
-        if (pointer.worldX == monitorBorderX + 10 && pointer.worldY == monitorBorderY + 20) {
-            //transition scene to myPC
-        } else if (pointer.worldX == monitorBorderX + 15 && pointer.worldY == monitorBorderY * 2 + 40) {
-            //transition scene to inbox
-        } else if (pointer.worldX == monitorBorderX + 15 && pointer.worldY == monitorBorderY * 4 + 20) {
-            //transition scene to ie
-        } else if (pointer.worldX == monitorBorderX + 15 && pointer.worldY == monitorBorderY * 6 + 20) {
-            //transition scene rb
-        }
+        this.input.on('pointerdown', function() {
+            if (pointer.worldX == monitorBorderX + 10 && pointer.worldY == monitorBorderY + 20) {
+                //transition scene to myPC
+                console.log("my computer")
+            } else if (pointer.worldX == monitorBorderX + 15 && pointer.worldY == monitorBorderY * 2 + 40) {
+                //transition scene to inbox
+            } else if (pointer.worldX == monitorBorderX + 15 && pointer.worldY == monitorBorderY * 4 + 20) {
+                //transition scene to ie
+            } else if (pointer.worldX == monitorBorderX + 15 && pointer.worldY == monitorBorderY * 6 + 20) {
+                //transition scene rb
+            }
+
+        })
 
         //update outside sprite to creepy stuff when stuff happens
 
