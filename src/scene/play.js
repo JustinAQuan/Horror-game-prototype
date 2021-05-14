@@ -39,9 +39,12 @@ class play extends Phaser.Scene {
 
         // monitor icons
         this.myPC = this.add.sprite(monitorBorderX + 10, monitorBorderY + 20, 'my_pc').setOrigin(0, 0);
-        this.inbox = this.add.sprite(monitorBorderX + 15, monitorBorderY * 2 + 40, 'inbox').setOrigin(0, 0);
+        //this.inbox = this.add.sprite(monitorBorderX + 15, monitorBorderY * 2 + 40, 'inbox').setOrigin(0, 0);
         this.ie = this.add.sprite(monitorBorderX + 15, monitorBorderY * 4 + 20, 'ie').setOrigin(0, 0);
         this.rb = this.add.sprite(monitorBorderX + 15, monitorBorderY * 6 + 20, 'recycle_bin').setOrigin(0, 0);
+
+        this.inbox = new clickable(this, monitorBorderX + 15, monitorBorderY * 2 + 40, 'inbox').setOrigin(0, 0);
+
 
         this.computer.add([this.monitor_border, this.homescreen, this.ie, this.rb, this.inbox, this.myPC]);
 
@@ -68,15 +71,17 @@ class play extends Phaser.Scene {
         this.spaceKey = this.input.keyboard.addKey('SPACE');
 
         //check if mouse click works, can be removed later
-        this.input.on('pointerup', function(pointer) {
+        this.input.on('pointerdown', function(pointer) {
 
             if (pointer.leftButtonReleased()) {
                 console.log("left click")
             }
         });
+        console.log(this.input.activePointer.isDown);
     }
 
     update() {
+        //console.log(this.input.activePointer.isDown);
         if (this.spaceKey.isDown) { // able to look around the room when pressing space
             this.cameras.main.setBounds(-game.config.width / 5, // x: -160
                 -game.config.height / 20, // y: -30
@@ -105,7 +110,7 @@ class play extends Phaser.Scene {
             this.computer.setScale(1);
         }
 
-        //add pointer and asset click event
+        /*//add pointer and asset click event
         var pointer = this.input.activePointer;
         this.input.on('pointerdown', function() {
             if (pointer.worldX == monitorBorderX + 10 && pointer.worldY == monitorBorderY + 20) {
@@ -120,6 +125,8 @@ class play extends Phaser.Scene {
             }
 
         })
+        */
+
 
         //update outside sprite to creepy stuff when stuff happens
 
