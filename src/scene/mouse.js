@@ -2,7 +2,7 @@ var config = {
     width: 800,
     height: 600,
     type: Phaser.AUTO,
-    parent: 'phaser-example',
+    parent: 'mouse',
     scene: {
         preload: preload,
         create: create,
@@ -65,14 +65,7 @@ function create() {
             console.log('Left Button');
         } else if (pointer.rightButtonReleased()) {
             console.log('Right Button');
-        } else if (pointer.middleButtonReleased()) {
-            console.log('Middle Button ');
-        } else if (pointer.backButtonReleased()) {
-            console.log('Back Button');
-        } else if (pointer.forwardButtonReleased()) {
-            console.log('Forward Button');
         }
-
     });
 }
 
