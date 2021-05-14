@@ -67,6 +67,7 @@ class play extends Phaser.Scene {
         // initializing spacebar as a keyboard input
         this.spaceKey = this.input.keyboard.addKey('SPACE');
 
+        //check if mouse click works, can be removed later
         this.input.on('pointerdown', function(pointer) {
 
             if (pointer.leftButtonReleased()) {
