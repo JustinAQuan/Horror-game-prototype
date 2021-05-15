@@ -7,7 +7,7 @@
  * Game:            Untitled
  * 
  * Date Completed:  TBD
-**************************************************/
+ **************************************************/
 
 let config = {
     type: Phaser.AUTO,
@@ -20,11 +20,12 @@ let config = {
     },
     scene: [menu, play],
 };
- 
+
 let game = new Phaser.Game(config);
 
 let monitorBorderX = 34;
 let monitorBorderY = 33;
+var text1;
 
 /**************************************************
  *                 CREDIT
@@ -33,4 +34,4 @@ let monitorBorderY = 33;
  * https://www.thepolyglotdeveloper.com/2020/09/accept-text-input-user-phaser-game/
  * 
  * 
-**************************************************/
+ **************************************************/
