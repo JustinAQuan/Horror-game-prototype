@@ -18,10 +18,6 @@ let config = {
         width: 800,
         height: 600
     },
-    dom: {
-        createContainer: true,
-        behindCanvas: true
-    },
     scene: [menu, play],
 };
  

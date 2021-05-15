@@ -8,11 +8,10 @@ class menu extends Phaser.Scene {
         this.load.image('homescreen', './assets/Desktop_bg.png');
         this.load.image('monitor', './assets/Monitor.png');
 
+        this.load.image('login', './assets/login.png');
+
         // load music
         this.load.audio('menu_music', './assets/testmenu.wav');
-
-        // load form
-        this.load.html("form", "form.html");
     }
 
     create() {
@@ -37,10 +36,11 @@ class menu extends Phaser.Scene {
         this.homescreen = this.add.sprite(monitorBorderX, monitorBorderY, 'homescreen').setOrigin(0,0);
 
         // title text (this can be made in combination with menu image)
-        this.title = this.add.text(game.config.width/2, game.config.height/2, Title, {fontSize: "50px", color: 0xffffff}).setOrigin(.5,.5);
+        this.title = this.add.text(game.config.width / 2, game.config.height / 2, Title, {fontSize: "50px", color: 0xffffff}).setOrigin(.5,.5);
 
-        // sets enter key as a valid key
-        this.returnKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+        // adds clickable login text
+        this.login = this.add.sprite(game.config.width / 2, game.config.height / 1.5, 'login').setOrigin(0.5,0.5);
+        this.login.setInteractive({ cursor: 'pointer' });
 
         // after a 5 second delay
         this.time.delayedCall(5000, function() {
@@ -60,22 +60,11 @@ class menu extends Phaser.Scene {
             });
         });
 
-        // creates the dom form
-        this.nameInput = this.add.dom(game.config.width / 2, game.config.height / 1.5).createFromCache("form");
-
-        // when player hits enter after filling out the form
-        this.returnKey.on("down", event => {
-            let name = this.nameInput.getChildByName("name");       // sets name variable to whatever player types in
-
-            console.log(name.value);
-            
-            // checks if player fills in something
-            if(name.value != ""){
-                scene.menu_bgm.stop();                              // stops menu music
-                scene.nameInput.destroy();                          // destroys dom element
-                scene.scene.sleep("menuScene");                     // puts menuScene to sleep
-                scene.scene.start("playScene", {username: name.value});   // starts playScene and passes name
-            }
+        // when player clicks on login
+        this.login.on('pointerdown', function () {
+            scene.menu_bgm.stop();                              // stops menu music
+            scene.scene.sleep("menuScene");                     // puts menuScene to sleep
+            scene.scene.start("playScene");   // starts playScene and passes name
         });
     }
 }
