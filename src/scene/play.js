@@ -34,12 +34,10 @@ class play extends Phaser.Scene {
         this.homescreen = this.add.sprite(monitorBorderX, monitorBorderY, 'homescreen').setOrigin(0, 0);
 
         // monitor icons
-        this.myPC = this.add.sprite(monitorBorderX + 10, monitorBorderY + 20, 'my_pc').setOrigin(0, 0);
-        this.inbox = this.add.sprite(monitorBorderX + 15, monitorBorderY * 2 + 40, 'inbox').setOrigin(0, 0);
-        this.ie = this.add.sprite(monitorBorderX + 15, monitorBorderY * 4 + 20, 'ie').setOrigin(0, 0);
-        this.rb = this.add.sprite(monitorBorderX + 15, monitorBorderY * 6 + 20, 'recycle_bin').setOrigin(0, 0);
-
-        //this.inbox = new clickable(monitorBorderX + 15, monitorBorderY * 2 + 40, 'inbox').setOrigin(0, 0);
+        this.myPC = new clickable(this, monitorBorderX + 10, monitorBorderY + 20, 'my_pc').setOrigin(0, 0);
+        this.inbox = new clickable(this, monitorBorderX + 15, monitorBorderY * 2 + 40, 'inbox').setOrigin(0, 0);
+        this.ie = new clickable(this, monitorBorderX + 15, monitorBorderY * 4 + 20, 'ie').setOrigin(0, 0);
+        this.rb = new clickable(this, monitorBorderX + 15, monitorBorderY * 6 + 20, 'recycle_bin').setOrigin(0, 0);
 
         this.computer.add([this.monitor_border, this.homescreen, this.ie, this.rb, this.inbox, this.myPC]);
 
@@ -67,6 +65,7 @@ class play extends Phaser.Scene {
     }
 
     update() {
+
         if (this.spaceKey.isDown) { // able to look around the room when pressing space
             this.cameras.main.setBounds(-game.config.width / 5, // x: -160
                 -game.config.height / 20, // y: -30
