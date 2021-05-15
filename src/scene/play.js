@@ -72,11 +72,9 @@ class play extends Phaser.Scene {
 
         //check if mouse click works, can be removed later
         this.input.on('pointerdown', function(pointer) {
-
-            if (pointer.leftButtonReleased()) {
-                console.log("left click")
-            }
+            console.log("left click")
         });
+
         console.log(this.input.activePointer.isDown);
     }
 
