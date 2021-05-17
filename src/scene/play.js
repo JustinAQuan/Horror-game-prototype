@@ -21,6 +21,8 @@ class play extends Phaser.Scene {
     }
 
     create() {
+        let scene = this;
+
         // creates outside whenever we want
         // this.outside = this.add.tileSprite().setOrigin(0,0);
 
@@ -62,6 +64,12 @@ class play extends Phaser.Scene {
 
         // initializing spacebar as a keyboard input
         this.spaceKey = this.input.keyboard.addKey('SPACE');
+        this.escape = this.input.keyboard.addKey('ESC');
+
+        this.escape.on('down', function(){
+            scene.scene.pause();
+            scene.scene.launch("pause");
+        });
     }
 
     update() {

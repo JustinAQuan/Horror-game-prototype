@@ -64,7 +64,7 @@ class menu extends Phaser.Scene {
         this.login.on('pointerdown', function () {
             scene.menu_bgm.stop();                              // stops menu music
             scene.scene.sleep("menuScene");                     // puts menuScene to sleep
-            scene.scene.start("playScene");   // starts playScene and passes name
+            scene.scene.launch("playScene");   // starts playScene and passes name
         });
     }
 }
