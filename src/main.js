@@ -18,7 +18,7 @@ let config = {
         width: 800,
         height: 600
     },
-    scene: [menu, play],
+    scene: [menu, play, pause],
 };
  
 let game = new Phaser.Game(config);
@@ -29,8 +29,6 @@ let monitorBorderY = 33;
 /**************************************************
  *                 CREDIT
  * 
- * User login name form
- * https://www.thepolyglotdeveloper.com/2020/09/accept-text-input-user-phaser-game/
  * 
  * 
 **************************************************/
