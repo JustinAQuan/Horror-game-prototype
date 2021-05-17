@@ -24,7 +24,7 @@ class menu extends Phaser.Scene {
         this.menu_bgm = this.sound.add(
             'menu_music', 
             {
-                volume: 1,
+                volume: 0.7,
                 loop: true,
                 rate: 0.65
             }
@@ -66,5 +66,9 @@ class menu extends Phaser.Scene {
             scene.scene.sleep("menuScene");                     // puts menuScene to sleep
             scene.scene.launch("playScene");   // starts playScene and passes name
         });
+    }
+
+    update() {
+        if(this.menu_bgm.rate > .35) this.menu_bgm.setRate(this.menu_bgm.rate - 0.0002);
     }
 }
