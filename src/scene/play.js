@@ -18,6 +18,12 @@ class play extends Phaser.Scene {
         // loads outside
         this.load.image('test', './assets/test.png');
 
+        // loads audio
+        this.load.audio('click', './assets/click.wav');
+        this.load.audio('double_click', './assets/double_click.wav');
+        this.load.audio('weird', './assets/weird.wav');
+
+        this.load.image('webpage', './assets/reallygoodwebpage.png');
     }
 
     create() {
@@ -36,10 +42,10 @@ class play extends Phaser.Scene {
         this.homescreen = this.add.sprite(monitorBorderX, monitorBorderY, 'homescreen').setOrigin(0, 0);
 
         // monitor icons
-        this.myPC = new clickable(this, monitorBorderX + 10, monitorBorderY + 20, 'my_pc').setOrigin(0, 0);
-        this.inbox = new clickable(this, monitorBorderX + 15, monitorBorderY * 2 + 40, 'inbox').setOrigin(0, 0);
-        this.ie = new clickable(this, monitorBorderX + 15, monitorBorderY * 4 + 20, 'ie').setOrigin(0, 0);
-        this.rb = new clickable(this, monitorBorderX + 15, monitorBorderY * 6 + 20, 'recycle_bin').setOrigin(0, 0);
+        this.myPC = new clickable(this, monitorBorderX + 10, monitorBorderY + 20, 'my_pc', "icon").setOrigin(0, 0);
+        this.inbox = new clickable(this, monitorBorderX + 15, monitorBorderY * 2 + 40, 'inbox', "icon").setOrigin(0, 0);
+        this.ie = new clickable(this, monitorBorderX + 15, monitorBorderY * 4 + 20, 'ie', "icon").setOrigin(0, 0);
+        this.rb = new clickable(this, monitorBorderX + 15, monitorBorderY * 6 + 20, 'recycle_bin', "icon").setOrigin(0, 0);
 
         this.computer.add([this.monitor_border, this.homescreen, this.ie, this.rb, this.inbox, this.myPC]);
 
@@ -53,6 +59,7 @@ class play extends Phaser.Scene {
             ).setOrigin(0.5, 0);
 
             // play sound
+            this.sound.play('weird');
 
             // add something to window
             this.beegyoshi = this.add.sprite(500, 0, 'test').setOrigin(0, 0);
@@ -66,6 +73,7 @@ class play extends Phaser.Scene {
         this.spaceKey = this.input.keyboard.addKey('SPACE');
         this.escape = this.input.keyboard.addKey('ESC');
 
+        // pause game when player presses esc
         this.escape.on('down', function(){
             scene.scene.pause();
             scene.scene.launch("pause");
@@ -73,7 +81,6 @@ class play extends Phaser.Scene {
     }
 
     update() {
-
         if (this.spaceKey.isDown) { // able to look around the room when pressing space
             this.cameras.main.setBounds(-game.config.width / 5, // x: -160
                 -game.config.height / 20, // y: -30
@@ -92,11 +99,6 @@ class play extends Phaser.Scene {
                 0, // y: 0
                 game.config.width, // width: 800
                 game.config.height); // height: 600
-
-
-            this.monitor_border.setY(0);
-            this.homescreen.setX(monitorBorderX);
-            this.homescreen.setY(monitorBorderY);
 
             this.computer.setY(0);
             this.computer.setScale(1);

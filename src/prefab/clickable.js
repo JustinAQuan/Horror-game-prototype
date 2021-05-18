@@ -1,21 +1,18 @@
 class clickable extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, texture, frame) {
-        super(scene, x, y, texture, frame);
+    constructor(scene, x, y, texture, type) {
+        super(scene, x, y, texture);
         scene.add.existing(this);
-        this.create(scene, texture);
+        this.create(scene, type);
     }
 
-    create(scene, texture) {
-        //let self = scene;
+    create(scene, type) {
         this.setInteractive({ cursor: 'pointer' });
-        this.on('pointerdown', function(pointer) {
-            console.log('click');
-            console.log(pointer);
-
-            if (texture === 'inbox') {
-
-                //scene.scene.sleep("playScene");
-                scene.scene.start("inboxscene");
+        this.on('pointerdown', function() {
+            if(type == "icon"){
+                scene.sound.play('double_click');
+            }
+            else{
+                scene.sound.play('click');
             }
         })
     }
