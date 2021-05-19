@@ -12,6 +12,7 @@ class menu extends Phaser.Scene {
 
         // load music
         this.load.audio('menu_music', './assets/testmenu.wav');
+        this.load.audio('keyboard', './assets/keyboard.wav');
     }
 
     create() {
@@ -63,8 +64,11 @@ class menu extends Phaser.Scene {
         // when player clicks on login
         this.login.on('pointerdown', function () {
             scene.menu_bgm.stop();                  // stops menu music
-            scene.scene.sleep("menuScene");         // puts menuScene to sleep
-            scene.scene.launch("playScene");        // starts playScene and passes name
+            scene.sound.play('keyboard');
+            scene.time.delayedCall(2000, function(){
+                scene.scene.sleep("menuScene");         // puts menuScene to sleep
+                scene.scene.launch("playScene");        // starts playScene and passes name
+            });
         });
     }
 
