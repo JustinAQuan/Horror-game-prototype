@@ -18,10 +18,14 @@ class play extends Phaser.Scene {
         // loads outside
         this.load.image('test', './assets/test.png');
 
+        // loads path1_1
+        this.load.image('link1_1_1', './assets/linkex.png');
+
         // loads audio
         this.load.audio('click', './assets/click.wav');
         this.load.audio('double_click', './assets/double_click.wav');
         this.load.audio('weird', './assets/weird.wav');
+        this.load.audio('startup', './assets/startup.wav');
 
         this.load.image('webpage', './assets/reallygoodwebpage.png');
     }
@@ -29,8 +33,14 @@ class play extends Phaser.Scene {
     create() {
         let scene = this;
 
+        //////////////////////////////
+        //   INITIAL SCENE SETUP    //
+        //////////////////////////////
+
         // creates outside whenever we want
         // this.outside = this.add.tileSprite().setOrigin(0,0);
+
+        this.sound.play('startup', {volume: 0.5});
 
         // creates room
         this.room = this.add.sprite(-game.config.width / 5, -game.config.height / 20, 'room').setOrigin(0, 0);
@@ -49,22 +59,54 @@ class play extends Phaser.Scene {
 
         this.computer.add([this.monitor_border, this.homescreen, this.ie, this.rb, this.inbox, this.myPC]);
 
-        //prototype looking around and hearing sounds
-        this.time.delayedCall(3000, () => {
-            // add instruction text
-            this.instructions = this.add.text(
-                game.config.width / 2,
-                game.config.height - monitorBorderY * 4,
-                "Press Space to look around the room", { fontSize: "30px", color: 0xffffff }
-            ).setOrigin(0.5, 0);
 
-            // play sound
-            this.sound.play('weird');
+        //////////////////////////////
+        //   WEBPAGE CONTAINERS     //
+        //////////////////////////////
 
-            // add something to window
-            this.beegyoshi = this.add.sprite(500, 0, 'test').setOrigin(0, 0);
-            this.beegyoshi.setDepth(-1);
-        }, null, this);
+        // path 1
+        this.path1_1 = this.add.container();
+        this.path1_2 = this.add.container();
+        this.path1_3 = this.add.container();
+
+        // path 2
+        this.path2_1 = this.add.container();
+        this.path2_2 = this.add.container();
+        this.path2_3 = this.add.container();
+
+        // paht 3
+        this.path3_1 = this.add.container();
+        this.path3_2 = this.add.container();
+        this.path3_3 = this.add.container();
+
+        // path 1_1 template
+        this.webpage1_1 = this.add.rectangle(300, 200, 300, 300);
+        this.link1_1_1 = new clickable(this, 350, 250, 'link1_1_1');
+
+
+
+
+
+        // //prototype looking around and hearing sounds
+        // this.time.delayedCall(3000, () => {
+        //     // add instruction text
+        //     this.instructions = this.add.text(
+        //         game.config.width / 2,
+        //         game.config.height - monitorBorderY * 4,
+        //         "Press Space to look around the room", { fontSize: "30px", color: 0xffffff }
+        //     ).setOrigin(0.5, 0);
+
+        //     // play sound
+        //     this.sound.play('weird');
+
+        //     // add something to window
+        //     this.beegyoshi = this.add.sprite(500, 0, 'test').setOrigin(0, 0);
+        //     this.beegyoshi.setDepth(-1);
+        // }, null, this);
+
+        //////////////////////////////
+        //      MAIN CONTROLS       //
+        //////////////////////////////
 
         // camera follows player's mouse
         this.cameras.main.startFollow(this.input, false, 0.01, 0.01);
@@ -103,9 +145,5 @@ class play extends Phaser.Scene {
             this.computer.setY(0);
             this.computer.setScale(1);
         }
-
-        //update outside sprite to creepy stuff when stuff happens
-
-        //test push
     }
 }
