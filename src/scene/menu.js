@@ -18,8 +18,8 @@ class menu extends Phaser.Scene {
     create() {
         let scene = this;
 
-        let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789*#%&!";
-        let Title = "Horror Game";
+        let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789*#%&!";
+        let Title = "NEVER ALONE";
 
         // creates menu music
         this.menu_bgm = this.sound.add(
