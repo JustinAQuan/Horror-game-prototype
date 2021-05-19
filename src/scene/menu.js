@@ -52,7 +52,11 @@ class menu extends Phaser.Scene {
                 // function gets a random char from letters
                 callback: function() {
                     let index = Math.floor(Math.random() * letters.length);
-                    let i = Math.floor(Math.random() * Title.length);
+                    let i = Math.floor(Math.random() * (Title.length - 1));
+
+                    if(i >= 5){
+                        ++i;
+                    }
 
                     // replaces a random char from title with one from letters
                     Title = Title.replace(Title[i], letters.charAt(index));
