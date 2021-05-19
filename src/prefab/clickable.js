@@ -16,8 +16,4 @@ class clickable extends Phaser.GameObjects.Sprite {
             }
         })
     }
-
-    update() {
-
-    }
 }
