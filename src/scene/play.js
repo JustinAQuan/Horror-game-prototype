@@ -11,6 +11,7 @@ class play extends Phaser.Scene {
         this.load.image('recycle_bin', './assets/art/Recycle_bin.png');
         this.load.image('inbox', './assets/art/Inbox.png');
         this.load.image('my_pc', './assets/art/My_computer.png');
+        this.load.image('taskbar', './assets/art/Start_menu.png');
 
 
         // LOADS ROOM
@@ -20,6 +21,9 @@ class play extends Phaser.Scene {
         // LOADS OUTSIDE
         this.load.image('Beeg Yoshi', './assets/art/test.png');
 
+
+        // LOADS INBOX
+        this.load.image('inbox_window', './assets/art/Inbox_window.png');
 
         // LOADS PATH1_1
         this.load.image('webpage', './assets/art/reallygoodwebpage.png');
@@ -56,8 +60,9 @@ class play extends Phaser.Scene {
         this.computer = this.add.container();
 
         // create monitor
-        this.monitor_border = this.add.sprite(0, 0, 'monitor_border').setOrigin(0, 0);
         this.homescreen = this.add.sprite(monitorBorderX, monitorBorderY, 'homescreen').setOrigin(0, 0);
+        this.taskbar = this.add.sprite(monitorBorderX, game.config.height - monitorBorderY, 'taskbar').setOrigin(0,1);
+        this.monitor_border = this.add.sprite(0, 0, 'monitor_border').setOrigin(0, 0);
 
         // monitor icons
         this.myPC = new clickable(this, monitorBorderX + 10, monitorBorderY + 20, 'my_pc', "icon").setOrigin(0, 0);
@@ -65,7 +70,7 @@ class play extends Phaser.Scene {
         this.ie = new clickable(this, monitorBorderX + 15, monitorBorderY * 4 + 20, 'ie', "icon").setOrigin(0, 0);
         this.rb = new clickable(this, monitorBorderX + 15, monitorBorderY * 6 + 20, 'recycle_bin', "icon").setOrigin(0, 0);
 
-        this.computer.add([this.monitor_border, this.homescreen, this.ie, this.rb, this.inbox, this.myPC]);
+        this.computer.add([this.monitor_border, this.homescreen, this.ie, this.rb, this.inbox, this.myPC, this.taskbar]);
 
 
         //////////////////////////////
@@ -77,7 +82,7 @@ class play extends Phaser.Scene {
         this.inboxCon.setX(2000);               // sets assets offscreen
 
         // temp assets
-        this.inboxWindow = this.add.rectangle(400, 300, 600, 400, 0x000000).setOrigin(0.5,0.5);
+        this.inboxWindow = this.add.sprite(400, 300, 'inbox_window').setOrigin(0.5,0.5);
         this.emailLink = new clickable(this, 350, 250, 'link1_1_1');
 
         this.inboxCon.add([this.inboxWindow, this.emailLink]);
