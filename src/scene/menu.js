@@ -36,16 +36,16 @@ class menu extends Phaser.Scene {
         this.homescreen = this.add.sprite(monitorBorderX, monitorBorderY, 'homescreen').setOrigin(0,0);
 
         // title text (this can be made in combination with menu image)
-        this.title = this.add.text(game.config.width / 2, game.config.height / 2, Title, {fontSize: "50px", color: 0xffffff}).setOrigin(.5,.5);
+        this.title = this.add.text(game.config.width / 2, game.config.height / 2 - 50, Title, {fontFamily: 'VT323', fontSize: "100px", color: 0xffffff}).setOrigin(.5,.5);
 
         // adds clickable login text
         this.login = this.add.sprite(game.config.width / 2, game.config.height / 1.5, 'login').setOrigin(0.5,0.5);
         this.login.setInteractive({ cursor: 'pointer' });
 
         // after a 5 second delay
-        this.time.delayedCall(5000, function() {
+        this.time.delayedCall(4000, function() {
             scene.time.addEvent({
-                delay: 750,
+                delay: 1000,
 
                 // function gets a random char from letters
                 callback: function() {
@@ -62,9 +62,9 @@ class menu extends Phaser.Scene {
 
         // when player clicks on login
         this.login.on('pointerdown', function () {
-            scene.menu_bgm.stop();                              // stops menu music
-            scene.scene.sleep("menuScene");                     // puts menuScene to sleep
-            scene.scene.launch("playScene");   // starts playScene and passes name
+            scene.menu_bgm.stop();                  // stops menu music
+            scene.scene.sleep("menuScene");         // puts menuScene to sleep
+            scene.scene.launch("playScene");        // starts playScene and passes name
         });
     }
 

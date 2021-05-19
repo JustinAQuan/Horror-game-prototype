@@ -30,6 +30,9 @@ var text1;
 /**************************************************
  *                 CREDIT
  * 
+ * Windows Startup Sound
+ * https://soundbible.com/1654-Windows-95-Startup.html
  * 
- * 
+ * VT323 Font Family
+ * https://fonts.google.com/specimen/VT323?category=Monospace#about
  **************************************************/
