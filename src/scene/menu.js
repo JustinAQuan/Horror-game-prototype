@@ -42,6 +42,7 @@ class menu extends Phaser.Scene {
         // adds clickable login text
         this.login = this.add.sprite(game.config.width / 2, game.config.height / 1.5, 'login').setOrigin(0.5,0.5);
         this.login.setInteractive({ cursor: 'pointer' });
+        this.clicked = false;
 
         // after a 5 second delay
         this.time.delayedCall(4000, function() {
@@ -63,12 +64,16 @@ class menu extends Phaser.Scene {
 
         // when player clicks on login
         this.login.on('pointerdown', function () {
-            scene.menu_bgm.stop();                  // stops menu music
-            scene.sound.play('keyboard');
-            scene.time.delayedCall(2000, function(){
-                scene.scene.sleep("menuScene");         // puts menuScene to sleep
-                scene.scene.launch("playScene");        // starts playScene and passes name
-            });
+            if(scene.clicked == false){
+                scene.clicked = true;                   // sets clicked to true, so no spam
+                scene.menu_bgm.stop();                  // stops menu music
+                scene.sound.play('keyboard');           // starts keyboard sound effect
+                scene.time.delayedCall(2000, function(){
+                    scene.clicked = false;
+                    scene.scene.sleep("menuScene");         // puts menuScene to sleep
+                    scene.scene.launch("playScene");        // starts playScene and passes name
+                });
+            }
         });
     }
 
