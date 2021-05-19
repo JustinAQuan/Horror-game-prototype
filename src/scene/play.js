@@ -5,32 +5,32 @@ class play extends Phaser.Scene {
 
     preload() {
         // LOADS MAIN MONITOR
-        this.load.image('homescreen', './assets/Desktop_bg.png');
-        this.load.image('monitor_border', './assets/Monitor.png');
-        this.load.image('ie', './assets/Internet_explorer.png');
-        this.load.image('recycle_bin', './assets/Recycle_bin.png');
-        this.load.image('inbox', './assets/Inbox.png');
-        this.load.image('my_pc', './assets/My_computer.png');
+        this.load.image('homescreen', './assets/art/Desktop_bg.png');
+        this.load.image('monitor_border', './assets/art/Monitor.png');
+        this.load.image('ie', './assets/art/Internet_explorer.png');
+        this.load.image('recycle_bin', './assets/art/Recycle_bin.png');
+        this.load.image('inbox', './assets/art/Inbox.png');
+        this.load.image('my_pc', './assets/art/My_computer.png');
 
 
         // LOADS ROOM
-        this.load.image('room', './assets/room.png');
+        this.load.image('room', './assets/art/room.png');
 
 
         // LOADS OUTSIDE
-        this.load.image('test', './assets/test.png');
+        this.load.image('test', './assets/art/test.png');
 
 
         // LOADS PATH1_1
-        this.load.image('webpage', './assets/reallygoodwebpage.png');
-        this.load.image('link1_1_1', './assets/linkex.png');
+        this.load.image('webpage', './assets/art/reallygoodwebpage.png');
+        this.load.image('link1_1_1', './assets/art/linkex.png');
 
 
         // LOADS AUDIO
-        this.load.audio('click', './assets/click.wav');
-        this.load.audio('double_click', './assets/double_click.wav');
-        this.load.audio('weird', './assets/weird.wav');
-        this.load.audio('startup', './assets/startup.wav');
+        this.load.audio('click', './assets/sound/click.wav');
+        this.load.audio('double_click', './assets/sound/double_click.wav');
+        this.load.audio('weird', './assets/sound/weird.wav');
+        this.load.audio('startup', './assets/sound/startup.wav');
     }
 
     create() {
