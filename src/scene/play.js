@@ -48,6 +48,11 @@ class play extends Phaser.Scene {
         // creates room
         this.room = this.add.sprite(-game.config.width / 5, -game.config.height / 20, 'room').setOrigin(0, 0);
 
+
+        //////////////////////////////
+        //      MONITOR SETUP       //
+        //////////////////////////////
+
         this.computer = this.add.container();
 
         // create monitor
@@ -64,6 +69,19 @@ class play extends Phaser.Scene {
 
 
         //////////////////////////////
+        //       INBOX SETUP        //
+        //////////////////////////////
+
+        this.inboxCon = this.add.container();
+        this.inboxCon.setX(2000);
+
+        this.inboxMenu = this.add.rectangle(400, 300, 600, 400, 0x000000).setOrigin(0.5,0.5);
+        this.emailLink = new clickable(this, 350, 250, 'link1_1_1');
+
+        this.inboxCon.add([this.inboxMenu, this.emailLink]);
+
+
+        //////////////////////////////
         //   WEBPAGE CONTAINERS     //
         //////////////////////////////
 
@@ -72,26 +90,42 @@ class play extends Phaser.Scene {
         this.path1_2 = this.add.container();
         this.path1_3 = this.add.container();
 
+        this.path1_1.setX(2000);
+        this.path1_2.setX(2000);
+        this.path1_3.setX(2000);
+
         // path 2
         this.path2_1 = this.add.container();
         this.path2_2 = this.add.container();
         this.path2_3 = this.add.container();
+
+        this.path2_1.setX(2000);
+        this.path2_2.setX(2000);
+        this.path2_3.setX(2000);
 
         // paht 3
         this.path3_1 = this.add.container();
         this.path3_2 = this.add.container();
         this.path3_3 = this.add.container();
 
-        // path 1_1 template
-        this.webpage1_1 = this.add.rectangle(300, 200, 300, 300);
-        this.link1_1_1 = new clickable(this, 350, 250, 'link1_1_1');
+        this.path3_1.setX(2000);
+        this.path3_2.setX(2000);
+        this.path3_3.setX(2000);
 
-        this.path1_1.add([this.webpage1_1, this.link1_1_1]);
+        // path 1_1
 
-        this.computer.add([this.path1_1]);
+        this.path1_1.add([]);
 
 
+        //////////////////////////////
+        //      EVENT SETUP         //
+        //////////////////////////////
 
+        // INBOX SETUP
+        this.inbox.on('pointerdown', function(){
+            scene.inboxCon.setRandomPosition(0, -50, 40, 100);
+            scene.computer.add([scene.inboxCon]);
+        });
 
 
         // //prototype looking around and hearing sounds
@@ -132,10 +166,11 @@ class play extends Phaser.Scene {
 
     update() {
         if (this.spaceKey.isDown) { // able to look around the room when pressing space
-            this.cameras.main.setBounds(-game.config.width / 5, // x: -160
+            this.cameras.main.setBounds(
+                -game.config.width / 5, // x: -160
                 -game.config.height / 20, // y: -30
                 game.config.width * 1.5, // width: 1200 (therefore, can scroll right until 1040 pixels)
-                game.config.height * 1.1); // height: 660 (therefore, can scroll down until 630 pixels)
+                game.config.height * 1.1 + 20); // height: 680 (therefore, can scroll down until 650 pixels)
 
             this.computer.setY(180);
             this.computer.setScale(.75);
