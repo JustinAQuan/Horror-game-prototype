@@ -24,6 +24,7 @@ class play extends Phaser.Scene {
 
         // LOADS INBOX
         this.load.image('inbox_window', './assets/art/Inbox_window.png');
+        this.load.image('email', './assets/art/Email_inboxTemplate.png');
 
         // LOADS PATH1_1
         this.load.image('webpage', './assets/art/reallygoodwebpage.png');
@@ -81,11 +82,21 @@ class play extends Phaser.Scene {
         this.inboxCon = this.add.container();
         this.inboxCon.setX(2000);               // sets assets offscreen
 
-        // temp assets
-        this.inboxWindow = this.add.sprite(400, 300, 'inbox_window').setOrigin(0.5,0.5);
-        this.emailLink = new clickable(this, 350, 250, 'link1_1_1');
+        // email array
+        let emailFrom = ['speckledorp69@hotmail.com', 'osatvlx@hotmail.com', 'wombusyeah557@hotmail.com'];
+        let emailSubject = ['Broken Link', 'ILOVEYOU', 'wombus friend'];
 
-        this.inboxCon.add([this.inboxWindow, this.emailLink]);
+        // choose random i from array
+        let i = Math.floor(Math.random() * (emailSubject.length - 1));
+
+        // assets
+        this.inboxWindow = this.add.sprite(400, 300, 'inbox_window').setOrigin(0.5,0.5);
+        this.email = this.add.sprite(457, 183, 'email').setOrigin(0.5,0.5);
+        this.emailLink = this.add.text(380, 183, emailFrom[i] + '     ' + emailSubject[i], { fontFamily: 'VT323', fontSize: '9px', color: 0xffffff }).setOrigin(0,0.5);
+        this.emailLink.setInteractive({ cursor: 'pointer' });
+
+        this.inboxCon.add([this.inboxWindow, this.email, this.emailLink]);
+        this.inboxCon.setScale(1.1);
 
 
         //////////////////////////////
@@ -157,7 +168,7 @@ class play extends Phaser.Scene {
 
         // INBOX SETUP
         this.inbox.on('pointerdown', function(){
-            scene.inboxCon.setRandomPosition(0, -50, 40, 100);
+            scene.inboxCon.setRandomPosition(0, -50, 40, 50);
             scene.computer.add([scene.inboxCon]);
             scene.inbox.removeInteractive();
         });
