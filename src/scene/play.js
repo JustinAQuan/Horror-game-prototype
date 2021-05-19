@@ -18,7 +18,7 @@ class play extends Phaser.Scene {
 
 
         // LOADS OUTSIDE
-        this.load.image('test', './assets/art/test.png');
+        this.load.image('Beeg Yoshi', './assets/art/test.png');
 
 
         // LOADS PATH1_1
@@ -72,18 +72,22 @@ class play extends Phaser.Scene {
         //       INBOX SETUP        //
         //////////////////////////////
 
+        // Container to house all assets for inbox window
         this.inboxCon = this.add.container();
-        this.inboxCon.setX(2000);
+        this.inboxCon.setX(2000);               // sets assets offscreen
 
-        this.inboxMenu = this.add.rectangle(400, 300, 600, 400, 0x000000).setOrigin(0.5,0.5);
+        // temp assets
+        this.inboxWindow = this.add.rectangle(400, 300, 600, 400, 0x000000).setOrigin(0.5,0.5);
         this.emailLink = new clickable(this, 350, 250, 'link1_1_1');
 
-        this.inboxCon.add([this.inboxMenu, this.emailLink]);
+        this.inboxCon.add([this.inboxWindow, this.emailLink]);
 
 
         //////////////////////////////
         //   WEBPAGE CONTAINERS     //
         //////////////////////////////
+
+        // preload pathing containers
 
         // path 1
         this.path1_1 = this.add.container();
@@ -112,10 +116,35 @@ class play extends Phaser.Scene {
         this.path3_2.setX(2000);
         this.path3_3.setX(2000);
 
-        // path 1_1
 
-        this.path1_1.add([]);
+        // setting up each container
 
+        // path1_1
+        this.webpage1_1 = this.add.sprite(400, 300, 'webpage').setScale(0.7);
+        this.link1_1 = new clickable(this, 350, 250, 'link1_1_1');
+        this.path1_1.add([this.webpage1_1, this.link1_1]);
+
+        // path1_2
+        this.webpage1_2 = this.add.sprite(400, 300, 'webpage').setScale(0.7).setTint(0xff0000);
+        this.link1_2 = new clickable(this, 350, 250, 'link1_1_1');
+        this.path1_2.add([this.webpage1_2, this.link1_2]);
+
+        // path1_3
+        this.webpage1_3 = this.add.sprite(400, 300, 'webpage').setScale(0.7).setTint(0x00ff00);
+        this.link1_3 = new clickable(this, 350, 250, 'link1_1_1');
+        this.path1_3.add([this.webpage1_3, this.link1_3]);
+
+        // path2_1
+
+        // path2_2
+
+        // path2_3
+
+        // path3_1
+
+        // path3_2
+
+        // path3_3
 
         //////////////////////////////
         //      EVENT SETUP         //
@@ -125,6 +154,34 @@ class play extends Phaser.Scene {
         this.inbox.on('pointerdown', function(){
             scene.inboxCon.setRandomPosition(0, -50, 40, 100);
             scene.computer.add([scene.inboxCon]);
+            scene.inbox.removeInteractive();
+        });
+
+        // EMAIL LINK SETUP
+        this.emailLink.on('pointerdown', function(){
+            scene.path1_1.setRandomPosition(0, -50, 40, 100);
+            scene.computer.add([scene.path1_1]);
+            scene.emailLink.removeInteractive();
+
+            // LINK1_1 SETUP
+            scene.link1_1.on('pointerdown', function(){
+                scene.path1_2.setPosition(scene.path1_1.x, scene.path1_1.y);
+                scene.computer.add([scene.path1_2]);
+                scene.path1_1.destroy();
+            });
+
+            // LINK1_2 SETUP
+            scene.link1_2.on('pointerdown', function(){
+                scene.path1_3.setPosition(scene.path1_2.x, scene.path1_2.y);
+                scene.computer.add([scene.path1_3]);
+                scene.path1_2.destroy();
+            });
+
+            // LINK1_3 SETUP
+            scene.link1_3.on('pointerdown', function(){
+                console.log("you beat the game yay");
+                scene.add.sprite(100, 100, 'Beeg Yoshi').setOrigin(0,0).setScale(0.5);
+            });
         });
 
 
