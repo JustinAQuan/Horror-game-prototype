@@ -4,7 +4,7 @@ class play extends Phaser.Scene {
     }
 
     preload() {
-        // loads monitor
+        // LOADS MAIN MONITOR
         this.load.image('homescreen', './assets/Desktop_bg.png');
         this.load.image('monitor_border', './assets/Monitor.png');
         this.load.image('ie', './assets/Internet_explorer.png');
@@ -12,22 +12,25 @@ class play extends Phaser.Scene {
         this.load.image('inbox', './assets/Inbox.png');
         this.load.image('my_pc', './assets/My_computer.png');
 
-        // loads room
+
+        // LOADS ROOM
         this.load.image('room', './assets/room.png');
 
-        // loads outside
+
+        // LOADS OUTSIDE
         this.load.image('test', './assets/test.png');
 
-        // loads path1_1
+
+        // LOADS PATH1_1
+        this.load.image('webpage', './assets/reallygoodwebpage.png');
         this.load.image('link1_1_1', './assets/linkex.png');
 
-        // loads audio
+
+        // LOADS AUDIO
         this.load.audio('click', './assets/click.wav');
         this.load.audio('double_click', './assets/double_click.wav');
         this.load.audio('weird', './assets/weird.wav');
         this.load.audio('startup', './assets/startup.wav');
-
-        this.load.image('webpage', './assets/reallygoodwebpage.png');
     }
 
     create() {
@@ -83,6 +86,10 @@ class play extends Phaser.Scene {
         this.webpage1_1 = this.add.rectangle(300, 200, 300, 300);
         this.link1_1_1 = new clickable(this, 350, 250, 'link1_1_1');
 
+        this.path1_1.add([this.webpage1_1, this.link1_1_1]);
+
+        this.computer.add([this.path1_1]);
+
 
 
 
@@ -103,6 +110,7 @@ class play extends Phaser.Scene {
         //     this.beegyoshi = this.add.sprite(500, 0, 'test').setOrigin(0, 0);
         //     this.beegyoshi.setDepth(-1);
         // }, null, this);
+
 
         //////////////////////////////
         //      MAIN CONTROLS       //
