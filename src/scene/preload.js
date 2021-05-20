@@ -9,17 +9,14 @@ class preload extends Phaser.Scene {
         //       MENU SCENE        //
         /////////////////////////////
 
-        // preload homescreen
-        this.load.image('homescreen', './assets/art/Desktop_bg.png');
-        this.load.image('monitor', './assets/art/Monitor.png');
-
         this.load.image('login', './assets/art/login.png');
+        this.load.image('close_button', './assets/art/close_button.png');
 
         // load music
         this.load.audio('menu_music', './assets/sound/testmenu.wav');
         this.load.audio('keyboard', './assets/sound/keyboard.wav');
 
-        
+
         /////////////////////////////
         //       PLAY SCENE        //
         /////////////////////////////

@@ -21,7 +21,7 @@ class menu extends Phaser.Scene {
         this.menu_bgm.play();
 
         // create homescreen
-        this.monitor = this.add.sprite(0, 0, 'monitor').setOrigin(0,0);
+        this.monitor = this.add.sprite(0, 0, 'monitor_border').setOrigin(0,0);
         this.homescreen = this.add.sprite(monitorBorderX, monitorBorderY, 'homescreen').setOrigin(0,0);
 
         // title text (this can be made in combination with menu image)
