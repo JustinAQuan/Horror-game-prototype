@@ -6,8 +6,8 @@ class menu extends Phaser.Scene {
     create() {
         let scene = this;
 
-        let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789*#%&!";
-        let Title = "NEVER ALONE";
+        let letters = "______LEAVE";
+        let Title = "NEVER_ALONE ";
 
         // creates menu music
         this.menu_bgm = this.sound.add(
@@ -35,19 +35,14 @@ class menu extends Phaser.Scene {
         // after a 5 second delay
         this.time.delayedCall(4000, function() {
             scene.time.addEvent({
-                delay: 1000,
+                delay: 100,
 
                 // function gets a random char from letters
                 callback: function() {
-                    let index = Math.floor(Math.random() * letters.length);
-                    let i = Math.floor(Math.random() * (Title.length - 1));
-
-                    if(i >= 5){
-                        ++i;
-                    }
+                    let index = Math.floor(Math.random() * (letters.length - 6) + 6);
 
                     // replaces a random char from title with one from letters
-                    Title = Title.replace(Title[i], letters.charAt(index));
+                    Title = Title.replace(Title[index], letters.charAt(index));
                     scene.title.setText(Title);
                 },
                 loop: true,

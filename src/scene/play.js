@@ -54,23 +54,27 @@ class play extends Phaser.Scene {
 
         // choose random i from array
         let i = Math.floor(Math.random() * (this.emailFSD.length));
+        i = 2;
 
         // email config
         let UserEmail = "theuser@hotmail.com"
         let Sender = this.emailFSD[i]["Sender"];
         let Subject = this.emailFSD[i]["Subject"];
         let RecDate = "12/18/2000";
-        let SentDate = "January 14, 1998 5:45 PM";
+        let SentDate = this.emailFSD[i]["Sent"];
         let Text = this.emailFSD[i]["Text"];
+        let Link1 = this.emailFSD[i]["Link1"]
+        let Link1PosX = this.emailFSD[i]["Link1PosX"];
+        let Link1PosY = this.emailFSD[i]["Link1PosY"];
 
         // assets
         this.inboxWindow = this.add.sprite(75, 100, 'inbox_window').setOrigin(0,0).setScale(1.2);
-        this.email = this.add.sprite(220, 161, 'email').setOrigin(0,0).setScale(1.2).setInteractive( { cursor: 'pointer' } );
-        this.emailFrom1 = this.add.text(290, 163, Sender, textStyle).setOrigin(0,0).setInteractive( { cursor: 'pointer' } );
-        this.emailSub1 = this.add.text(395, 163, Subject, textStyle).setOrigin(0,0).setInteractive( { cursor: 'pointer' } );
-        this.emailDate1 = this.add.text(495, 163, RecDate, textStyle).setOrigin(0,0).setInteractive( { cursor: 'pointer' } );
+        this.email = new clickable(this, 220, 161, 'email').setOrigin(0,0).setScale(1.2);
+        this.emailFrom1 = new links(this, 290, 163, Sender, textStyle).setOrigin(0,0);
+        this.emailSub1 = new links(this, 395, 163, Subject, textStyle).setOrigin(0,0);
+        this.emailDate1 = new links(this, 495, 163, RecDate, textStyle).setOrigin(0,0);
 
-        this.inboxClose = new clickable(this, 542, 112, 'close_button').setScale(.45);
+        this.inboxClose = new clickable(this, 542, 112, 'close_button').setScale(.44);
 
         this.inboxCon.add([this.inboxWindow, this.email, this.emailFrom1, this.emailSub1, this.emailDate1, this.inboxClose]);
 
@@ -83,15 +87,17 @@ class play extends Phaser.Scene {
         this.emailCon.setX(2000);
 
         this.emailWindow = this.add.sprite(75, 100, 'email_window').setOrigin(0,0);
-        this.emailFrom2 = this.add.text(105, 122, Sender, textStyle).setOrigin(0,0);
-        this.emailSub2 = this.add.text(150, 221, Subject, textStyle).setOrigin(0,0);
-        this.emailSent = this.add.text(105, 143, SentDate, textStyle).setOrigin(0,0);
+        this.emailFrom2 = this.add.text(105, 121, Sender, textStyle).setOrigin(0,0);
+        this.emailSub2 = this.add.text(150, 220, Subject, textStyle).setOrigin(0,0);
+        this.emailSent = this.add.text(105, 141, SentDate, textStyle).setOrigin(0,0);
         this.emailTo = this.add.text(105, 165, UserEmail, textStyle).setOrigin(0,0);
-        this.emailContents = this.add.text(85, 250, Text, textStyle).setOrigin(0,0);
+        this.emailContents = this.add.text(85, 245, Text, textStyle).setOrigin(0,0);
+        this.emailLink1 = new links(this, Link1PosX, Link1PosY, Link1, textStyle).setOrigin(0,0);
 
-        this.emailClose = this.add.rectangle(480, 107, 10, 10, 0x000000).setInteractive( { cursor: 'pointer' } );
+        this.emailClose = new clickable(this, 485, 105, 'close_button').setScale(.25);
 
-        this.emailCon.add([this.emailWindow, this.emailFrom2, this.emailSub2, this.emailSent, this.emailTo, this.emailClose, this.emailContents]);
+        this.emailCon.add([this.emailWindow, this.emailFrom2, this.emailSub2, this.emailSent, this.emailTo, this.emailClose]);
+        this.emailCon.add([this.emailContents, this.emailLink1]);
 
         //////////////////////////////
         //    RECYCLE BIN SETUP     //
@@ -101,7 +107,7 @@ class play extends Phaser.Scene {
         this.rbCon.setX(2000);                  // sets asset offscreen
 
         this.rbWindow = this.add.sprite(75, 100, 'rb_window').setOrigin(0,0);
-        this.rbClose = this.add.rectangle(345, 112, 15, 15, 0x000000).setInteractive( { cursor: 'pointer' } );
+        this.rbClose = new clickable(this, 340, 119, 'close_button');
 
         this.rbCon.add([this.rbWindow, this.rbClose]);
 
@@ -115,7 +121,7 @@ class play extends Phaser.Scene {
 
         this.myPCWindow = this.add.sprite(75, 100, 'mypc_window').setOrigin(0, 0);
 
-        this.myPCClose = this.add.rectangle(385, 107, 10, 10, 0x000000).setInteractive( { cursor: 'pointer' } );
+        this.myPCClose = new clickable(this, 388, 107, 'close_button').setScale(.34);
 
         this.myPCCon.add([this.myPCWindow, this.myPCClose]);
 
@@ -274,22 +280,24 @@ class play extends Phaser.Scene {
         });
 
 
-        // //prototype looking around and hearing sounds
-        // this.time.delayedCall(3000, () => {
-        //     // add instruction text
-        //     this.instructions = this.add.text(
-        //         game.config.width / 2,
-        //         game.config.height - monitorBorderY * 4,
-        //         "Press Space to look around the room", { fontSize: "30px", color: 0xffffff }
-        //     ).setOrigin(0.5, 0);
+        //prototype looking around and hearing sounds
+        this.time.delayedCall(3000, () => {
+            // play sound
+            this.sound.play('weird');
 
-        //     // play sound
-        //     this.sound.play('weird');
+            this.time.delayedCall(3000, () => {
+                // add instruction text
+                this.instructions = this.add.text(
+                    game.config.width / 2,
+                    game.config.height - monitorBorderY * 4,
+                    "Press Space to look around the room", { fontSize: "30px", color: 0xffffff }
+                ).setOrigin(0.5, 0);
 
-        //     // add something to window
-        //     this.beegyoshi = this.add.sprite(500, 0, 'test').setOrigin(0, 0);
-        //     this.beegyoshi.setDepth(-1);
-        // }, null, this);
+                // add something to window
+                this.beegyoshi = this.add.sprite(500, 0, 'test').setOrigin(0, 0);
+                this.beegyoshi.setDepth(-1);
+            });
+        }, null, this);
 
 
         //////////////////////////////
