@@ -6,7 +6,7 @@ class menu extends Phaser.Scene {
     create() {
         let scene = this;
 
-        let letters = "______LEAVE";
+        let letters = "NEVER_LEAVE";
         let Title = "NEVER_ALONE ";
 
         // creates menu music
@@ -39,7 +39,7 @@ class menu extends Phaser.Scene {
 
                 // function gets a random char from letters
                 callback: function() {
-                    let index = Math.floor(Math.random() * (letters.length - 6) + 6);
+                    let index = Math.floor(Math.random() * letters.length);
 
                     // replaces a random char from title with one from letters
                     Title = Title.replace(Title[index], letters.charAt(index));

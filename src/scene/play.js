@@ -285,7 +285,7 @@ class play extends Phaser.Scene {
             // play sound
             this.sound.play('weird');
 
-            this.time.delayedCall(3000, () => {
+            this.time.delayedCall(10000, () => {
                 // add instruction text
                 this.instructions = this.add.text(
                     game.config.width / 2,
