@@ -11,7 +11,6 @@ class play extends Phaser.Scene {
         this.load.image('recycle_bin', './assets/art/Recycle_bin.png');
         this.load.image('inbox', './assets/art/Inbox.png');
         this.load.image('my_pc', './assets/art/My_computer.png');
-        this.load.image('taskbar', './assets/art/Start_menu.png');
 
 
         // LOADS ROOM
@@ -22,9 +21,15 @@ class play extends Phaser.Scene {
         this.load.image('Beeg Yoshi', './assets/art/test.png');
 
 
+        // LOADS DUMMY WINDOWS
+        this.load.image('rb_window', './assets/art/Recycle_binTemplate.png');
+        this.load.image('mypc_window', './assets/art/My_computerTemplate.png');
+
+
         // LOADS INBOX
         this.load.image('inbox_window', './assets/art/Inbox_window.png');
         this.load.image('email', './assets/art/Email_inboxTemplate.png');
+        this.load.image('email_window', './assets/art/Email_template.png');
 
         // LOADS PATH1_1
         this.load.image('webpage', './assets/art/reallygoodwebpage.png');
@@ -40,6 +45,7 @@ class play extends Phaser.Scene {
 
     create() {
         let scene = this;
+        let currPage = null;
 
         //////////////////////////////
         //   INITIAL SCENE SETUP    //
@@ -62,7 +68,6 @@ class play extends Phaser.Scene {
 
         // create monitor
         this.homescreen = this.add.sprite(monitorBorderX, monitorBorderY, 'homescreen').setOrigin(0, 0);
-        this.taskbar = this.add.sprite(monitorBorderX, game.config.height - monitorBorderY, 'taskbar').setOrigin(0,1);
         this.monitor_border = this.add.sprite(0, 0, 'monitor_border').setOrigin(0, 0);
 
         // monitor icons
@@ -71,32 +76,81 @@ class play extends Phaser.Scene {
         this.ie = new clickable(this, monitorBorderX + 15, monitorBorderY * 4 + 20, 'ie', "icon").setOrigin(0, 0);
         this.rb = new clickable(this, monitorBorderX + 15, monitorBorderY * 6 + 20, 'recycle_bin', "icon").setOrigin(0, 0);
 
-        this.computer.add([this.monitor_border, this.homescreen, this.ie, this.rb, this.inbox, this.myPC, this.taskbar]);
+        this.computer.add([this.monitor_border, this.homescreen, this.ie, this.rb, this.inbox, this.myPC]);
 
 
         //////////////////////////////
         //       INBOX SETUP        //
         //////////////////////////////
 
+        // text style
+        let textStyle = { fontFamily: 'VT323', fontSize: '10px', color: 0xffffff};
+
         // Container to house all assets for inbox window
         this.inboxCon = this.add.container();
         this.inboxCon.setX(2000);               // sets assets offscreen
 
         // email array
-        let emailFrom = ['speckledorp69@hotmail.com', 'osatvlx@hotmail.com', 'wombusyeah557@hotmail.com'];
+        let emailFrom = ['speckled69@hotmail.com', 'osatvlx@hotmail.com', 'wombus557@hotmail.com'];
         let emailSubject = ['Broken Link', 'ILOVEYOU', 'wombus friend'];
 
         // choose random i from array
         let i = Math.floor(Math.random() * (emailSubject.length - 1));
 
         // assets
-        this.inboxWindow = this.add.sprite(400, 300, 'inbox_window').setOrigin(0.5,0.5);
-        this.email = this.add.sprite(457, 183, 'email').setOrigin(0.5,0.5);
-        this.emailLink = this.add.text(380, 183, emailFrom[i] + '     ' + emailSubject[i], { fontFamily: 'VT323', fontSize: '9px', color: 0xffffff }).setOrigin(0,0.5);
-        this.emailLink.setInteractive({ cursor: 'pointer' });
+        this.inboxWindow = this.add.sprite(75, 100, 'inbox_window').setOrigin(0,0).setScale(1.2);
+        this.email = this.add.sprite(220, 161, 'email').setOrigin(0,0).setScale(1.2).setInteractive( { cursor: 'pointer' } );
+        this.emailFrom1 = this.add.text(290, 163, emailFrom[i], textStyle).setOrigin(0,0).setInteractive( { cursor: 'pointer' } );
+        this.emailSub1 = this.add.text(400, 163, emailSubject[i], textStyle).setOrigin(0,0).setInteractive( { cursor: 'pointer' } );
+        this.emailDate1 = this.add.text(500, 163, '01/14/1998', textStyle).setOrigin(0,0).setInteractive( { cursor: 'pointer' } );
 
-        this.inboxCon.add([this.inboxWindow, this.email, this.emailLink]);
-        this.inboxCon.setScale(1.1);
+        this.inboxClose = this.add.rectangle(542, 112, 15, 15, 0x000000).setInteractive( { cursor: 'pointer' } );
+
+        this.inboxCon.add([this.inboxWindow, this.email, this.emailFrom1, this.emailSub1, this.emailDate1, this.inboxClose]);
+
+
+        //////////////////////////////
+        //    EMAIL WINDOW SETUP    //
+        //////////////////////////////
+
+        this.emailCon = this.add.container();
+        this.emailCon.setX(2000);
+
+        this.emailWindow = this.add.sprite(75, 100, 'email_window').setOrigin(0,0);
+        this.emailFrom2 = this.add.text(105, 122, emailFrom[i], textStyle).setOrigin(0,0);
+        this.emailSub2 = this.add.text(150, 221, emailSubject[i], textStyle).setOrigin(0,0);
+        this.emailSent = this.add.text(105, 143, 'January 14, 1998 5:45 PM', textStyle).setOrigin(0,0);
+        this.emailTo = this.add.text(105, 165, 'theuser@hotmail.com', textStyle).setOrigin(0,0)
+
+        this.emailClose = this.add.rectangle(480, 107, 10, 10, 0x000000).setInteractive( { cursor: 'pointer' } );
+
+        this.emailCon.add([this.emailWindow, this.emailFrom2, this.emailSub2, this.emailSent, this.emailTo, this.emailClose]);
+
+        //////////////////////////////
+        //    RECYCLE BIN SETUP     //
+        //////////////////////////////
+
+        this.rbCon = this.add.container();
+        this.rbCon.setX(2000);                  // sets asset offscreen
+
+        this.rbWindow = this.add.sprite(75, 100, 'rb_window').setOrigin(0,0);
+        this.rbClose = this.add.rectangle(345, 112, 15, 15, 0x000000).setInteractive( { cursor: 'pointer' } );
+
+        this.rbCon.add([this.rbWindow, this.rbClose]);
+
+
+        //////////////////////////////
+        //    MY COMPUTER SETUP     //
+        //////////////////////////////
+
+        this.myPCCon = this.add.container();
+        this.myPCCon.setX(2000);                  // sets asset offscreen
+
+        this.myPCWindow = this.add.sprite(75, 100, 'mypc_window').setOrigin(0, 0);
+
+        this.myPCClose = this.add.rectangle(385, 107, 10, 10, 0x000000).setInteractive( { cursor: 'pointer' } );
+
+        this.myPCCon.add([this.myPCWindow, this.myPCClose]);
 
 
         //////////////////////////////
@@ -166,38 +220,88 @@ class play extends Phaser.Scene {
         //      EVENT SETUP         //
         //////////////////////////////
 
-        // INBOX SETUP
-        this.inbox.on('pointerdown', function(){
-            scene.inboxCon.setRandomPosition(0, -50, 40, 50);
-            scene.computer.add([scene.inboxCon]);
-            scene.inbox.removeInteractive();
+        // DUMMY EVENTS
+
+        // recycling bin setup
+        this.rb.on('pointerdown', function(){
+            scene.rbCon.setRandomPosition(10, -50, 200, 50);
+            scene.computer.add([scene.rbCon]);
         });
 
-        // EMAIL LINK SETUP
-        this.emailLink.on('pointerdown', function(){
-            scene.path1_1.setRandomPosition(0, -50, 40, 100);
-            scene.computer.add([scene.path1_1]);
-            scene.emailLink.removeInteractive();
+        // sets up recycling bin close button
+        this.rbClose.on('pointerdown', function(){
+            scene.rbCon.setPosition(2000, 0);
+            scene.computer.remove([scene.rbCon]);
+        });
 
-            // LINK1_1 SETUP
-            scene.link1_1.on('pointerdown', function(){
-                scene.path1_2.setPosition(scene.path1_1.x, scene.path1_1.y);
-                scene.computer.add([scene.path1_2]);
-                scene.path1_1.destroy();
-            });
+        // my_pc setup
+        this.myPC.on('pointerdown', function(){
+            scene.myPCCon.setRandomPosition(30, -50, 325, 150);
+            scene.computer.add([scene.myPCCon]);
+        })
 
-            // LINK1_2 SETUP
-            scene.link1_2.on('pointerdown', function(){
-                scene.path1_3.setPosition(scene.path1_2.x, scene.path1_2.y);
-                scene.computer.add([scene.path1_3]);
-                scene.path1_2.destroy();
-            });
+        // sets up my pc close button
+        this.myPCClose.on('pointerdown', function(){
+            scene.myPCCon.setPosition(2000, 0);
+            scene.computer.add([scene.myPCCon]);
+        })
 
-            // LINK1_3 SETUP
-            scene.link1_3.on('pointerdown', function(){
-                console.log("you beat the game yay");
-                scene.add.sprite(100, 100, 'Beeg Yoshi').setOrigin(0,0).setScale(0.5);
-            });
+        // MAIN EVENTS
+
+        // inbox setup
+        this.inbox.on('pointerdown', function(){
+            scene.inboxCon.setRandomPosition(10, -50, 200, 50);
+            scene.computer.add([scene.inboxCon]);
+        });
+
+        // sets up inbox close button
+        this.inboxClose.on('pointerdown', function(){
+            scene.inboxCon.setPosition(2000, 0);
+            scene.computer.remove([scene.inboxCon]);
+        });
+
+        // email template setup
+        this.email.on('pointerdown', function(){
+            scene.emailCon.setRandomPosition(10, -50, 200, 50);
+            scene.computer.add([scene.emailCon]);
+        });
+        this.emailFrom1.on('pointerdown', function(){
+            scene.emailCon.setRandomPosition(10, -50, 200, 50);
+            scene.computer.add([scene.emailCon]);
+        });
+        this.emailSub1.on('pointerdown', function(){
+            scene.emailCon.setRandomPosition(10, -50, 200, 50);
+            scene.computer.add([scene.emailCon]);
+        });
+        this.emailDate1.on('pointerdown', function(){
+            scene.emailCon.setRandomPosition(10, -50, 200, 50);
+            scene.computer.add([scene.emailCon]);
+        });
+
+        // sets up email close button
+        this.emailClose.on('pointerdown', function(){
+            scene.emailCon.setPosition(2000, 0);
+            scene.computer.remove([scene.emailCon]);
+        });
+
+        // LINK1_1 SETUP
+        this.link1_1.on('pointerdown', function(){
+            scene.path1_2.setPosition(scene.path1_1.x, scene.path1_1.y);
+            scene.computer.add([scene.path1_2]);
+            scene.path1_1.destroy();
+        });
+
+        // LINK1_2 SETUP
+        this.link1_2.on('pointerdown', function(){
+            scene.path1_3.setPosition(scene.path1_2.x, scene.path1_2.y);
+            scene.computer.add([scene.path1_3]);
+            scene.path1_2.destroy();
+        });
+
+        // LINK1_3 SETUP
+        this.link1_3.on('pointerdown', function(){
+            console.log("you beat the game yay");
+            scene.add.sprite(100, 100, 'Beeg Yoshi').setOrigin(0,0).setScale(0.5);
         });
 
 
