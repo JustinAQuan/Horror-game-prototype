@@ -3,49 +3,11 @@ class play extends Phaser.Scene {
         super("playScene");
     }
 
-    preload() {
-        // LOADS MAIN MONITOR
-        this.load.image('homescreen', './assets/art/Desktop_bg.png');
-        this.load.image('monitor_border', './assets/art/Monitor.png');
-        this.load.image('ie', './assets/art/Internet_explorer.png');
-        this.load.image('recycle_bin', './assets/art/Recycle_bin.png');
-        this.load.image('inbox', './assets/art/Inbox.png');
-        this.load.image('my_pc', './assets/art/My_computer.png');
-
-
-        // LOADS ROOM
-        this.load.image('room', './assets/art/room.png');
-
-
-        // LOADS OUTSIDE
-        this.load.image('Beeg Yoshi', './assets/art/test.png');
-
-
-        // LOADS DUMMY WINDOWS
-        this.load.image('rb_window', './assets/art/Recycle_binTemplate.png');
-        this.load.image('mypc_window', './assets/art/My_computerTemplate.png');
-
-
-        // LOADS INBOX
-        this.load.image('inbox_window', './assets/art/Inbox_window.png');
-        this.load.image('email', './assets/art/Email_inboxTemplate.png');
-        this.load.image('email_window', './assets/art/Email_template.png');
-
-        // LOADS PATH1_1
-        this.load.image('webpage', './assets/art/reallygoodwebpage.png');
-        this.load.image('link1_1_1', './assets/art/linkex.png');
-
-
-        // LOADS AUDIO
-        this.load.audio('click', './assets/sound/click.wav');
-        this.load.audio('double_click', './assets/sound/double_click.wav');
-        this.load.audio('weird', './assets/sound/weird.wav');
-        this.load.audio('startup', './assets/sound/startup.wav');
-    }
-
     create() {
         let scene = this;
         let currPage = null;
+
+        this.emailFSD = this.cache.json.get('emailHeader')
 
         //////////////////////////////
         //   INITIAL SCENE SETUP    //
@@ -84,27 +46,31 @@ class play extends Phaser.Scene {
         //////////////////////////////
 
         // text style
-        let textStyle = { fontFamily: 'VT323', fontSize: '10px', color: 0xffffff};
+        let textStyle = { fontFamily: 'VT323', fontSize: '11px', color: 0xffffff, resolution: 2};
 
         // Container to house all assets for inbox window
         this.inboxCon = this.add.container();
         this.inboxCon.setX(2000);               // sets assets offscreen
 
-        // email array
-        let emailFrom = ['speckled69@hotmail.com', 'osatvlx@hotmail.com', 'wombus557@hotmail.com'];
-        let emailSubject = ['Broken Link', 'ILOVEYOU', 'wombus friend'];
-
         // choose random i from array
-        let i = Math.floor(Math.random() * (emailSubject.length - 1));
+        let i = Math.floor(Math.random() * (this.emailFSD.length));
+
+        // email config
+        let UserEmail = "theuser@hotmail.com"
+        let Sender = this.emailFSD[i]["Sender"];
+        let Subject = this.emailFSD[i]["Subject"];
+        let RecDate = "12/18/2000";
+        let SentDate = "January 14, 1998 5:45 PM";
+        let Text = this.emailFSD[i]["Text"];
 
         // assets
         this.inboxWindow = this.add.sprite(75, 100, 'inbox_window').setOrigin(0,0).setScale(1.2);
         this.email = this.add.sprite(220, 161, 'email').setOrigin(0,0).setScale(1.2).setInteractive( { cursor: 'pointer' } );
-        this.emailFrom1 = this.add.text(290, 163, emailFrom[i], textStyle).setOrigin(0,0).setInteractive( { cursor: 'pointer' } );
-        this.emailSub1 = this.add.text(400, 163, emailSubject[i], textStyle).setOrigin(0,0).setInteractive( { cursor: 'pointer' } );
-        this.emailDate1 = this.add.text(500, 163, '01/14/1998', textStyle).setOrigin(0,0).setInteractive( { cursor: 'pointer' } );
+        this.emailFrom1 = this.add.text(290, 163, Sender, textStyle).setOrigin(0,0).setInteractive( { cursor: 'pointer' } );
+        this.emailSub1 = this.add.text(395, 163, Subject, textStyle).setOrigin(0,0).setInteractive( { cursor: 'pointer' } );
+        this.emailDate1 = this.add.text(495, 163, RecDate, textStyle).setOrigin(0,0).setInteractive( { cursor: 'pointer' } );
 
-        this.inboxClose = this.add.rectangle(542, 112, 15, 15, 0x000000).setInteractive( { cursor: 'pointer' } );
+        this.inboxClose = new clickable(this, 542, 112, 'close_button').setScale(.45);
 
         this.inboxCon.add([this.inboxWindow, this.email, this.emailFrom1, this.emailSub1, this.emailDate1, this.inboxClose]);
 
@@ -117,14 +83,15 @@ class play extends Phaser.Scene {
         this.emailCon.setX(2000);
 
         this.emailWindow = this.add.sprite(75, 100, 'email_window').setOrigin(0,0);
-        this.emailFrom2 = this.add.text(105, 122, emailFrom[i], textStyle).setOrigin(0,0);
-        this.emailSub2 = this.add.text(150, 221, emailSubject[i], textStyle).setOrigin(0,0);
-        this.emailSent = this.add.text(105, 143, 'January 14, 1998 5:45 PM', textStyle).setOrigin(0,0);
-        this.emailTo = this.add.text(105, 165, 'theuser@hotmail.com', textStyle).setOrigin(0,0)
+        this.emailFrom2 = this.add.text(105, 122, Sender, textStyle).setOrigin(0,0);
+        this.emailSub2 = this.add.text(150, 221, Subject, textStyle).setOrigin(0,0);
+        this.emailSent = this.add.text(105, 143, SentDate, textStyle).setOrigin(0,0);
+        this.emailTo = this.add.text(105, 165, UserEmail, textStyle).setOrigin(0,0);
+        this.emailContents = this.add.text(85, 250, Text, textStyle).setOrigin(0,0);
 
         this.emailClose = this.add.rectangle(480, 107, 10, 10, 0x000000).setInteractive( { cursor: 'pointer' } );
 
-        this.emailCon.add([this.emailWindow, this.emailFrom2, this.emailSub2, this.emailSent, this.emailTo, this.emailClose]);
+        this.emailCon.add([this.emailWindow, this.emailFrom2, this.emailSub2, this.emailSent, this.emailTo, this.emailClose, this.emailContents]);
 
         //////////////////////////////
         //    RECYCLE BIN SETUP     //
@@ -277,6 +244,8 @@ class play extends Phaser.Scene {
             scene.emailCon.setRandomPosition(10, -50, 200, 50);
             scene.computer.add([scene.emailCon]);
         });
+
+
 
         // sets up email close button
         this.emailClose.on('pointerdown', function(){
