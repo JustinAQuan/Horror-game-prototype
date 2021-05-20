@@ -54,7 +54,6 @@ class play extends Phaser.Scene {
 
         // choose random i from array
         let i = Math.floor(Math.random() * (this.emailFSD.length));
-        i = 2;
 
         // email config
         let UserEmail = "theuser@hotmail.com"
@@ -163,31 +162,49 @@ class play extends Phaser.Scene {
         // setting up each container
 
         // path1_1
-        this.webpage1_1 = this.add.sprite(400, 300, 'webpage').setScale(0.7);
+        this.webpage1_1 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.7);
         this.link1_1 = new clickable(this, 350, 250, 'link1_1_1');
         this.path1_1.add([this.webpage1_1, this.link1_1]);
 
         // path1_2
-        this.webpage1_2 = this.add.sprite(400, 300, 'webpage').setScale(0.7).setTint(0xff0000);
+        this.webpage1_2 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.7).setTint(0xff0000);
         this.link1_2 = new clickable(this, 350, 250, 'link1_1_1');
         this.path1_2.add([this.webpage1_2, this.link1_2]);
 
         // path1_3
-        this.webpage1_3 = this.add.sprite(400, 300, 'webpage').setScale(0.7).setTint(0x00ff00);
+        this.webpage1_3 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.7).setTint(0x00ff00);
         this.link1_3 = new clickable(this, 350, 250, 'link1_1_1');
         this.path1_3.add([this.webpage1_3, this.link1_3]);
 
         // path2_1
+        this.webpage2_1 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.7);
+        this.link2_1 = new clickable(this, 350, 250, 'link1_1_1');
+        this.path2_1.add([this.webpage2_1, this.link2_1]);
 
         // path2_2
+        this.webpage2_2 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.7).setTint(0x0000ff);
+        this.link2_2 = new clickable(this, 350, 250, 'link1_1_1');
+        this.path2_2.add([this.webpage2_2, this.link2_2]);
 
         // path2_3
+        this.webpage2_3 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.7).setTint(0xff0000);
+        this.link2_3 = new clickable(this, 350, 250, 'link1_1_1');
+        this.path2_3.add([this.webpage2_3, this.link2_3]);
 
         // path3_1
+        this.webpage3_1 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.7);
+        this.link3_1 = new clickable(this, 350, 250, 'link1_1_1');
+        this.path3_1.add([this.webpage3_1, this.link3_1]);
 
         // path3_2
+        this.webpage3_2 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.7).setTint(0x00ff00);
+        this.link3_2 = new clickable(this, 350, 250, 'link1_1_1');
+        this.path3_2.add([this.webpage3_2, this.link3_2]);
 
         // path3_3
+        this.webpage3_3 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.7).setTint(0x0000ff);
+        this.link3_3 = new clickable(this, 350, 250, 'link1_1_1');
+        this.path3_3.add([this.webpage3_3, this.link3_3]);
 
         //////////////////////////////
         //      EVENT SETUP         //
@@ -226,6 +243,26 @@ class play extends Phaser.Scene {
             scene.inboxCon.setRandomPosition(10, -50, 200, 50);
             scene.computer.add([scene.inboxCon]);
         });
+        // email box
+        this.email.on('pointerdown', function(){
+            scene.emailCon.setRandomPosition(10, -50, 200, 50);
+            scene.computer.add([scene.emailCon]);
+        });
+        // email sender
+        this.emailFrom1.on('pointerdown', function(){
+            scene.emailCon.setRandomPosition(10, -50, 200, 50);
+            scene.computer.add([scene.emailCon]);
+        });
+        // email subject
+        this.emailSub1.on('pointerdown', function(){
+            scene.emailCon.setRandomPosition(10, -50, 200, 50);
+            scene.computer.add([scene.emailCon]);
+        });
+        // email received date
+        this.emailDate1.on('pointerdown', function(){
+            scene.emailCon.setRandomPosition(10, -50, 200, 50);
+            scene.computer.add([scene.emailCon]);
+        });
 
         // sets up inbox close button
         this.inboxClose.on('pointerdown', function(){
@@ -233,52 +270,128 @@ class play extends Phaser.Scene {
             scene.computer.remove([scene.inboxCon]);
         });
 
-        // email template setup
-        this.email.on('pointerdown', function(){
-            scene.emailCon.setRandomPosition(10, -50, 200, 50);
-            scene.computer.add([scene.emailCon]);
-        });
-        this.emailFrom1.on('pointerdown', function(){
-            scene.emailCon.setRandomPosition(10, -50, 200, 50);
-            scene.computer.add([scene.emailCon]);
-        });
-        this.emailSub1.on('pointerdown', function(){
-            scene.emailCon.setRandomPosition(10, -50, 200, 50);
-            scene.computer.add([scene.emailCon]);
-        });
-        this.emailDate1.on('pointerdown', function(){
-            scene.emailCon.setRandomPosition(10, -50, 200, 50);
-            scene.computer.add([scene.emailCon]);
-        });
-
-
-
         // sets up email close button
         this.emailClose.on('pointerdown', function(){
             scene.emailCon.setPosition(2000, 0);
             scene.computer.remove([scene.emailCon]);
         });
 
-        // LINK1_1 SETUP
-        this.link1_1.on('pointerdown', function(){
-            scene.path1_2.setPosition(scene.path1_1.x, scene.path1_1.y);
-            scene.computer.add([scene.path1_2]);
-            scene.path1_1.destroy();
-        });
+        // MAIN RABBIT WHOLE
+        this.emailLink1.on('pointerdown', function(){
 
-        // LINK1_2 SETUP
-        this.link1_2.on('pointerdown', function(){
-            scene.path1_3.setPosition(scene.path1_2.x, scene.path1_2.y);
-            scene.computer.add([scene.path1_3]);
-            scene.path1_2.destroy();
-        });
+            if(i == 0){
+                // DESTROY OTHER ASSETS FOR CLEANINESS
+                scene.path2_1.destroy();
+                scene.path2_2.destroy();
+                scene.path2_3.destroy();
+                
+                scene.path3_1.destroy();
+                scene.path3_2.destroy();
+                scene.path3_3.destroy();
 
-        // LINK1_3 SETUP
-        this.link1_3.on('pointerdown', function(){
-            console.log("you beat the game yay");
-            scene.add.sprite(100, 100, 'Beeg Yoshi').setOrigin(0,0).setScale(0.5);
-        });
+                // INITIAL WEBPAGE
+                scene.path1_1.setRandomPosition(10, -50, 100, 50);
+                scene.computer.add([scene.path1_1]);
 
+                // LINK1_1 SETUP
+                scene.link1_1.on('pointerdown', function(){
+                    scene.path1_2.setPosition(scene.path1_1.x, scene.path1_1.y);
+                    scene.computer.add([scene.path1_2]);
+                    scene.path1_1.destroy();
+                });
+
+                // LINK1_2 SETUP
+                scene.link1_2.on('pointerdown', function(){
+                    scene.path1_3.setPosition(scene.path1_2.x, scene.path1_2.y);
+                    scene.computer.add([scene.path1_3]);
+                    scene.path1_2.destroy();
+                });
+
+                // LINK1_3 SETUP
+                scene.link1_3.on('pointerdown', function(){
+                    console.log("you beat the game yay");
+                    let win = scene.add.sprite(100, 100, 'Beeg Yoshi').setOrigin(0,0).setScale(0.5);
+                    scene.computer.add(win);
+                });
+            }
+
+            else if(i == 1){
+                // DESTROY OTHER ASSETS FOR CLEANINESS
+                scene.path1_1.destroy();
+                scene.path1_2.destroy();
+                scene.path1_3.destroy();
+
+                scene.path3_1.destroy();
+                scene.path3_2.destroy();
+                scene.path3_3.destroy();
+
+                // INITIAL WEBPAGE
+                scene.path2_1.setRandomPosition(10, -50, 100, 50);
+                scene.computer.add([scene.path2_1]);
+
+                // LINK1_1 SETUP
+                scene.link2_1.on('pointerdown', function(){
+                    scene.path2_2.setPosition(scene.path2_1.x, scene.path2_1.y);
+                    scene.computer.add([scene.path2_2]);
+                    scene.path2_1.destroy();
+                });
+
+                // LINK1_2 SETUP
+                scene.link2_2.on('pointerdown', function(){
+                    scene.path2_3.setPosition(scene.path2_2.x, scene.path2_2.y);
+                    scene.computer.add([scene.path2_3]);
+                    scene.path2_2.destroy();
+                });
+
+                // LINK1_3 SETUP
+                scene.link2_3.on('pointerdown', function(){
+                    console.log("you beat the game yay");
+                    let win = scene.add.sprite(100, 100, 'Beeg Yoshi').setOrigin(0,0).setScale(0.5);
+                    scene.computer.add(win)
+                });
+            }
+
+            else if(i == 2){
+                // DESTROY OTHER ASSETS FOR CLEANINESS
+                scene.path1_1.destroy();
+                scene.path1_2.destroy();
+                scene.path1_3.destroy();
+
+                scene.path2_1.destroy();
+                scene.path2_2.destroy();
+                scene.path2_3.destroy();
+
+                // INITIAL WEBPAGE
+                scene.path3_1.setRandomPosition(10, -50, 100, 50);
+                scene.computer.add([scene.path3_1]);
+
+                // LINK1_1 SETUP
+                scene.link3_1.on('pointerdown', function(){
+                    scene.path3_2.setPosition(scene.path3_1.x, scene.path3_1.y);
+                    scene.computer.add([scene.path3_2]);
+                    scene.path3_1.destroy();
+                });
+
+                // LINK1_2 SETUP
+                scene.link3_2.on('pointerdown', function(){
+                    scene.path3_3.setPosition(scene.path3_2.x, scene.path3_2.y);
+                    scene.computer.add([scene.path3_3]);
+                    scene.path3_2.destroy();
+                });
+
+                // LINK1_3 SETUP
+                scene.link3_3.on('pointerdown', function(){
+                    console.log("you beat the game yay");
+                    let win = scene.add.sprite(100, 100, 'Beeg Yoshi').setOrigin(0,0).setScale(0.5);
+                    scene.computer.add(win);
+                });
+            }
+        })
+
+
+        //////////////////////////////
+        //      SPOOKY SETUP        //
+        //////////////////////////////
 
         //prototype looking around and hearing sounds
         this.time.delayedCall(3000, () => {
