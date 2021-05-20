@@ -294,7 +294,7 @@ class play extends Phaser.Scene {
                 ).setOrigin(0.5, 0);
 
                 // add something to window
-                this.beegyoshi = this.add.sprite(500, 0, 'test').setOrigin(0, 0);
+                this.beegyoshi = this.add.sprite(500, 0, 'Beeg Yoshi').setOrigin(0, 0);
                 this.beegyoshi.setDepth(-1);
             });
         }, null, this);
