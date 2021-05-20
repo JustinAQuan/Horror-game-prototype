@@ -33,6 +33,6 @@ var text1;
  * Windows Startup Sound
  * https://soundbible.com/1654-Windows-95-Startup.html
  * 
- * VT323 Font Family
- * https://fonts.google.com/specimen/VT323?category=Monospace#about
+ * W95FA Font Family
+ * https://fontsarena.com/w95fa-by-fontsarena/
  **************************************************/
