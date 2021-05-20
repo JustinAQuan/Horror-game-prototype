@@ -3,18 +3,6 @@ class menu extends Phaser.Scene {
         super("menuScene");
     }
     
-    preload() {
-        // preload homescreen
-        this.load.image('homescreen', './assets/art/Desktop_bg.png');
-        this.load.image('monitor', './assets/art/Monitor.png');
-
-        this.load.image('login', './assets/art/login.png');
-
-        // load music
-        this.load.audio('menu_music', './assets/sound/testmenu.wav');
-        this.load.audio('keyboard', './assets/sound/keyboard.wav');
-    }
-
     create() {
         let scene = this;
 
