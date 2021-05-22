@@ -54,6 +54,7 @@ class play extends Phaser.Scene {
 
         // choose random i from array
         let i = Math.floor(Math.random() * (this.emailFSD.length));
+        i = 0;
 
         // email config
         let UserEmail = "theuser@hotmail.com"
@@ -73,7 +74,7 @@ class play extends Phaser.Scene {
         this.emailSub1 = new links(this, 395, 163, Subject, textStyle).setOrigin(0,0);
         this.emailDate1 = new links(this, 495, 163, RecDate, textStyle).setOrigin(0,0);
 
-        this.inboxClose = new clickable(this, 542, 112, 'close_button').setScale(.44);
+        this.inboxClose = new clickable(this, 542, 112, 'close_button').setScale(.9);
 
         this.inboxCon.add([this.inboxWindow, this.email, this.emailFrom1, this.emailSub1, this.emailDate1, this.inboxClose]);
 
@@ -93,11 +94,11 @@ class play extends Phaser.Scene {
         this.emailContents = this.add.text(85, 245, Text, textStyle).setOrigin(0,0);
         this.emailLink1 = new links(this, Link1PosX, Link1PosY, Link1, textStyle).setOrigin(0,0);
 
-        this.emailClose = new clickable(this, 485, 105, 'close_button').setScale(.25);
+        this.emailClose = new clickable(this, 485, 105, 'close_button').setScale(.7);
 
         this.emailCon.add([this.emailWindow, this.emailFrom2, this.emailSub2, this.emailSent, this.emailTo, this.emailClose]);
         this.emailCon.add([this.emailContents, this.emailLink1]);
-
+4
         //////////////////////////////
         //    RECYCLE BIN SETUP     //
         //////////////////////////////
@@ -119,10 +120,23 @@ class play extends Phaser.Scene {
         this.myPCCon.setX(2000);                  // sets asset offscreen
 
         this.myPCWindow = this.add.sprite(75, 100, 'mypc_window').setOrigin(0, 0);
-
-        this.myPCClose = new clickable(this, 388, 107, 'close_button').setScale(.34);
+        this.myPCClose = new clickable(this, 388, 107, 'close_button').setScale(.8);
 
         this.myPCCon.add([this.myPCWindow, this.myPCClose]);
+
+
+        //////////////////////////////
+        //  INTERNET EXPLORER SETUP //
+        //////////////////////////////
+
+        this.ieCon = this.add.container();
+        this.ieCon.setPosition(2000, 0);
+
+        this.ieWindow = this.add.sprite(75, 100, 'ie_window').setOrigin(0,0);
+        this.fourohfour = this.add.sprite(85, 150, '404').setOrigin(0,0).setScale(.5);
+        this.ieClose = new clickable(this, 630, 104, 'close_button').setScale(.8);
+
+        this.ieCon.add([this.ieWindow, this.fourohfour, this.ieClose]);
 
 
         //////////////////////////////
@@ -136,75 +150,90 @@ class play extends Phaser.Scene {
         this.path1_2 = this.add.container();
         this.path1_3 = this.add.container();
 
-        this.path1_1.setX(2000);
-        this.path1_2.setX(2000);
-        this.path1_3.setX(2000);
+        this.path1_1.setPosition(2000, 0);
+        this.path1_2.setPosition(2000, 0);
+        this.path1_3.setPosition(2000, 0);
 
         // path 2
         this.path2_1 = this.add.container();
         this.path2_2 = this.add.container();
         this.path2_3 = this.add.container();
 
-        this.path2_1.setX(2000);
-        this.path2_2.setX(2000);
-        this.path2_3.setX(2000);
+        this.path2_1.setPosition(2000, 0);
+        this.path2_2.setPosition(2000, 0);
+        this.path2_3.setPosition(2000, 0);
 
         // paht 3
         this.path3_1 = this.add.container();
         this.path3_2 = this.add.container();
         this.path3_3 = this.add.container();
 
-        this.path3_1.setX(2000);
-        this.path3_2.setX(2000);
-        this.path3_3.setX(2000);
+        this.path3_1.setPosition(2000, 0);
+        this.path3_2.setPosition(2000, 0);
+        this.path3_3.setPosition(2000, 0);
 
 
         // setting up each container
 
         // path1_1
-        this.webpage1_1 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.7);
-        this.link1_1 = new clickable(this, 350, 250, 'link1_1_1');
-        this.path1_1.add([this.webpage1_1, this.link1_1]);
+        this.webpageUI1_1 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0);
+        this.webpage1_1 = this.add.sprite(77, 144, 'webpage1_1').setOrigin(0,0);
+        this.link1_1 = new clickable(this, 295, 402, 'link1_1_1');
+        this.link1_1.on('pointerover', function(){
+            scene.link1_1.setTint(0x0000ff);
+        })
+        this.link1_1.on('pointerout', function(){
+            scene.link1_1.clearTint();
+        })
+        this.path1_1.add([this.webpageUI1_1, this.webpage1_1, this.link1_1]);
 
         // path1_2
-        this.webpage1_2 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.7).setTint(0xff0000);
+        this.webpageUI1_2 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0);
+        this.webpage1_2 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.6).setTint(0xff0000);
         this.link1_2 = new clickable(this, 350, 250, 'link1_1_1');
-        this.path1_2.add([this.webpage1_2, this.link1_2]);
+        this.path1_2.add([this.webpageUI1_2, this.webpage1_2, this.link1_2]);
 
         // path1_3
-        this.webpage1_3 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.7).setTint(0x00ff00);
+        this.webpageUI1_3 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0);
+        this.webpage1_3 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.6).setTint(0x00ff00);
         this.link1_3 = new clickable(this, 350, 250, 'link1_1_1');
-        this.path1_3.add([this.webpage1_3, this.link1_3]);
+        this.path1_3.add([this.webpageUI1_3, this.webpage1_3, this.link1_3]);
 
         // path2_1
-        this.webpage2_1 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.7);
+        this.webpageUI2_1 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0);
+        this.webpage2_1 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.6);
         this.link2_1 = new clickable(this, 350, 250, 'link1_1_1');
-        this.path2_1.add([this.webpage2_1, this.link2_1]);
+        this.path2_1.add([this.webpageUI2_1, this.webpage2_1, this.link2_1]);
 
         // path2_2
+        this.webpageUI2_2 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0);
         this.webpage2_2 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.7).setTint(0x0000ff);
         this.link2_2 = new clickable(this, 350, 250, 'link1_1_1');
-        this.path2_2.add([this.webpage2_2, this.link2_2]);
+        this.path2_2.add([this.webpageUI2_2, this.webpage2_2, this.link2_2]);
 
         // path2_3
+        this.webpageUI2_3 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0);
         this.webpage2_3 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.7).setTint(0xff0000);
         this.link2_3 = new clickable(this, 350, 250, 'link1_1_1');
-        this.path2_3.add([this.webpage2_3, this.link2_3]);
+        this.path2_3.add([this.webpageUI2_3, this.webpage2_3, this.link2_3]);
 
         // path3_1
+        this.webpageUI3_1 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0);
         this.webpage3_1 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.7);
         this.link3_1 = new clickable(this, 350, 250, 'link1_1_1');
-        this.path3_1.add([this.webpage3_1, this.link3_1]);
+        this.path3_1.add([this.webpageUI3_1, this.webpage3_1, this.link3_1]);
 
         // path3_2
+        this.webpageUI3_2 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0);
         this.webpage3_2 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.7).setTint(0x00ff00);
         this.link3_2 = new clickable(this, 350, 250, 'link1_1_1');
-        this.path3_2.add([this.webpage3_2, this.link3_2]);
+        this.path3_2.add([this.webpageUI3_2, this.webpage3_2, this.link3_2]);
 
         // path3_3
+        this.webpageUI3_3 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0);
         this.webpage3_3 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.7).setTint(0x0000ff);
         this.link3_3 = new clickable(this, 350, 250, 'link1_1_1');
-        this.path3_3.add([this.webpage3_3, this.link3_3]);
+        this.path3_3.add([this.webpageUI3_3, this.webpage3_3, this.link3_3]);
 
         //////////////////////////////
         //      EVENT SETUP         //
@@ -276,8 +305,24 @@ class play extends Phaser.Scene {
             scene.computer.remove([scene.emailCon]);
         });
 
+        // sets up internet explorer
+        this.ie.on('pointerdown', function(){
+            scene.ieCon.setRandomPosition(10, -50, 100, 50);
+            scene.computer.add([scene.ieCon]);
+            currPage = "onScreen";
+        });
+
+        // sets up internet explorer close button
+        this.ieClose.on('pointerdown', function(){
+            scene.ieCon.setPosition(2000, 0);
+            scene.computer.remove([scene.ieCon]);
+            currPage = null;
+        })
+
+
         // MAIN RABBIT WHOLE
         this.emailLink1.on('pointerdown', function(){
+            scene.ieCon.destroy();
 
             if(i == 0){
                 // DESTROY OTHER ASSETS FOR CLEANINESS
@@ -326,8 +371,7 @@ class play extends Phaser.Scene {
                 scene.path3_3.destroy();
 
                 // INITIAL WEBPAGE
-                scene.path2_1.setRandomPosition(10, -50, 100, 50);
-                scene.computer.add([scene.path2_1]);
+                scene.ieCon.add([scene.path2_1]);
 
                 // LINK1_1 SETUP
                 scene.link2_1.on('pointerdown', function(){
@@ -362,8 +406,7 @@ class play extends Phaser.Scene {
                 scene.path2_3.destroy();
 
                 // INITIAL WEBPAGE
-                scene.path3_1.setRandomPosition(10, -50, 100, 50);
-                scene.computer.add([scene.path3_1]);
+                scene.ieCon.add([scene.path3_1]);
 
                 // LINK1_1 SETUP
                 scene.link3_1.on('pointerdown', function(){
