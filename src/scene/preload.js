@@ -41,6 +41,11 @@ class preload extends Phaser.Scene {
         // LOADS DUMMY WINDOWS
         this.load.image('rb_window', './assets/art/Recycle_binTemplate.png');
         this.load.image('mypc_window', './assets/art/My_computerTemplate.png');
+        
+
+        // WEBPAGE PRELOADS
+        this.load.image('ie_window', './assets/art/Internet_ui.png');
+        this.load.image('404', './assets/art/404.jpg');
 
 
         // LOADS INBOX
@@ -49,9 +54,12 @@ class preload extends Phaser.Scene {
         this.load.image('email_window', './assets/art/Email_template.png');
 
         // LOADS PATH1_1
-        this.load.image('webpage', './assets/art/reallygoodwebpage.png');
-        this.load.image('link1_1_1', './assets/art/linkex.png');
+        this.load.image('webpage1_1', './assets/art/Forum_page.png');
+        this.load.image('link1_1_1', './assets/art/Clickable_ForumLink.png');
 
+
+        // LOADS GENERIC
+        this.load.image('webpage', './assets/art/reallygoodwebpage.png');
 
         // LOADS AUDIO
         this.load.audio('click', './assets/sound/click.wav');
