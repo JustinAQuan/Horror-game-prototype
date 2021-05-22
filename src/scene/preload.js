@@ -13,8 +13,8 @@ class preload extends Phaser.Scene {
         this.load.image('close_button', './assets/art/close_button.png');
 
         // load music
-        this.load.audio('menu_music', './assets/sound/testmenu.wav');
-        this.load.audio('keyboard', './assets/sound/keyboard.wav');
+        this.load.audio('menu_music', './assets/sound/sfx/testmenu.wav');
+        this.load.audio('keyboard', './assets/sound/sfx/sfx_keyboard.wav');
 
 
         /////////////////////////////
@@ -54,10 +54,10 @@ class preload extends Phaser.Scene {
 
 
         // LOADS AUDIO
-        this.load.audio('click', './assets/sound/click.wav');
-        this.load.audio('double_click', './assets/sound/double_click.wav');
-        this.load.audio('weird', './assets/sound/weird.wav');
-        this.load.audio('startup', './assets/sound/startup.wav');
+        this.load.audio('click', './assets/sound/sfx/sfx_click.wav');
+        this.load.audio('double_click', './assets/sound/sfx/sfx_double_click.wav');
+        this.load.audio('weird', './assets/sound/web_audio/web_mus1.wav');
+        this.load.audio('startup', './assets/sound/sfx/startup.wav');
 
 
         // LOADS JSON
