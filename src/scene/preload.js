@@ -66,6 +66,7 @@ class preload extends Phaser.Scene {
         this.load.audio('double_click', './assets/sound/sfx/sfx_double_click.wav');
         this.load.audio('weird', './assets/sound/web_audio/web_mus1.wav');
         this.load.audio('startup', './assets/sound/sfx/startup.wav');
+        this.load.audio('bg_1', './assets/sound/bgm/bg_1.wav');
 
 
         // LOADS JSON

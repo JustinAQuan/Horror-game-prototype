@@ -437,9 +437,15 @@ class play extends Phaser.Scene {
         //////////////////////////////
 
         //prototype looking around and hearing sounds
-        this.time.delayedCall(3000, () => {
-            // play sound
-            this.sound.play('weird');
+        this.time.delayedCall(10000, () => {
+            // plays background music
+            this.bg_1 = this.sound.add(
+                'bg_1', 
+                {
+                    loop: true
+                }
+            );
+            this.bg_1.play();
 
             this.time.delayedCall(10000, () => {
                 // add instruction text
