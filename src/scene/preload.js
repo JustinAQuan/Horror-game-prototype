@@ -54,8 +54,8 @@ class preload extends Phaser.Scene {
         this.load.image('email_window', './assets/art/Email_template.png');
 
         // LOADS PATH1_1
-        this.load.image('webpage1_1', './assets/art/Forum_page.png');
-        this.load.image('link1_1_1', './assets/art/Clickable_ForumLink.png');
+        this.load.image('webpage1_1', './assets/art/page1_2.png');
+        this.load.image('link1_1_1', './assets/art/page1_2_link.png');
 
 
         // LOADS GENERIC
