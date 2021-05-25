@@ -206,9 +206,10 @@ class play extends Phaser.Scene {
         this.webpage1_1 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.6).setTint(0xff0000);
         this.link1_1 = new clickable(this, 350, 250, 'linkex');
         this.web1_1close = new clickable(this, 625, 104, 'close_button').setScale(.8);
-        this.path1_1.add([this.webpageUI1_1, this.webpage1_1, this.link1_1, this.web1_1close]);
+        this.url1_1 = this.add.text(152, 127, "https://www.hole.com", textStyle).setOrigin(0,0);
+        this.path1_1.add([this.webpageUI1_1, this.webpage1_1, this.link1_1, this.web1_1close, this.url1_1]);
 
-        
+
         // path1_2
         this.webpageUI1_2 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0).setInteractive();
         this.webpage1_2 = this.add.sprite(77, 144, 'webpage1_2').setOrigin(0,0);
@@ -220,7 +221,8 @@ class play extends Phaser.Scene {
             scene.link1_2.clearTint();
         })
         this.web1_2close = new clickable(this, 625, 104, 'close_button').setScale(.8);
-        this.path1_2.add([this.webpageUI1_2, this.webpage1_2, this.link1_2, this.web1_2close]);
+        this.url1_2 = this.add.text(152, 127, "http://www.ash-blog-attack.com/post-256414", textStyle).setOrigin(0,0);
+        this.path1_2.add([this.webpageUI1_2, this.webpage1_2, this.link1_2, this.web1_2close, this.url1_2]);
 
 
         // path1_3
@@ -229,7 +231,8 @@ class play extends Phaser.Scene {
         this.webpage1_3_2 = this.add.sprite(77, 144, 'webpage1_3.2').setOrigin(0,0);
         this.link1_3 = new clickable(this, 80, 300, 'link1_3').setOrigin(0,0);
         this.web1_3close = new clickable(this, 625, 104, 'close_button').setScale(.8);
-        this.path1_3.add([this.webpageUI1_3, this.webpage1_3_2, this.link1_3, this.webpage1_3_1, this.web1_3close]);
+        this.url1_3 = this.add.text(152, 127, "http://www.aliens-heaven.org", textStyle).setOrigin(0,0);
+        this.path1_3.add([this.webpageUI1_3, this.webpage1_3_2, this.link1_3, this.webpage1_3_1, this.web1_3close, this.url1_3]);
 
         scene.input.on('wheel', function(pointer, gameObjects, deltaX, deltaY, deltaZ) {
             if(deltaY > 0){
@@ -247,7 +250,8 @@ class play extends Phaser.Scene {
         this.webpage2_1 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.6);
         this.link2_1 = new clickable(this, 350, 250, 'linkex');
         this.web2_1close = new clickable(this, 625, 104, 'close_button').setScale(.8);
-        this.path2_1.add([this.webpageUI2_1, this.webpage2_1, this.link2_1, this.web2_1close]);
+        this.url2_1 = this.add.text(152, 127, "http://www.the-laundry-room.com/sammy39/", textStyle).setOrigin(0,0);
+        this.path2_1.add([this.webpageUI2_1, this.webpage2_1, this.link2_1, this.web2_1close, this.url2_1]);
 
 
         // path2_2
@@ -255,7 +259,8 @@ class play extends Phaser.Scene {
         this.webpage2_2 = this.add.sprite(77, 144, 'webpage2_2').setOrigin(0,0);
         this.link2_2 = new clickable(this, 350, 250, 'link2_2');
         this.web2_2close = new clickable(this, 625, 104, 'close_button').setScale(.8);
-        this.path2_2.add([this.webpageUI2_2, this.webpage2_2, this.link2_2, this.web2_2close]);
+        this.url2_2 = this.add.text(152, 127, "https://www.lPovRIA.org/a-beautiful-song/", textStyle).setOrigin(0,0);
+        this.path2_2.add([this.webpageUI2_2, this.webpage2_2, this.link2_2, this.web2_2close, this.url2_2]);
 
 
         // path2_3
@@ -263,7 +268,8 @@ class play extends Phaser.Scene {
         this.webpage2_3 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.6).setTint(0xff0000);
         this.link2_3 = new clickable(this, 350, 250, 'linkex');
         this.web2_3close = new clickable(this, 625, 104, 'close_button').setScale(.8);
-        this.path2_3.add([this.webpageUI2_3, this.webpage2_3, this.link2_3, this.web2_3close]);
+        this.url2_3 = this.add.text(152, 127, "http://www.aoi.com/x_rUra_aSha_x/", textStyle).setOrigin(0,0);
+        this.path2_3.add([this.webpageUI2_3, this.webpage2_3, this.link2_3, this.web2_3close, this.url2_3]);
 
 
         // path3_1
@@ -271,7 +277,8 @@ class play extends Phaser.Scene {
         this.webpage3_1 = this.add.sprite(77, 144, 'webpage3_1').setOrigin(0,0);
         this.link3_1 = new clickable(this, 350, 250, 'link3_1');
         this.web3_1close = new clickable(this, 625, 104, 'close_button').setScale(.8);
-        this.path3_1.add([this.webpageUI3_1, this.webpage3_1, this.link3_1, this.web3_1close]);
+        this.url3_1 = this.add.text(152, 127, "https://www.audio-city.com/user-ratpoison/", textStyle).setOrigin(0,0);
+        this.path3_1.add([this.webpageUI3_1, this.webpage3_1, this.link3_1, this.web3_1close, this.url3_1]);
 
 
         // path3_2
@@ -279,7 +286,8 @@ class play extends Phaser.Scene {
         this.webpage3_2 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.6).setTint(0x00ff00);
         this.link3_2 = new clickable(this, 350, 250, 'linkex');
         this.web3_2close = new clickable(this, 625, 104, 'close_button').setScale(.8);
-        this.path3_2.add([this.webpageUI3_2, this.webpage3_2, this.link3_2, this.web3_2close]);
+        this.url3_2 = this.add.text(152, 127, "https://www.madame-ferebi.com", textStyle).setOrigin(0,0);
+        this.path3_2.add([this.webpageUI3_2, this.webpage3_2, this.link3_2, this.web3_2close, this.url3_2]);
 
 
         // path3_3
@@ -287,7 +295,8 @@ class play extends Phaser.Scene {
         this.webpage3_3 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.6).setTint(0x0000ff);
         this.link3_3 = new clickable(this, 350, 250, 'linkex');
         this.web3_3close = new clickable(this, 625, 104, 'close_button').setScale(.8);
-        this.path3_3.add([this.webpageUI3_3, this.webpage3_3, this.link3_3, this.web3_3close]);
+        this.url3_3 = this.add.text(152, 127, "http://www.the-pantaloon-inquirer.net/feb_28_2002-AnHinY2/", textStyle).setOrigin(0,0);
+        this.path3_3.add([this.webpageUI3_3, this.webpage3_3, this.link3_3, this.web3_3close, this.url3_3]);
 
 
         //////////////////////////////
@@ -659,8 +668,6 @@ class play extends Phaser.Scene {
     }
 
     update() {
-
-
         if (this.spaceKey.isDown) { // able to look around the room when pressing space
             this.cameras.main.setBounds(
                 -game.config.width / 5, // x: -160
