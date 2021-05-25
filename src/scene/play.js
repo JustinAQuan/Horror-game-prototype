@@ -80,7 +80,6 @@ class play extends Phaser.Scene {
 
         // choose random i from array
         let i = Math.floor(Math.random() * (this.emailFSD.length));
-        i = 0;
         
         // email config
         let UserEmail = "theuser@hotmail.com"
