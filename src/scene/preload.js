@@ -4,7 +4,6 @@ class preload extends Phaser.Scene {
     }
 
     preload(){
-
         /////////////////////////////
         //       MENU SCENE        //
         /////////////////////////////
@@ -87,11 +86,22 @@ class preload extends Phaser.Scene {
 
 
         // LOADS AUDIO
+
+        // music
+        this.load.audio('bg_1', './assets/sound/bgm/bg_1.wav');
+
+        // sfx
         this.load.audio('click', './assets/sound/sfx/sfx_click.wav');
         this.load.audio('double_click', './assets/sound/sfx/sfx_double_click.wav');
-        this.load.audio('weird', './assets/sound/web_audio/web_mus1.wav');
         this.load.audio('startup', './assets/sound/sfx/startup.wav');
-        this.load.audio('bg_1', './assets/sound/bgm/bg_1.wav');
+
+        // creepy
+        this.load.audio('weird', './assets/sound/web_audio/web_mus1.wav');
+        this.load.audio('laughing', './assets/sound/creepy/laughing.wav');
+        this.load.audio('door_knock', './assets/sound/creepy/door_knocking1.wav');
+        this.load.audio('drop_spoon', './assets/sound/creepy/dropping_spoon1.wav');
+        this.load.audio('slam_desk', './assets/sound/creepy/slam_desk1.wav');
+        this.load.audio('licking', './assets/sound/creepy/yucky_dog.wav');
 
 
         // LOADS JSON
