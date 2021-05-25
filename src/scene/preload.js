@@ -35,7 +35,6 @@ class preload extends Phaser.Scene {
 
 
         // LOADS OUTSIDE
-        this.load.image('Beeg Yoshi', './assets/art/test.png');
 
 
         // LOADS DUMMY WINDOWS
@@ -54,12 +53,38 @@ class preload extends Phaser.Scene {
         this.load.image('email_window', './assets/art/Email_template.png');
 
         // LOADS PATH1_1
-        this.load.image('webpage1_1', './assets/art/page1_2.png');
-        this.load.image('link1_1_1', './assets/art/page1_2_link.png');
+
+        // LOADS PATH1_2
+        this.load.image('webpage1_2', './assets/art/page1_2.png');
+        this.load.image('link1_2', './assets/art/page1_2_link.png');
+
+        // LOADS PATH1_3
+        this.load.image('webpage1_3.1', './assets/art/page1_3_part1.png');
+        this.load.image('webpage1_3.2', './assets/art/page1_3_part2.png');
+        this.load.image('link1_3', './assets/art/page1_3_link.png');
+
+        // LOADS PATH2_1
+
+        // LOADS PATH2_2
+        this.load.image('webpage2_2', './assets/art/page2_2.png');
+        this.load.image('link2_2', './assets/art/page2_2_link.png');
+
+        // LOADS PATH2_3
+
+        // LOADS PATH3_1
+        this.load.image('webpage3_1', './assets/art/page3_1.png');
+        this.load.image('link3_1', './assets/art/page3_1_link.png');
+        this.load.image('play_button', './assets/art/page3_1_play_button.png');
+
+        // LOADS PATH3_2
+
+        // LOADS PATH3_3
 
 
         // LOADS GENERIC
         this.load.image('webpage', './assets/art/reallygoodwebpage.png');
+        this.load.image('linkex', './assets/art/linkex.png');
+
 
         // LOADS AUDIO
         this.load.audio('click', './assets/sound/sfx/sfx_click.wav');
@@ -71,6 +96,10 @@ class preload extends Phaser.Scene {
 
         // LOADS JSON
         this.load.json('emailHeader', './assets/json/email.json');
+
+        
+        // LOADS BEEG YOSHI
+        this.load.image('Beeg Yoshi', './assets/art/test.png');
     }
 
     create(){
