@@ -63,8 +63,4 @@ class menu extends Phaser.Scene {
             }
         });
     }
-
-    update() {
-        if(this.menu_bgm.rate > .35) this.menu_bgm.setRate(this.menu_bgm.rate - 0.0003);
-    }
 }
