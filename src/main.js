@@ -35,4 +35,7 @@ var text1;
  * 
  * W95FA Font Family
  * https://fontsarena.com/w95fa-by-fontsarena/
+ * 
+ * Preload loading
+ * https://gamedevacademy.org/creating-a-preloading-screen-in-phaser-3/
  **************************************************/
