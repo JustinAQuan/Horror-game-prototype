@@ -61,7 +61,7 @@ class preload extends Phaser.Scene {
         this.load.image('close_button', './assets/art/close_button.png');
 
         // load music
-        this.load.audio('menu_music', './assets/sound/sfx/testmenu.wav');
+        this.load.audio('menu_music', './assets/sound/bgm/bg_2.wav');
         this.load.audio('keyboard', './assets/sound/sfx/sfx_keyboard.wav');
 
 
@@ -101,6 +101,8 @@ class preload extends Phaser.Scene {
         this.load.image('email_window', './assets/art/Email_template.png');
 
         // LOADS PATH1_1
+        this.load.image('webpage1_1', './assets/art/Page1_1.png');
+        this.load.image('link1_1', './assets/art/page1_1_link.png');
 
         // LOADS PATH1_2
         this.load.image('webpage1_2', './assets/art/page1_2.png');
@@ -138,6 +140,22 @@ class preload extends Phaser.Scene {
 
         // music
         this.load.audio('bg_1', './assets/sound/bgm/bg_1.wav');
+        this.load.audio('bg_2', './assets/sound/bgm/bg_2.wav');
+
+        this.load.audio('bg_path1_1', './assets/sound/bgm/bg_path1_1.wav');
+        this.load.audio('bg_path1_2', './assets/sound/bgm/bg_path1_2.wav');
+        this.load.audio('bg_path1_3', './assets/sound/bgm/bg_path1_3.wav');
+        this.load.audio('bg_path1_4', './assets/sound/bgm/bg_path1_4.wav');
+
+        this.load.audio('bg_path2_1', './assets/sound/bgm/bg_path2_1.wav');
+        this.load.audio('bg_path2_2', './assets/sound/bgm/bg_path2_2.wav');
+        this.load.audio('bg_path2_3', './assets/sound/bgm/bg_path2_3.wav');
+        this.load.audio('bg_path2_4', './assets/sound/bgm/bg_path2_4.wav');
+
+        this.load.audio('bg_path3_1', './assets/sound/bgm/bg_path3_1.wav');
+        this.load.audio('bg_path3_2', './assets/sound/bgm/bg_path3_2.wav');
+        this.load.audio('bg_path3_3', './assets/sound/bgm/bg_path3_3.wav');
+        this.load.audio('bg_path3_4', './assets/sound/bgm/bg_path3_4.wav');
 
         // sfx
         this.load.audio('click', './assets/sound/sfx/sfx_click.wav');

@@ -7,12 +7,11 @@ class play extends Phaser.Scene {
         let scene = this;
         this.curr = null;
 
-        this.emailFSD = this.cache.json.get('emailHeader')
+        this.emailFSD = this.cache.json.get('emailHeader');
 
         //////////////////////////////
         //   INITIAL SCENE SETUP    //
         //////////////////////////////
-
 
         // background music set up
 
@@ -203,26 +202,33 @@ class play extends Phaser.Scene {
 
         // path1_1
         this.webpageUI1_1 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0).setInteractive();
-        this.webpage1_1 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.6).setTint(0xff0000);
-        this.link1_1 = new clickable(this, 350, 250, 'linkex');
+        this.webpage1_1 = this.add.sprite(77, 144, 'webpage1_1').setOrigin(0,0);
+        this.link1_1 = new clickable(this, 202, 460, 'link1_1');
         this.web1_1close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url1_1 = this.add.text(152, 127, "https://www.hole.com", textStyle).setOrigin(0,0);
         this.path1_1.add([this.webpageUI1_1, this.webpage1_1, this.link1_1, this.web1_1close, this.url1_1]);
 
+        this.link1_1.on('pointerover', function(){
+            scene.link1_1.setTint(0x0000ff);
+        })
+        this.link1_1.on('pointerout', function(){
+            scene.link1_1.clearTint();
+        })
 
         // path1_2
         this.webpageUI1_2 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0).setInteractive();
         this.webpage1_2 = this.add.sprite(77, 144, 'webpage1_2').setOrigin(0,0);
         this.link1_2 = new clickable(this, 295, 402, 'link1_2');
+        this.web1_2close = new clickable(this, 625, 104, 'close_button').setScale(.8);
+        this.url1_2 = this.add.text(152, 127, "http://www.ash-blog-attack.com/post-256414", textStyle).setOrigin(0,0);
+        this.path1_2.add([this.webpageUI1_2, this.webpage1_2, this.link1_2, this.web1_2close, this.url1_2]);
+
         this.link1_2.on('pointerover', function(){
             scene.link1_2.setTint(0x0000ff);
         })
         this.link1_2.on('pointerout', function(){
             scene.link1_2.clearTint();
         })
-        this.web1_2close = new clickable(this, 625, 104, 'close_button').setScale(.8);
-        this.url1_2 = this.add.text(152, 127, "http://www.ash-blog-attack.com/post-256414", textStyle).setOrigin(0,0);
-        this.path1_2.add([this.webpageUI1_2, this.webpage1_2, this.link1_2, this.web1_2close, this.url1_2]);
 
 
         // path1_3
@@ -529,7 +535,7 @@ class play extends Phaser.Scene {
 
 
         //////////////////////////////
-        //    WINDOW INTERACTIONs   //
+        //    WINDOW INTERACTIONS   //
         //////////////////////////////
 
         // MAIN WINDOWS
@@ -646,7 +652,9 @@ class play extends Phaser.Scene {
         //      SPOOKY SETUP        //
         //////////////////////////////
 
-        
+        this.emailLink1.on('pointerdown', function(){
+            
+        });
 
 
         //////////////////////////////
