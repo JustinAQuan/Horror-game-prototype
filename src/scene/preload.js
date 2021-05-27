@@ -1,9 +1,9 @@
 class preload extends Phaser.Scene {
-    constructor(){
+    constructor() {
         super("preloadScene");
     }
 
-    preload(){
+    preload() {
         let scene = this;
 
         /////////////////////////////
@@ -37,14 +37,14 @@ class preload extends Phaser.Scene {
         });
         percentText.setOrigin(0.5, 0.5);
 
-        this.load.on('progress', function (value) {
+        this.load.on('progress', function(value) {
             percentText.setText(parseInt(value * 100) + '%');
             progressBar.clear();
             progressBar.fillStyle(0xffffff, 1);
             progressBar.fillRect(250, 280, 300 * value, 30);
         });
 
-        this.load.on('complete', function () {
+        this.load.on('complete', function() {
             progressBar.destroy();
             progressBox.destroy();
             loadingText.destroy();
@@ -88,7 +88,7 @@ class preload extends Phaser.Scene {
         // LOADS DUMMY WINDOWS
         this.load.image('rb_window', './assets/art/Recycle_binTemplate.png');
         this.load.image('mypc_window', './assets/art/My_computerTemplate.png');
-        
+
 
         // WEBPAGE PRELOADS
         this.load.image('ie_window', './assets/art/Internet_ui.png');
@@ -129,6 +129,9 @@ class preload extends Phaser.Scene {
         // LOADS PATH3_2
 
         // LOADS PATH3_3
+        this.load.image('popup-advert_1', './assets/art/page3_3-popup1.png');
+        this.load.image('popup-advert_2', './assets/art/page3_3-popup2.png');
+        this.load.image('popup-advert_3', './assets/art/page3_3-popup3.png');
 
 
         // LOADS GENERIC
@@ -174,7 +177,7 @@ class preload extends Phaser.Scene {
         // LOADS JSON
         this.load.json('emailHeader', './assets/json/email.json');
 
-        
+
         // LOADS BEEG YOSHI
         this.load.image('Beeg Yoshi', './assets/art/test.png');
     }
