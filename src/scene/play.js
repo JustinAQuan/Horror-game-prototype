@@ -10,31 +10,143 @@ class play extends Phaser.Scene {
         this.emailFSD = this.cache.json.get('emailHeader');
 
         //////////////////////////////
+        //      MAIN CONTROLS       //
+        //////////////////////////////
+
+        // camera follows player's mouse
+        this.cameras.main.startFollow(this.input, false, 0.01, 0.01);
+
+        // initializing spacebar as a keyboard input
+        this.spaceKey = this.input.keyboard.addKey('SPACE');
+        this.escape = this.input.keyboard.addKey('ESC');
+
+        // pause game when player presses esc
+        this.escape.on('down', function(){
+            scene.scene.pause();
+            scene.scene.launch("pause");
+        });
+
+        //////////////////////////////
+        //       SOUND SETUP        //
+        //////////////////////////////
+
+        // BACKGROUND MUSIC
+
+        this.bg_1 = this.sound.add(
+            'bg_1', 
+            {
+                volume: .5,
+                loop: true,
+                rate: .2
+            }
+        );
+
+        this.bg_1_2 = this.sound.add(
+            'bg_1',
+            {
+                volume: .5,
+                loop: true,
+                rate: .35
+            }
+        );
+
+        this.bg_path1_1 = this.sound.add(
+            'bg_path1_1',
+        );
+
+        this.bg_path1_2 = this.sound.add(
+            'bg_path1_2',
+        );
+
+        this.bg_path1_3 = this.sound.add(
+            'bg_path1_3',
+        );
+
+        this.bg_path1_4 = this.sound.add(
+            'bg_path1_4',
+        );
+
+        this.bg_path2_1 = this.sound.add(
+            'bg_path2_1',
+        );
+
+        this.bg_path2_2 = this.sound.add(
+            'bg_path2_2',
+        );
+
+        this.bg_path2_3 = this.sound.add(
+            'bg_path2_3',
+        );
+
+        this.bg_path2_4 = this.sound.add(
+            'bg_path2_4',
+        );
+
+        this.bg_path3_1 = this.sound.add(
+            'bg_path3_1',
+        );
+
+        this.bg_path3_2 = this.sound.add(
+            'bg_path3_2',
+        );
+
+        this.bg_path3_3 = this.sound.add(
+            'bg_path3_3',
+        );
+
+        this.bg_path3_4 = this.sound.add(
+            'bg_path3_4',
+        );
+
+        this.bg_path1 = [this.bg_path1_1, this.bg_path1_2, this.bg_path1_3, this.bg_path1_4];
+        this.bg_path2 = [this.bg_path2_1, this.bg_path2_2, this.bg_path2_3, this.bg_path2_4];
+        this.bg_path3 = [this.bg_path3_1, this.bg_path3_2, this.bg_path3_3, this.bg_path3_4];
+
+        // CREEPY MUSIC
+
+        this.laughing = this.sound.add(
+            'laughing',
+        );
+
+        this.dog = this.sound.add(
+            'licking',
+            {
+                rate: .4,
+            }
+        );
+
+        this.weird = this.sound.add(
+            'weird',
+        );
+
+        // EVENT SFX
+
+        this.knocking = this.sound.add(
+            'door_knock',
+            {
+                rate: .8,
+                volume: 3,
+            }
+        );
+
+        this.drop_spoon = this.sound.add(
+            'drop_spoon',
+        );
+
+        this.slam_desk = this.sound.add(
+            'slam_desk',
+        );
+
+        //////////////////////////////
         //   INITIAL SCENE SETUP    //
         //////////////////////////////
 
         // background music set up
 
         this.time.delayedCall(6000, () => {
-            this.bg_1 = this.sound.add(
-                'bg_1', 
-                {
-                    volume: .5,
-                    loop: true,
-                    rate: .2
-                }
-            );
             this.bg_1.play();
 
             this.time.delayedCall(1000, () =>{
-                this.bg_1_2 = this.sound.add(
-                    'bg_1',
-                    {
-                        volume: .5,
-                        loop: true,
-                        rate: .35
-                    }
-                );
                 this.bg_1_2.play();
             });
         }, null, this);
@@ -42,7 +154,7 @@ class play extends Phaser.Scene {
         // creates outside whenever we want
         // this.outside = this.add.tileSprite().setOrigin(0,0);
 
-        this.sound.play('startup', {volume: 0.5});
+        this.sound.play('startup', {volume: 0.4});
 
         // creates room
         this.room = this.add.sprite(-game.config.width / 5, -game.config.height / 20, 'room').setOrigin(0, 0);
@@ -80,6 +192,7 @@ class play extends Phaser.Scene {
 
         // choose random i from array
         let i = Math.floor(Math.random() * (this.emailFSD.length));
+        i = 1;
         
         // email config
         let UserEmail = "theuser@hotmail.com"
@@ -253,8 +366,8 @@ class play extends Phaser.Scene {
 
         // path2_1
         this.webpageUI2_1 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0).setInteractive();
-        this.webpage2_1 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.6);
-        this.link2_1 = new clickable(this, 350, 250, 'linkex');
+        this.webpage2_1 = this.add.sprite(77, 144, 'webpage2_1').setOrigin(0,0);
+        this.link2_1 = new clickable(this, 550, 450, 'link2_1');
         this.web2_1close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url2_1 = this.add.text(152, 127, "http://www.the-laundry-room.com/sammy39/", textStyle).setOrigin(0,0);
         this.path2_1.add([this.webpageUI2_1, this.webpage2_1, this.link2_1, this.web2_1close, this.url2_1]);
@@ -262,8 +375,8 @@ class play extends Phaser.Scene {
 
         // path2_2
         this.webpageUI2_2 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0).setInteractive();
-        this.webpage2_2 = this.add.sprite(77, 144, 'webpage2_2').setOrigin(0,0);
-        this.link2_2 = new clickable(this, 350, 250, 'link2_2');
+        this.webpage2_2 = this.add.sprite(77, 144, 'webpage').setOrigin(0,0);
+        this.link2_2 = new clickable(this, 350, 250, 'linkex');
         this.web2_2close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url2_2 = this.add.text(152, 127, "https://www.lPovRIA.org/a-beautiful-song/", textStyle).setOrigin(0,0);
         this.path2_2.add([this.webpageUI2_2, this.webpage2_2, this.link2_2, this.web2_2close, this.url2_2]);
@@ -281,19 +394,50 @@ class play extends Phaser.Scene {
         // path3_1
         this.webpageUI3_1 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0).setInteractive();
         this.webpage3_1 = this.add.sprite(77, 144, 'webpage3_1').setOrigin(0,0);
-        this.link3_1 = new clickable(this, 350, 250, 'link3_1');
+        this.link3_1 = new clickable(this, 500, 350, 'link3_1');
+        this.play1 = new clickable(this, 140, 293, 'play_button');
+        this.play2 = new clickable(this, 140, 374, 'play_button');
+        this.play3 = new clickable(this, 140, 456, 'play_button');
         this.web3_1close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url3_1 = this.add.text(152, 127, "https://www.audio-city.com/user-ratpoison/", textStyle).setOrigin(0,0);
-        this.path3_1.add([this.webpageUI3_1, this.webpage3_1, this.link3_1, this.web3_1close, this.url3_1]);
+        this.path3_1.add([this.webpageUI3_1, this.webpage3_1, this.link3_1, this.play1, this.play2, this.play3, this.web3_1close, this.url3_1]);
+
+        this.play1.on('pointerdown', function(){
+            scene.laughing.stop();
+            scene.weird.stop();
+            scene.dog.play();
+        });
+
+        this.play2.on('pointerdown', function(){
+            scene.dog.stop();
+            scene.weird.stop();
+            scene.laughing.play();
+        });
+
+        this.play3.on('pointerdown', function(){
+            scene.laughing.stop();
+            scene.dog.stop();
+            scene.weird.play();
+        });
 
 
         // path3_2
         this.webpageUI3_2 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0).setInteractive();
-        this.webpage3_2 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.6).setTint(0x00ff00);
-        this.link3_2 = new clickable(this, 350, 250, 'linkex');
+        this.webpage3_2 = this.add.sprite(77, 144, 'webpage3_2').setOrigin(0,0);
+        this.death = new clickable(this, 350, 250, 'death');
+        this.tower = new clickable(this, 250, 250, 'tower');
         this.web3_2close = new clickable(this, 625, 104, 'close_button').setScale(.8);
+        this.clickhere = this.add.rectangle(153, 370, 100, 25, 0xffffff).setAlpha(0.01).setInteractive( { cursor: 'pointer' } );
         this.url3_2 = this.add.text(152, 127, "https://www.madame-ferebi.com", textStyle).setOrigin(0,0);
-        this.path3_2.add([this.webpageUI3_2, this.webpage3_2, this.link3_2, this.web3_2close, this.url3_2]);
+        this.path3_2.add([this.webpageUI3_2, this.webpage3_2, this.death, this.tower, this.clickhere, this.web3_2close, this.url3_2]);
+
+        let cards_tween = this.add.tween({
+            targets: [this.death, this.tower],
+            ease: 'Linear',
+            x: '+=200',
+            repeat: -1,
+            yoyo: true
+        })
 
 
         // path3_3
@@ -405,16 +549,59 @@ class play extends Phaser.Scene {
             else{
                 scene.curr.setPosition(2000, 0);
                 scene.computer.remove([scene.curr]);
-
             }
         })
+
+        // creates a once variable
+        let once = false;
 
 
         // MAIN RABBIT WHOLE
         this.emailLink1.on('pointerdown', function(){
+            // sets internet explorer container offscreen
             scene.ieCon.setPosition(2000, 0);
+            scene.computer.bringToTop(scene.curr);
 
+            // selects a random j
+            let j = Math.floor(Math.random() * (4));
+
+            // path 1
             if(i == 0){
+
+                // if first time
+                if(!once){
+                    // play bg_path1 and loops continuously
+                    scene.bg_path1[j].play();
+                    
+                    // checks when one song is complete
+
+                    scene.bg_path1_1.on('complete', function(){
+                        console.log(j);
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path1[j].play();
+                    });
+    
+                    scene.bg_path1_2.on('complete', function(){
+                        console.log(j);
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path1[j].play();
+                    });
+    
+                    scene.bg_path1_3.on('complete', function(){
+                        console.log(j);
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path1[j].play();
+                    });
+    
+                    scene.bg_path1_4.on('complete', function(){
+                        console.log(j);
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path1[j].play();
+                    });
+                    
+                    once = true;
+                }
+
                 // DESTROY OTHER ASSETS FOR CLEANINESS
                 scene.path2_1.destroy();
                 scene.path2_2.destroy();
@@ -453,7 +640,38 @@ class play extends Phaser.Scene {
                 });
             }
 
+            // path 2
             else if(i == 1){
+
+                // if first time
+                if(!once){
+                    // play bg_path2 and loops continously
+                    scene.bg_path2[j].play();
+
+                    // checks when one song is complete
+                    scene.bg_path2_1.on('complete', function(){
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path2[j].play();
+                    });
+    
+                    scene.bg_path2_2.on('complete', function(){
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path2[j].play();
+                    });
+    
+                    scene.bg_path2_3.on('complete', function(){
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path2[j].play();
+                    });
+    
+                    scene.bg_path2_4.on('complete', function(){
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path2[j].play();
+                    });
+
+                    once = true;
+                }
+
                 // DESTROY OTHER ASSETS FOR CLEANINESS
                 scene.path1_1.destroy();
                 scene.path1_2.destroy();
@@ -492,8 +710,43 @@ class play extends Phaser.Scene {
                 });
             }
 
+            // path 3
             else if(i == 2){
-                console.log("got into 2");
+
+                // if first time
+                if(!once){
+                    // play bg_path3 and loops continously
+                    scene.bg_path3[j].play();
+
+                    // checks when one song is complete
+
+                    scene.bg_path3_1.on('complete', function(){
+                        console.log(j);
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path3[j].play();
+                    });
+    
+                    scene.bg_path3_2.on('complete', function(){
+                        console.log(j);
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path3[j].play();
+                    });
+    
+                    scene.bg_path3_3.on('complete', function(){
+                        console.log(j);
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path3[j].play();
+                    });
+    
+                    scene.bg_path3_4.on('complete', function(){
+                        console.log(j);
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path3[j].play();
+                    });
+
+                    once = true;
+                }
+
                 // DESTROY OTHER ASSETS FOR CLEANINESS
                 scene.path1_1.destroy();
                 scene.path1_2.destroy();
@@ -511,13 +764,14 @@ class play extends Phaser.Scene {
                 // LINK1_1 SETUP
                 scene.link3_1.on('pointerdown', function(){
                     scene.curr = scene.path3_2;
+                    cards_tween.play();
                     scene.path3_2.setPosition(scene.path3_1.x, scene.path3_1.y);
                     scene.computer.add([scene.path3_2]);
                     scene.path3_1.destroy();
                 });
 
                 // LINK1_2 SETUP
-                scene.link3_2.on('pointerdown', function(){
+                scene.tower.on('pointerdown', function(){
                     scene.curr = scene.path3_3;
                     scene.path3_3.setPosition(scene.path3_2.x, scene.path3_2.y);
                     scene.computer.add([scene.path3_3]);
@@ -538,7 +792,7 @@ class play extends Phaser.Scene {
         //    WINDOW INTERACTIONS   //
         //////////////////////////////
 
-        // MAIN WINDOWS
+        // ALLOWS MAIN WINDOWS TO BE BROUGHT TO TOP WHEN CLICKED ON
 
         this.inboxWindow.on('pointerdown', function(){
             scene.computer.bringToTop(scene.inboxCon);
@@ -561,7 +815,7 @@ class play extends Phaser.Scene {
         })
 
         
-        // PATH WINDOWS
+        // ALLOWS PATH WINDOWS TO BE BROUGHT TO TOP WHEN CLICKED ON
 
         this.webpageUI1_1.on('pointerdown', function(){
             scene.computer.bringToTop(scene.path1_1);
@@ -599,7 +853,7 @@ class play extends Phaser.Scene {
             scene.computer.bringToTop(scene.path3_3);
         });
 
-        // setting up close feature for each webpage
+        // ALLOWS WEBPAGES TO BE CLOSED
 
         this.web1_1close.on('pointerdown', function(){
             scene.path1_1.setPosition(2000, 0);
@@ -652,27 +906,75 @@ class play extends Phaser.Scene {
         //      SPOOKY SETUP        //
         //////////////////////////////
 
+        let knockOnce = false;
+
+        // knocking twice after opening up the first email links
         this.emailLink1.on('pointerdown', function(){
+
+            if(!knockOnce){
+                knockOnce = true;
+
+                // after 3 seconds of clicking on the email link for any path
+                scene.time.delayedCall(3000, () => {
+
+                    // play knocking
+                    scene.knocking.play();
+                    textStyle = { backgroundColor: "white", fontFamily: 'VT323', fontSize: '40px', color: "black", resolution: 2};
+                    scene.instructions = scene.add.text(game.config.width / 2, game.config.height - monitorBorderY * 3, "Press Space to Look Around", textStyle).setOrigin(0.5, 0.5);
+                    
+                    // declare doneonce to false
+                    let doneonce = false;
+
+                    // destroy instructions on space press
+                    scene.spaceKey.on('down', function(){
+                        scene.instructions.destroy();
+                    });
+
+                    // when space key is lifted
+                    scene.spaceKey.on('up', function(){
+
+                        // only do this once
+                        if(!doneonce){
+                            // set doneonce to true
+                            doneonce = true;
+
+                            //after 10 seconds delay
+                            scene.time.delayedCall(10000, () => {
+
+                                // play knocking a second time
+                                scene.knocking.play();
+                                textStyle = { backgroundColor: "white", fontFamily: 'VT323', fontSize: '40px', color: "black", resolution: 2};
+                                scene.instructions = scene.add.text(game.config.width / 2, game.config.height - monitorBorderY * 3, "Press Space to Look Around", textStyle).setOrigin(0.5, 0.5);
+                
+                                // destroy instructions on space press
+                                scene.spaceKey.on('down', function(){
+                                    scene.instructions.destroy();
+                                });
+
+                            });
+
+                        }
+
+                    });
+
+                });
+
+            }
+
+        });
+
+        // when tarot death card is clicked
+        scene.death.on('pointerdown', function(){
+
+        });
+
+        // when red "CLICK HERE" is clicked
+        this.clickhere.on('pointerdown', function(){
+            scene.sound.play('click');
+
             
-        });
+        })
 
-
-        //////////////////////////////
-        //      MAIN CONTROLS       //
-        //////////////////////////////
-
-        // camera follows player's mouse
-        this.cameras.main.startFollow(this.input, false, 0.01, 0.01);
-
-        // initializing spacebar as a keyboard input
-        this.spaceKey = this.input.keyboard.addKey('SPACE');
-        this.escape = this.input.keyboard.addKey('ESC');
-
-        // pause game when player presses esc
-        this.escape.on('down', function(){
-            scene.scene.pause();
-            scene.scene.launch("pause");
-        });
     }
 
     update() {
