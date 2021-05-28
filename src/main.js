@@ -2,9 +2,9 @@
  * Group Members:   Michelle Lytle
  *                  Thea Knasiak
  *                  Justin Quan
- *                  Div
+ *                  Div Khare
  * 
- * Game:            Untitled
+ * Game:            NEVER ALONE
  * 
  * Date Completed:  TBD
  **************************************************/
@@ -18,7 +18,7 @@ let config = {
         width: 800,
         height: 600
     },
-    scene: [preload, menu, play, pause],
+    scene: [preload, menu, play, pause, end],
 };
 
 let game = new Phaser.Game(config);

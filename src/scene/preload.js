@@ -186,5 +186,12 @@ class preload extends Phaser.Scene {
         
         // LOADS BEEG YOSHI
         this.load.image('Beeg Yoshi', './assets/art/test.png');
+
+
+        /////////////////////////////
+        //       END SCENE         //
+        /////////////////////////////
+
+
     }
 }

@@ -228,7 +228,7 @@ class play extends Phaser.Scene {
 
         // choose random i from array
         let i = Math.floor(Math.random() * (this.emailFSD.length));
-        i = 2;
+        i = 0;
         
         // email config
         let UserEmail = "theuser@hotmail.com"
@@ -700,9 +700,9 @@ class play extends Phaser.Scene {
 
                 // LINK1_3 SETUP
                 scene.link1_3.on('pointerdown', function(){
-                    console.log("you beat the game yay");
-                    let win = scene.add.sprite(100, 100, 'Beeg Yoshi').setOrigin(0,0).setScale(0.5);
-                    scene.computer.add(win);
+                    scene.game.sound.stopAll();
+                    scene.scene.stop();
+                    scene.scene.launch("endScene");
                 });
             }
 
@@ -765,7 +765,7 @@ class play extends Phaser.Scene {
                     scene.path2_1.destroy();
                 });
 
-                // LINK1_2 SETUP
+                // LINK2_2 SETUP
                 scene.link2_2.on('pointerdown', function(){
                     scene.curr = scene.path2_3;
                     scene.path2_3.setPosition(scene.path2_2.x, scene.path2_2.y);
@@ -773,11 +773,11 @@ class play extends Phaser.Scene {
                     scene.path2_2.destroy();
                 });
 
-                // LINK1_3 SETUP
+                // LINK2_3 SETUP
                 scene.link2_3.on('pointerdown', function(){
-                    console.log("you beat the game yay");
-                    let win = scene.add.sprite(100, 100, 'Beeg Yoshi').setOrigin(0,0).setScale(0.5);
-                    scene.computer.add(win)
+                    scene.game.sound.stopAll();
+                    scene.scene.stop();
+                    scene.scene.launch("endScene");
                 });
             }
 
@@ -832,7 +832,7 @@ class play extends Phaser.Scene {
                 scene.path3_1.setRandomPosition(10, -50, 100, 50);
                 scene.computer.add([scene.path3_1]);
 
-                // LINK1_1 SETUP
+                // LINK3_1 SETUP
                 scene.link3_1.on('pointerdown', function(){
                     scene.curr = scene.path3_2;
                     cards_tween.play();
@@ -841,7 +841,7 @@ class play extends Phaser.Scene {
                     scene.path3_1.destroy();
                 });
 
-                // LINK1_2 SETUP
+                // LINK3_2 SETUP
                 scene.tower.on('pointerdown', function(){
                     scene.curr = scene.path3_3;
                     scene.path3_3.setPosition(scene.path3_2.x, scene.path3_2.y);
@@ -849,11 +849,11 @@ class play extends Phaser.Scene {
                     scene.path3_2.destroy();
                 });
 
-                // LINK1_3 SETUP
+                // LINK3_3 SETUP
                 scene.link3_3.on('pointerdown', function(){
-                    console.log("you beat the game yay");
-                    let win = scene.add.sprite(100, 100, 'Beeg Yoshi').setOrigin(0,0).setScale(0.5);
-                    scene.computer.add(win);
+                    scene.game.sound.stopAll();
+                    scene.scene.stop();
+                    scene.scene.launch("endScene");
                 });
             }
         })
