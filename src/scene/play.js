@@ -1038,7 +1038,7 @@ class play extends Phaser.Scene {
                                 // play knocking a second time
                                 scene.knocking.play();
                                 textStyle = { backgroundColor: "white", fontFamily: 'VT323', fontSize: '40px', color: "black", resolution: 2};
-                                scene.instructions = scene.add.text(game.config.width / 2, game.config.height - monitorBorderY * 3, "press and hold space while moving the mouse to pan the camera", textStyle).setOrigin(0.5, 0.5);
+                                scene.instructions = scene.add.text(game.config.width / 2, game.config.height - monitorBorderY * 3, "Press and Hold Space while Moving\nthe Mouse to Pan the Camera", textStyle).setOrigin(0.5, 0.5);
 
                                 scene.angel.setPosition(730, 100);
                                 scene.laughing.setRate(.6);
