@@ -1078,6 +1078,8 @@ class play extends Phaser.Scene {
             scene.sound.play('crackle');
 
             scene.room.setTint(0x000000);
+
+            // add dude pic here 
         })
 
     }
