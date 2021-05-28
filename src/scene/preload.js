@@ -59,6 +59,8 @@ class preload extends Phaser.Scene {
 
         this.load.image('login', './assets/art/Desktop/login.png');
         this.load.image('close_button', './assets/art/Desktop/close_button.png');
+        this.load.image('folder', './assets/art/Desktop/Open_folder.png');
+        this.load.image('instruction_window', './assets/art/Desktop/Instructions.png');
 
         // load music
         this.load.audio('menu_music', './assets/sound/bgm/bg_2.wav');
@@ -84,6 +86,7 @@ class preload extends Phaser.Scene {
 
         // LOADS OUTSIDE
         this.load.image('outside', './assets/art/outside.png');
+        this.load.image('angel', './assets/art/Tall_Lady.png');
 
 
         // LOADS DUMMY WINDOWS

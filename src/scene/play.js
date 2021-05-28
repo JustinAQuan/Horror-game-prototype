@@ -190,6 +190,7 @@ class play extends Phaser.Scene {
 
         // creates outside whenever we want
         this.outside = this.add.sprite(715, 50, 'outside').setOrigin(0,0).setScale(.75);
+        this.angel = this.add.sprite(2000, 0, 'angel').setOrigin(0,0).setScale(1.3);
 
         this.sound.play('startup', {volume: 0.4});
 
@@ -1038,12 +1039,18 @@ class play extends Phaser.Scene {
                                 scene.knocking.play();
                                 textStyle = { backgroundColor: "white", fontFamily: 'VT323', fontSize: '40px', color: "black", resolution: 2};
                                 scene.instructions = scene.add.text(game.config.width / 2, game.config.height - monitorBorderY * 3, "Press Space to Look Around", textStyle).setOrigin(0.5, 0.5);
-                
-                                // destroy instructions on space press
-                                scene.spaceKey.on('down', function(){
-                                    scene.instructions.destroy();
-                                });
 
+                                scene.angel.setPosition(730, 100);
+                                scene.laughing.setRate(.6);
+                                scene.laughing.setLoop(true);
+                                scene.laughing.play();
+
+                                scene.time.delayedCall(5000, () =>{
+                                    scene.angel.setPosition(2000, 0);
+                                    scene.laughing.stop();
+                                    scene.laughing.setLoop(false);
+                                    scene.laughing.setRate(1);
+                                });
                             });
 
                         }
@@ -1059,13 +1066,18 @@ class play extends Phaser.Scene {
         // when tarot death card is clicked
         scene.death.on('pointerdown', function(){
             scene.sound.play('scary');
+            scene.computer.remove(scene.path2_2);
+            scene.path3_2.setPosition(2000, 0);
+            scene.webpage3_2.setTint(0xff0000);
         });
 
         // when red "CLICK HERE" is clicked
         this.clickhere.on('pointerdown', function(){
             scene.sound.play('click');
 
+            scene.sound.play('crackle');
 
+            scene.room.setTint(0x000000);
         })
 
     }
