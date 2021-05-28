@@ -52,50 +52,86 @@ class play extends Phaser.Scene {
 
         this.bg_path1_1 = this.sound.add(
             'bg_path1_1',
+            {
+                volume: .5,
+            }
         );
 
         this.bg_path1_2 = this.sound.add(
             'bg_path1_2',
+            {
+                volume: .5,
+            }
         );
 
         this.bg_path1_3 = this.sound.add(
             'bg_path1_3',
+            {
+                volume: .5,
+            }
         );
 
         this.bg_path1_4 = this.sound.add(
             'bg_path1_4',
+            {
+                volume: .5,
+            }
         );
 
         this.bg_path2_1 = this.sound.add(
             'bg_path2_1',
+            {
+                volume: .5,
+            }
         );
 
         this.bg_path2_2 = this.sound.add(
             'bg_path2_2',
+            {
+                volume: .5,
+            }
         );
 
         this.bg_path2_3 = this.sound.add(
             'bg_path2_3',
+            {
+                volume: .5,
+            }
         );
 
         this.bg_path2_4 = this.sound.add(
             'bg_path2_4',
+            {
+                volume: .5,
+            }
         );
 
         this.bg_path3_1 = this.sound.add(
             'bg_path3_1',
+            {
+                volume: .5,
+            }
         );
 
         this.bg_path3_2 = this.sound.add(
             'bg_path3_2',
+            {
+                volume: .5,
+            }
         );
 
         this.bg_path3_3 = this.sound.add(
             'bg_path3_3',
+            {
+                volume: .5,
+            }
         );
 
         this.bg_path3_4 = this.sound.add(
             'bg_path3_4',
+            {
+                volume: .5,
+            }
         );
 
         this.bg_path1 = [this.bg_path1_1, this.bg_path1_2, this.bg_path1_3, this.bg_path1_4];
@@ -152,7 +188,7 @@ class play extends Phaser.Scene {
         }, null, this);
 
         // creates outside whenever we want
-        // this.outside = this.add.tileSprite().setOrigin(0,0);
+        this.outside = this.add.sprite(715, 50, 'outside').setOrigin(0,0).setScale(.75);
 
         this.sound.play('startup', {volume: 0.4});
 
@@ -192,7 +228,7 @@ class play extends Phaser.Scene {
 
         // choose random i from array
         let i = Math.floor(Math.random() * (this.emailFSD.length));
-        i = 1;
+        i = 2;
         
         // email config
         let UserEmail = "theuser@hotmail.com"
@@ -236,7 +272,7 @@ class play extends Phaser.Scene {
 
         this.emailCon.add([this.emailWindow, this.emailFrom2, this.emailSub2, this.emailSent, this.emailTo, this.emailClose]);
         this.emailCon.add([this.emailContents, this.emailLink1]);
-4
+
         //////////////////////////////
         //    RECYCLE BIN SETUP     //
         //////////////////////////////
@@ -367,7 +403,7 @@ class play extends Phaser.Scene {
         // path2_1
         this.webpageUI2_1 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0).setInteractive();
         this.webpage2_1 = this.add.sprite(77, 144, 'webpage2_1').setOrigin(0,0);
-        this.link2_1 = new clickable(this, 550, 450, 'link2_1');
+        this.link2_1 = new clickable(this, 157, 450, 'link2_1').setAlpha(0);
         this.web2_1close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url2_1 = this.add.text(152, 127, "http://www.the-laundry-room.com/sammy39/", textStyle).setOrigin(0,0);
         this.path2_1.add([this.webpageUI2_1, this.webpage2_1, this.link2_1, this.web2_1close, this.url2_1]);
@@ -403,21 +439,51 @@ class play extends Phaser.Scene {
         this.path3_1.add([this.webpageUI3_1, this.webpage3_1, this.link3_1, this.play1, this.play2, this.play3, this.web3_1close, this.url3_1]);
 
         this.play1.on('pointerdown', function(){
+            scene.bg_1.pause();
+            scene.bg_1_2.pause();
+            scene.bg_path3[j].pause();
+
             scene.laughing.stop();
             scene.weird.stop();
             scene.dog.play();
+
+            scene.dog.on('complete', function(){
+                scene.bg_1.resume();
+                scene.bg_1_2.resume();
+                scene.bg_path3[j].resume();
+            });
         });
 
         this.play2.on('pointerdown', function(){
+            scene.bg_1.pause();
+            scene.bg_1_2.pause();
+            scene.bg_path3[j].pause();
+
             scene.dog.stop();
             scene.weird.stop();
             scene.laughing.play();
+
+            scene.laughing.on('complete', function(){
+                scene.bg_1.resume();
+                scene.bg_1_2.resume();
+                scene.bg_path3[j].resume();
+            });
         });
 
         this.play3.on('pointerdown', function(){
+            scene.bg_1.pause();
+            scene.bg_1_2.pause();
+            scene.bg_path3[j].pause();
+
             scene.laughing.stop();
             scene.dog.stop();
             scene.weird.play();
+
+            scene.weird.on('complete', function(){
+                scene.bg_1.resume();
+                scene.bg_1_2.resume();
+                scene.bg_path3[j].resume();
+            });
         });
 
 
@@ -555,15 +621,15 @@ class play extends Phaser.Scene {
         // creates a once variable
         let once = false;
 
+        // selects a random j
+        let j = Math.floor(Math.random() * (4));
+
 
         // MAIN RABBIT WHOLE
         this.emailLink1.on('pointerdown', function(){
             // sets internet explorer container offscreen
             scene.ieCon.setPosition(2000, 0);
             scene.computer.bringToTop(scene.curr);
-
-            // selects a random j
-            let j = Math.floor(Math.random() * (4));
 
             // path 1
             if(i == 0){
@@ -685,6 +751,11 @@ class play extends Phaser.Scene {
                 scene.curr = scene.path2_1;
                 scene.path2_1.setRandomPosition(10, -50, 100, 50);
                 scene.computer.add([scene.path2_1]);
+
+                // after 20 seconds, show the link to next page
+                scene.time.delayedCall(20000, () =>{
+                    scene.link2_1.setAlpha(1);
+                });
 
                 // LINK2_1 SETUP
                 scene.link2_1.on('pointerdown', function(){
@@ -965,14 +1036,14 @@ class play extends Phaser.Scene {
 
         // when tarot death card is clicked
         scene.death.on('pointerdown', function(){
-
+            scene.sound.play('scary');
         });
 
         // when red "CLICK HERE" is clicked
         this.clickhere.on('pointerdown', function(){
             scene.sound.play('click');
 
-            
+
         })
 
     }
