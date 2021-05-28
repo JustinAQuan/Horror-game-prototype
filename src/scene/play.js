@@ -89,14 +89,14 @@ class play extends Phaser.Scene {
         this.bg_path2_2 = this.sound.add(
             'bg_path2_2',
             {
-                volume: .5,
+                volume: 1,
             }
         );
 
         this.bg_path2_3 = this.sound.add(
             'bg_path2_3',
             {
-                volume: .5,
+                volume: 1,
             }
         );
 
