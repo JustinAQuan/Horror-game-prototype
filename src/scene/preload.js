@@ -83,6 +83,7 @@ class preload extends Phaser.Scene {
 
 
         // LOADS OUTSIDE
+        this.load.image('outside', './assets/art/outside.png');
 
 
         // LOADS DUMMY WINDOWS
