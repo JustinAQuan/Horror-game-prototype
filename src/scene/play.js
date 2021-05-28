@@ -399,6 +399,33 @@ class play extends Phaser.Scene {
             }
         });
 
+        // LINK1_1 SETUP
+        scene.link1_1.on('pointerdown', function(){
+            scene.curr = scene.path1_2;
+            scene.path1_2.setPosition(scene.path1_1.x, scene.path1_1.y);
+            scene.computer.add(scene.path1_2);
+
+            scene.computer.remove(scene.path1_1);
+            scene.path1_1.setPosition(2000, 0);
+        });
+
+        // LINK1_2 SETUP
+        scene.link1_2.on('pointerdown', function(){
+            scene.curr = scene.path1_3;
+            scene.path1_3.setPosition(scene.path1_2.x, scene.path1_2.y);
+            scene.computer.add(scene.path1_3);
+            
+            scene.computer.remove(scene.path1_2);
+            scene.path1_2.setPosition(2000, 0);
+        });
+
+        // LINK1_3 SETUP
+        scene.link1_3.on('pointerdown', function(){
+            scene.game.sound.stopAll();
+            scene.scene.stop();
+            scene.scene.launch("endScene");
+        });
+
 
         // path2_1
         this.webpageUI2_1 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0).setInteractive();
@@ -425,6 +452,31 @@ class play extends Phaser.Scene {
         this.web2_3close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url2_3 = this.add.text(152, 127, "http://www.aoi.com/x_rUra_aSha_x/", textStyle).setOrigin(0,0);
         this.path2_3.add([this.webpageUI2_3, this.webpage2_3, this.link2_3, this.web2_3close, this.url2_3]);
+
+        // LINK2_1 SETUP
+        scene.link2_1.on('pointerdown', function(){
+            scene.curr = scene.path2_2;
+            scene.path2_2.setPosition(scene.path2_1.x, scene.path2_1.y);
+            scene.computer.add([scene.path2_2]);
+            scene.computer.remove(scene.path2_1);
+            scene.path2_1.setPosition(2000, 0);
+        });
+
+        // LINK2_2 SETUP
+        scene.link2_2.on('pointerdown', function(){
+            scene.curr = scene.path2_3;
+            scene.path2_3.setPosition(scene.path2_2.x, scene.path2_2.y);
+            scene.computer.add([scene.path2_3]);
+            scene.computer.remove(scene.path2_2);
+            scene.path2_2.setPosition(2000, 0);
+        });
+
+        // LINK2_3 SETUP
+        scene.link2_3.on('pointerdown', function(){
+            scene.game.sound.stopAll();
+            scene.scene.stop();
+            scene.scene.launch("endScene");
+        });
 
 
         // path3_1
@@ -513,6 +565,36 @@ class play extends Phaser.Scene {
         this.web3_3close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url3_3 = this.add.text(152, 127, "http://www.the-pantaloon-inquirer.net/feb_28_2002-AnHinY2/", textStyle).setOrigin(0,0);
         this.path3_3.add([this.webpageUI3_3, this.webpage3_3, this.link3_3, this.web3_3close, this.url3_3]);
+
+        // LINK3_1 SETUP
+        scene.link3_1.on('pointerdown', function(){
+            scene.dog.stop();
+            scene.laughing.stop();
+            scene.weird.stop();
+
+            scene.curr = scene.path3_2;
+            cards_tween.play();
+            scene.path3_2.setPosition(scene.path3_1.x, scene.path3_1.y);
+            scene.computer.add([scene.path3_2]);
+            scene.computer.remove(scene.path3_1);
+            scene.path3_1.setPosition(2000, 0);
+        });
+
+        // LINK3_2 SETUP
+        scene.tower.on('pointerdown', function(){
+            scene.curr = scene.path3_3;
+            scene.path3_3.setPosition(scene.path3_2.x, scene.path3_2.y);
+            scene.computer.add([scene.path3_3]);
+            scene.computer.remove(scene.path3_2);
+            scene.path3_2.setPosition(2000, 0);
+        });
+
+        // LINK3_3 SETUP
+        scene.link3_3.on('pointerdown', function(){
+            scene.game.sound.stopAll();
+            scene.scene.stop();
+            scene.scene.launch("endScene");
+        });
 
 
         //////////////////////////////
@@ -664,46 +746,33 @@ class play extends Phaser.Scene {
                         j = Math.floor(Math.random() * (4));
                         scene.bg_path1[j].play();
                     });
+
+                    // DESTROY OTHER ASSETS FOR CLEANINESS
+                    scene.path2_1.destroy();
+                    scene.path2_2.destroy();
+                    scene.path2_3.destroy();
+                    
+                    scene.path3_1.destroy();
+                    scene.path3_2.destroy();
+                    scene.path3_3.destroy();
                     
                     once = true;
                 }
 
-                // DESTROY OTHER ASSETS FOR CLEANINESS
-                scene.path2_1.destroy();
-                scene.path2_2.destroy();
-                scene.path2_3.destroy();
-                
-                scene.path3_1.destroy();
-                scene.path3_2.destroy();
-                scene.path3_3.destroy();
+                if(scene.computer.exists(scene.path1_2)){
+                    scene.computer.remove(scene.path1_2);
+                    scene.path1_2.setPosition(2000, 0);
+                }
+
+                if(scene.computer.exists(scene.path1_3)){
+                    scene.computer.remove(scene.path1_3);
+                    scene.path1_3.setPosition(2000, 0);
+                }
 
                 // INITIAL WEBPAGE
                 scene.curr = scene.path1_1;
                 scene.path1_1.setRandomPosition(10, -50, 100, 50);
-                scene.computer.add([scene.path1_1]);
-
-                // LINK1_1 SETUP
-                scene.link1_1.on('pointerdown', function(){
-                    scene.curr = scene.path1_2;
-                    scene.path1_2.setPosition(scene.path1_1.x, scene.path1_1.y);
-                    scene.computer.add([scene.path1_2]);
-                    scene.path1_1.destroy();
-                });
-
-                // LINK1_2 SETUP
-                scene.link1_2.on('pointerdown', function(){
-                    scene.curr = scene.path1_3;
-                    scene.path1_3.setPosition(scene.path1_2.x, scene.path1_2.y);
-                    scene.computer.add([scene.path1_3]);
-                    scene.path1_2.destroy();
-                });
-
-                // LINK1_3 SETUP
-                scene.link1_3.on('pointerdown', function(){
-                    scene.game.sound.stopAll();
-                    scene.scene.stop();
-                    scene.scene.launch("endScene");
-                });
+                scene.computer.add(scene.path1_1);
             }
 
             // path 2
@@ -755,29 +824,6 @@ class play extends Phaser.Scene {
                 // after 20 seconds, show the link to next page
                 scene.time.delayedCall(20000, () =>{
                     scene.link2_1.setAlpha(1);
-                });
-
-                // LINK2_1 SETUP
-                scene.link2_1.on('pointerdown', function(){
-                    scene.curr = scene.path2_2;
-                    scene.path2_2.setPosition(scene.path2_1.x, scene.path2_1.y);
-                    scene.computer.add([scene.path2_2]);
-                    scene.path2_1.destroy();
-                });
-
-                // LINK2_2 SETUP
-                scene.link2_2.on('pointerdown', function(){
-                    scene.curr = scene.path2_3;
-                    scene.path2_3.setPosition(scene.path2_2.x, scene.path2_2.y);
-                    scene.computer.add([scene.path2_3]);
-                    scene.path2_2.destroy();
-                });
-
-                // LINK2_3 SETUP
-                scene.link2_3.on('pointerdown', function(){
-                    scene.game.sound.stopAll();
-                    scene.scene.stop();
-                    scene.scene.launch("endScene");
                 });
             }
 
@@ -831,30 +877,6 @@ class play extends Phaser.Scene {
                 scene.curr = scene.path3_1;
                 scene.path3_1.setRandomPosition(10, -50, 100, 50);
                 scene.computer.add([scene.path3_1]);
-
-                // LINK3_1 SETUP
-                scene.link3_1.on('pointerdown', function(){
-                    scene.curr = scene.path3_2;
-                    cards_tween.play();
-                    scene.path3_2.setPosition(scene.path3_1.x, scene.path3_1.y);
-                    scene.computer.add([scene.path3_2]);
-                    scene.path3_1.destroy();
-                });
-
-                // LINK3_2 SETUP
-                scene.tower.on('pointerdown', function(){
-                    scene.curr = scene.path3_3;
-                    scene.path3_3.setPosition(scene.path3_2.x, scene.path3_2.y);
-                    scene.computer.add([scene.path3_3]);
-                    scene.path3_2.destroy();
-                });
-
-                // LINK3_3 SETUP
-                scene.link3_3.on('pointerdown', function(){
-                    scene.game.sound.stopAll();
-                    scene.scene.stop();
-                    scene.scene.launch("endScene");
-                });
             }
         })
 
