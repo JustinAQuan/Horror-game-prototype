@@ -228,8 +228,15 @@ class play extends Phaser.Scene {
         this.inboxCon = this.add.container();
         this.inboxCon.setX(2000);               // sets assets offscreen
 
-        // choose random i from array
-        let i = Math.floor(Math.random() * (this.emailFSD.length));
+        let i;
+        if (!pathInput && pathInput != 0){
+            // choose random i from array
+            i = Math.floor(Math.random() * (this.emailFSD.length));
+        }
+        else {
+            // i is picked using a debug key
+            i = pathInput;
+        }
         
         // email config
         let UserEmail = "theuser@hotmail.com"

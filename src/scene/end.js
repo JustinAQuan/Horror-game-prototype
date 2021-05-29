@@ -6,6 +6,9 @@ class end extends Phaser.Scene {
     create(){
         let scene = this;
 
+        // resets debug input 
+        pathInput = null;
+
         this.monitor = this.add.sprite(0, 0, 'monitor_border').setOrigin(0,0);
         this.homescreen = this.add.sprite(monitorBorderX, monitorBorderY, 'homescreen').setOrigin(0,0);
 

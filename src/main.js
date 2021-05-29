@@ -26,6 +26,9 @@ let game = new Phaser.Game(config);
 let monitorBorderX = 34;
 let monitorBorderY = 33;
 var text1;
+// initializes debug variables 
+let pathInput;
+let pathText;
 
 /**************************************************
  *                 CREDIT
