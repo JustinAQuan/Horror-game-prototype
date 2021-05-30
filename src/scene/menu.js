@@ -29,10 +29,10 @@ class menu extends Phaser.Scene {
         this.monitor = this.add.sprite(0, 0, 'monitor_border').setOrigin(0,0);
         this.homescreen = this.add.sprite(monitorBorderX, monitorBorderY, 'homescreen').setOrigin(0,0);
         this.folder = new clickable(this, 75, 490, 'folder', "icon").setOrigin(0,0).setScale(.7);
-        this.add.text(73, 530, "Instructions", {fontFamily: 'VT323', fontSize: "12px", color: 0xffffff, resolution: 2}).setOrigin(0,0);
+        this.add.text(73, 530, "Instructions", {fontFamily: 'VT323', fontSize: "12px", color: '#ffffff', resolution: 2}).setOrigin(0,0);
 
         // title text (this can be made in combination with menu image)
-        this.title = this.add.text(game.config.width / 2, game.config.height / 2 - 50, Title, {fontFamily: 'VT323', fontSize: "100px", color: 0xffffff}).setOrigin(.5,.5);
+        this.title = this.add.text(game.config.width / 2, game.config.height / 2 - 50, Title, {fontFamily: 'VT323', fontSize: "100px", color: '#000000'}).setOrigin(.5,.5);
 
         // adds clickable login text
         this.login = this.add.sprite(game.config.width / 2, game.config.height / 1.5, 'login').setOrigin(0.5,0.5);
@@ -47,7 +47,7 @@ class menu extends Phaser.Scene {
 
         this.instructionsWindow = this.add.sprite(game.config.width / 2, game.config.height / 2 - 30, 'instruction_window').setOrigin(.5,.5);
         this.closeInstruct = new clickable(this, 585, 133, 'close_button');
-        this.instructions = this.add.text(380, 234, text, {fontFamily: 'VT323', fontSize: "13px", color: 0xffffff, resolution: 2}).setOrigin(.5,.5);
+        this.instructions = this.add.text(380, 234, text, {fontFamily: 'VT323', fontSize: "13px", color: '#000000', resolution: 2}).setOrigin(.5,.5);
 
         this.instructCon.add([this.instructionsWindow,this.closeInstruct,this.instructions]);
 
@@ -100,21 +100,21 @@ class menu extends Phaser.Scene {
             if (pathInput){
                 pathText.destroy();
             }
-            pathText = this.add.text(game.config.width - 200, 80, "Hacked! You're \nconfirmed for Path One!", {fontFamily: 'VT323', fontSize: "26px", color: 0xffffff, resolution: 2}).setOrigin(.5,.5);
+            pathText = this.add.text(game.config.width - 200, 80, "Hacked! You're \nconfirmed for Path One!", {fontFamily: 'VT323', fontSize: "26px", color: '#ffffff', resolution: 2}).setOrigin(.5,.5);
             pathInput = 0;
         }
         else if(Phaser.Input.Keyboard.JustDown(this.two) && pathInput != 1) {
             if (pathInput || pathInput == 0){
                 pathText.destroy();
             }
-            pathText = this.add.text(game.config.width - 200, 80, "Snazzy! You've\nchosen Path Two!", {fontFamily: 'VT323', fontSize: "26px", color: 0xffffff, resolution: 2}).setOrigin(.5,.5);
+            pathText = this.add.text(game.config.width - 200, 80, "Snazzy! You've\nchosen Path Two!", {fontFamily: 'VT323', fontSize: "26px", color: '#ffffff', resolution: 2}).setOrigin(.5,.5);
             pathInput = 1;
         }
         else if(Phaser.Input.Keyboard.JustDown(this.three) && pathInput != 2) {
             if (pathInput || pathInput == 0){
                 pathText.destroy();
             }
-            pathText = this.add.text(game.config.width - 200, 80, "That's it! You're being\nsent to Path Three!", {fontFamily: 'VT323', fontSize: "26px", color: 0xffffff, resolution: 2}).setOrigin(.5,.5);
+            pathText = this.add.text(game.config.width - 200, 80, "That's it! You're being\nsent to Path Three!", {fontFamily: 'VT323', fontSize: "26px", color: '#ffffff', resolution: 2}).setOrigin(.5,.5);
             pathInput = 2;
         }
     }
