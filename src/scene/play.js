@@ -139,22 +139,31 @@ class play extends Phaser.Scene {
         this.bg_path2 = [this.bg_path2_1, this.bg_path2_2, this.bg_path2_3, this.bg_path2_4];
         this.bg_path3 = [this.bg_path3_1, this.bg_path3_2, this.bg_path3_3, this.bg_path3_4];
 
-        // CREEPY MUSIC
-
-        this.laughing = this.sound.add(
-            'laughing',
+        // 3_1 music 
+        this.web_mus1 = this.sound.add(
+            'web_mus1',
         );
 
-        this.dog = this.sound.add(
-            'licking',
+        this.web_mus2 = this.sound.add(
+            'web_mus2',
+            {
+                volume: 2,
+            }
+        );
+
+        this.web_mus3 = this.sound.add(
+            'web_mus3',
             {
                 rate: .4,
             }
         );
 
-        this.weird = this.sound.add(
-            'weird',
+        // CREEPY MUSIC
+
+        this.laughing = this.sound.add(
+            'laughing',
         );
+        
 
         // EVENT SFX
 
@@ -497,56 +506,134 @@ class play extends Phaser.Scene {
         this.play1 = new clickable(this, 140, 293, 'play_button');
         this.play2 = new clickable(this, 140, 374, 'play_button');
         this.play3 = new clickable(this, 140, 456, 'play_button');
+        this.isPlaying1 = false;
+        this.isPlaying2 = false;
+        this.isPlaying3 = false;
+        this.isPaused1 = false;
+        this.isPaused2 = false;
+        this.isPaused3 = false;
         this.web3_1close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url3_1 = this.add.text(152, 127, "https://www.audio-city.com/user-ratpoison/", textStyle).setOrigin(0,0);
         this.path3_1.add([this.webpageUI3_1, this.webpage3_1, this.link3_1, this.play1, this.play2, this.play3, this.web3_1close, this.url3_1]);
 
+        // play button 1
         this.play1.on('pointerdown', function(){
-            scene.bg_1.pause();
-            scene.bg_1_2.pause();
-            scene.bg_path3[j].pause();
-
-            scene.laughing.stop();
-            scene.weird.stop();
-            scene.dog.play();
-
-            scene.dog.on('complete', function(){
-                scene.bg_1.resume();
-                scene.bg_1_2.resume();
+            if (!scene.isPlaying1) {
+                // stops other music 
+                if(scene.isPlaying2 || scene.isPaused2) {
+                    scene.web_mus2.stop();
+                    scene.isPaused2 = false;
+                    scene.isPlaying2 = false;
+                }
+                if(scene.isPlaying3 || scene.isPaused3) {
+                    scene.web_mus3.stop();
+                    scene.isPaused3 = false;
+                    scene.isPlaying3 = false;
+                }
+                scene.bg_path3[j].pause();
+                // resumes from pause 
+                if (scene.isPaused1) {
+                    scene.web_mus1.resume();
+                    scene.isPaused1 = false;
+                }
+                else {
+                    // plays 
+                    scene.web_mus1.play();
+                }
+            scene.isPlaying1 = true;
+            }
+            else {
+                // pauses 
                 scene.bg_path3[j].resume();
-            });
+                scene.web_mus1.pause();
+                scene.isPaused1 = true;
+                scene.isPlaying1 = false;
+            }
         });
 
+        scene.play1.on('complete', function(){
+            scene.isPlaying1 = false;
+            scene.bg_path3[j].resume();
+        });
+
+        // play button 2
         this.play2.on('pointerdown', function(){
-            scene.bg_1.pause();
-            scene.bg_1_2.pause();
-            scene.bg_path3[j].pause();
-
-            scene.dog.stop();
-            scene.weird.stop();
-            scene.laughing.play();
-
-            scene.laughing.on('complete', function(){
-                scene.bg_1.resume();
-                scene.bg_1_2.resume();
+            if (!scene.isPlaying2) {
+                // stops other music 
+                if(scene.isPlaying1 || scene.isPaused1) {
+                    scene.web_mus1.stop();
+                    scene.isPaused1 = false;
+                    scene.isPlaying1 = false;
+                }
+                if(scene.isPlaying3 || scene.isPaused3) {
+                    scene.web_mus3.stop();
+                    scene.isPaused3 = false;
+                    scene.isPlaying3 = false;
+                }
+                scene.bg_path3[j].pause();
+                // resumes from pause 
+                if (scene.isPaused2) {
+                    scene.web_mus2.resume();
+                    scene.isPaused2 = false;
+                }
+                else {
+                    // plays 
+                    scene.web_mus2.play();
+                }
+            scene.isPlaying2 = true;
+            }
+            else {
+                // pauses 
                 scene.bg_path3[j].resume();
-            });
+                scene.web_mus2.pause();
+                scene.isPaused2 = true;
+                scene.isPlaying2 = false;
+            }
         });
 
+        scene.play2.on('complete', function(){
+            scene.isPlaying2 = false;
+            scene.bg_path3[j].resume();
+        });
+
+        // play button 3 
         this.play3.on('pointerdown', function(){
-            scene.bg_1.pause();
-            scene.bg_1_2.pause();
-            scene.bg_path3[j].pause();
-
-            scene.laughing.stop();
-            scene.dog.stop();
-            scene.weird.play();
-
-            scene.weird.on('complete', function(){
-                scene.bg_1.resume();
-                scene.bg_1_2.resume();
+            if (!scene.isPlaying3) {
+                // stops other music 
+                if(scene.isPlaying1 || scene.isPaused1) {
+                    scene.web_mus1.stop();
+                    scene.isPaused1 = false;
+                    scene.isPlaying1 = false;
+                }
+                if(scene.isPlaying2 || scene.isPaused2) {
+                    scene.web_mus2.stop();
+                    scene.isPaused2 = false;
+                    scene.isPlaying2 = false;
+                }
+                scene.bg_path3[j].pause();
+                // resumes from pause 
+                if (scene.isPaused3) {
+                    scene.web_mus3.resume();
+                    scene.isPaused3 = false;
+                }
+                else {
+                    // plays 
+                    scene.web_mus3.play();
+                }
+            scene.isPlaying3 = true;
+            }
+            else {
+                // pauses 
                 scene.bg_path3[j].resume();
-            });
+                scene.web_mus3.pause();
+                scene.isPaused3 = true;
+                scene.isPlaying3 = false;
+            }
+        });
+
+        scene.play3.on('complete', function(){
+            scene.isPlaying3 = false;
+            scene.bg_path3[j].resume();
         });
 
 
@@ -582,9 +669,25 @@ class play extends Phaser.Scene {
 
         // LINK3_1 SETUP
         scene.link3_1.on('pointerdown', function(){
-            scene.dog.stop();
-            scene.laughing.stop();
-            scene.weird.stop();
+            // resets audio upon clicking link to exit 3_1 
+            if (scene.isPlaying1) {
+                scene.web_mus1.stop();
+                scene.isPaused1 = false;
+                scene.isPlaying1 = false;
+                scene.bg_path3[j].resume();
+            }
+            if (scene.isPlaying2) {
+                scene.web_mus2.stop();
+                scene.isPaused2 = false;
+                scene.isPlaying2 = false;
+                scene.bg_path3[j].resume();
+            }
+            if (scene.isPlaying3) {
+                scene.web_mus3.stop();
+                scene.isPaused3 = false;
+                scene.isPlaying3 = false;
+                scene.bg_path3[j].resume();
+            }
 
             scene.curr = scene.path3_2;
             cards_tween.play();
