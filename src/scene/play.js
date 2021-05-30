@@ -377,8 +377,11 @@ class play extends Phaser.Scene {
         this.webpage1_2 = this.add.sprite(77, 144, 'webpage1_2').setOrigin(0,0);
         this.link1_2 = new clickable(this, 295, 402, 'link1_2');
         this.web1_2close = new clickable(this, 625, 104, 'close_button').setScale(.8);
+        this.light_flash = this.add.sprite(0, 0, 'light_flash').setAlpha(1).setOrigin(0,0);
         this.url1_2 = this.add.text(152, 127, "http://www.ash-blog-attack.com/post-256414", textStyle).setOrigin(0,0);
-        this.path1_2.add([this.webpageUI1_2, this.webpage1_2, this.link1_2, this.web1_2close, this.url1_2]);
+        this.path1_2.add([this.webpageUI1_2, this.webpage1_2, this.link1_2, this.web1_2close, this.light_flash, this.url1_2]);
+
+        // TODO add tween for light_flash alpha, with ufo.wav 
 
         this.link1_2.on('pointerover', function(){
             scene.link1_2.setTint(0x0000ff);
