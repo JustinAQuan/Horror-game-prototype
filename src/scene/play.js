@@ -345,7 +345,7 @@ class play extends Phaser.Scene {
         this.path2_2.setPosition(2000, 0);
         this.path2_3.setPosition(2000, 0);
 
-        // paht 3
+        // path 3
         this.path3_1 = this.add.container();
         this.path3_2 = this.add.container();
         this.path3_3 = this.add.container();
@@ -449,8 +449,8 @@ class play extends Phaser.Scene {
 
         // path2_2
         this.webpageUI2_2 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0).setInteractive();
-        this.webpage2_2 = this.add.sprite(77, 144, 'webpage').setOrigin(0,0);
-        this.link2_2 = new clickable(this, 350, 250, 'linkex');
+        this.webpage2_2 = this.add.sprite(77, 144, 'webpage2_2').setOrigin(0,0);
+        this.link2_2 = new clickable(this, 210, 475, 'link2_2');
         this.web2_2close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url2_2 = this.add.text(152, 127, "https://www.lPovRIA.org/a-beautiful-song/", textStyle).setOrigin(0,0);
         this.path2_2.add([this.webpageUI2_2, this.webpage2_2, this.link2_2, this.web2_2close, this.url2_2]);
@@ -458,8 +458,8 @@ class play extends Phaser.Scene {
 
         // path2_3
         this.webpageUI2_3 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0).setInteractive();
-        this.webpage2_3 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.6).setTint(0xff0000);
-        this.link2_3 = new clickable(this, 350, 250, 'linkex');
+        this.webpage2_3 = this.add.sprite(77, 144, 'webpage2_3').setOrigin(0,0);
+        this.link2_3 = new clickable(this, 535, 397, 'link2_3');
         this.web2_3close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url2_3 = this.add.text(152, 127, "http://www.aoi.com/x_rUra_aSha_x/", textStyle).setOrigin(0,0);
         this.path2_3.add([this.webpageUI2_3, this.webpage2_3, this.link2_3, this.web2_3close, this.url2_3]);
@@ -836,7 +836,8 @@ class play extends Phaser.Scene {
                 scene.computer.add([scene.path2_1]);
 
                 // after 20 seconds, show the link to next page
-                scene.time.delayedCall(20000, () =>{
+                // TODO change to flashing loop 
+                scene.time.delayedCall(1, () =>{
                     scene.link2_1.setAlpha(1);
                 });
             }
