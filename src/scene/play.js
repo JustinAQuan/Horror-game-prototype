@@ -1020,8 +1020,8 @@ class play extends Phaser.Scene {
 
                     // play knocking
                     scene.knocking.play();
-                    textStyle = { backgroundColor: "white", fontFamily: 'VT323', fontSize: '40px', color: "black", resolution: 2};
-                    scene.instructions = scene.add.text(game.config.width / 2, game.config.height - monitorBorderY * 3, "Press and Hold Space while Moving\nthe Mouse to Pan the Camera", textStyle).setOrigin(0.5, 0.5);
+                    textStyle = { backgroundColor: "white", fontFamily: 'VT323', fontSize: '28px', color: "black", resolution: 2};
+                    scene.instructions = scene.add.text(game.config.width / 2, game.config.height - monitorBorderY - 23, "Press and Hold Space while Moving the Mouse to Pan the Camera", textStyle).setOrigin(0.5, 0.5);
                     
                     // declare doneonce to false
                     let doneonce = false;
@@ -1043,10 +1043,6 @@ class play extends Phaser.Scene {
                             scene.time.delayedCall(10000, () => {
 
                                 // play knocking a second time
-                                scene.knocking.play();
-                                textStyle = { backgroundColor: "white", fontFamily: 'VT323', fontSize: '40px', color: "black", resolution: 2};
-                                scene.instructions = scene.add.text(game.config.width / 2, game.config.height - monitorBorderY * 3, "Press and Hold Space while Moving\nthe Mouse to Pan the Camera", textStyle).setOrigin(0.5, 0.5);
-
                                 scene.angel.setPosition(730, 100);
                                 scene.laughing.setRate(.6);
                                 scene.laughing.setLoop(true);
