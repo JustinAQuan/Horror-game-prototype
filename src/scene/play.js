@@ -139,22 +139,31 @@ class play extends Phaser.Scene {
         this.bg_path2 = [this.bg_path2_1, this.bg_path2_2, this.bg_path2_3, this.bg_path2_4];
         this.bg_path3 = [this.bg_path3_1, this.bg_path3_2, this.bg_path3_3, this.bg_path3_4];
 
-        // CREEPY MUSIC
-
-        this.laughing = this.sound.add(
-            'laughing',
+        // 3_1 music 
+        this.web_mus1 = this.sound.add(
+            'web_mus1',
         );
 
-        this.dog = this.sound.add(
-            'licking',
+        this.web_mus2 = this.sound.add(
+            'web_mus2',
+            {
+                volume: 2,
+            }
+        );
+
+        this.web_mus3 = this.sound.add(
+            'web_mus3',
             {
                 rate: .4,
             }
         );
 
-        this.weird = this.sound.add(
-            'weird',
+        // CREEPY MUSIC
+
+        this.laughing = this.sound.add(
+            'laughing',
         );
+        
 
         // EVENT SFX
 
@@ -341,7 +350,7 @@ class play extends Phaser.Scene {
         this.path2_2.setPosition(2000, 0);
         this.path2_3.setPosition(2000, 0);
 
-        // paht 3
+        // path 3
         this.path3_1 = this.add.container();
         this.path3_2 = this.add.container();
         this.path3_3 = this.add.container();
@@ -373,8 +382,11 @@ class play extends Phaser.Scene {
         this.webpage1_2 = this.add.sprite(77, 144, 'webpage1_2').setOrigin(0,0);
         this.link1_2 = new clickable(this, 295, 402, 'link1_2');
         this.web1_2close = new clickable(this, 625, 104, 'close_button').setScale(.8);
+        this.light_flash = this.add.sprite(0, 0, 'light_flash').setAlpha(1).setOrigin(0,0);
         this.url1_2 = this.add.text(152, 127, "http://www.ash-blog-attack.com/post-256414", textStyle).setOrigin(0,0);
-        this.path1_2.add([this.webpageUI1_2, this.webpage1_2, this.link1_2, this.web1_2close, this.url1_2]);
+        this.path1_2.add([this.webpageUI1_2, this.webpage1_2, this.link1_2, this.web1_2close, this.light_flash, this.url1_2]);
+
+        // TODO add tween for light_flash alpha, with ufo.wav 
 
         this.link1_2.on('pointerover', function(){
             scene.link1_2.setTint(0x0000ff);
@@ -442,8 +454,8 @@ class play extends Phaser.Scene {
 
         // path2_2
         this.webpageUI2_2 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0).setInteractive();
-        this.webpage2_2 = this.add.sprite(77, 144, 'webpage').setOrigin(0,0);
-        this.link2_2 = new clickable(this, 350, 250, 'linkex');
+        this.webpage2_2 = this.add.sprite(77, 144, 'webpage2_2').setOrigin(0,0);
+        this.link2_2 = new clickable(this, 210, 475, 'link2_2');
         this.web2_2close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url2_2 = this.add.text(152, 127, "https://www.lPovRIA.org/a-beautiful-song/", textStyle).setOrigin(0,0);
         this.path2_2.add([this.webpageUI2_2, this.webpage2_2, this.link2_2, this.web2_2close, this.url2_2]);
@@ -451,8 +463,8 @@ class play extends Phaser.Scene {
 
         // path2_3
         this.webpageUI2_3 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0).setInteractive();
-        this.webpage2_3 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.6).setTint(0xff0000);
-        this.link2_3 = new clickable(this, 350, 250, 'linkex');
+        this.webpage2_3 = this.add.sprite(77, 144, 'webpage2_3').setOrigin(0,0);
+        this.link2_3 = new clickable(this, 535, 397, 'link2_3');
         this.web2_3close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url2_3 = this.add.text(152, 127, "http://www.aoi.com/x_rUra_aSha_x/", textStyle).setOrigin(0,0);
         this.path2_3.add([this.webpageUI2_3, this.webpage2_3, this.link2_3, this.web2_3close, this.url2_3]);
@@ -490,56 +502,134 @@ class play extends Phaser.Scene {
         this.play1 = new clickable(this, 140, 293, 'play_button');
         this.play2 = new clickable(this, 140, 374, 'play_button');
         this.play3 = new clickable(this, 140, 456, 'play_button');
+        this.isPlaying1 = false;
+        this.isPlaying2 = false;
+        this.isPlaying3 = false;
+        this.isPaused1 = false;
+        this.isPaused2 = false;
+        this.isPaused3 = false;
         this.web3_1close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url3_1 = this.add.text(152, 127, "https://www.audio-city.com/user-ratpoison/", textStyle).setOrigin(0,0);
         this.path3_1.add([this.webpageUI3_1, this.webpage3_1, this.link3_1, this.play1, this.play2, this.play3, this.web3_1close, this.url3_1]);
 
+        // play button 1
         this.play1.on('pointerdown', function(){
-            scene.bg_1.pause();
-            scene.bg_1_2.pause();
-            scene.bg_path3[j].pause();
-
-            scene.laughing.stop();
-            scene.weird.stop();
-            scene.dog.play();
-
-            scene.dog.on('complete', function(){
-                scene.bg_1.resume();
-                scene.bg_1_2.resume();
+            if (!scene.isPlaying1) {
+                // stops other music 
+                if(scene.isPlaying2 || scene.isPaused2) {
+                    scene.web_mus2.stop();
+                    scene.isPaused2 = false;
+                    scene.isPlaying2 = false;
+                }
+                if(scene.isPlaying3 || scene.isPaused3) {
+                    scene.web_mus3.stop();
+                    scene.isPaused3 = false;
+                    scene.isPlaying3 = false;
+                }
+                scene.bg_path3[j].pause();
+                // resumes from pause 
+                if (scene.isPaused1) {
+                    scene.web_mus1.resume();
+                    scene.isPaused1 = false;
+                }
+                else {
+                    // plays 
+                    scene.web_mus1.play();
+                }
+            scene.isPlaying1 = true;
+            }
+            else {
+                // pauses 
                 scene.bg_path3[j].resume();
-            });
+                scene.web_mus1.pause();
+                scene.isPaused1 = true;
+                scene.isPlaying1 = false;
+            }
         });
 
+        scene.play1.on('complete', function(){
+            scene.isPlaying1 = false;
+            scene.bg_path3[j].resume();
+        });
+
+        // play button 2
         this.play2.on('pointerdown', function(){
-            scene.bg_1.pause();
-            scene.bg_1_2.pause();
-            scene.bg_path3[j].pause();
-
-            scene.dog.stop();
-            scene.weird.stop();
-            scene.laughing.play();
-
-            scene.laughing.on('complete', function(){
-                scene.bg_1.resume();
-                scene.bg_1_2.resume();
+            if (!scene.isPlaying2) {
+                // stops other music 
+                if(scene.isPlaying1 || scene.isPaused1) {
+                    scene.web_mus1.stop();
+                    scene.isPaused1 = false;
+                    scene.isPlaying1 = false;
+                }
+                if(scene.isPlaying3 || scene.isPaused3) {
+                    scene.web_mus3.stop();
+                    scene.isPaused3 = false;
+                    scene.isPlaying3 = false;
+                }
+                scene.bg_path3[j].pause();
+                // resumes from pause 
+                if (scene.isPaused2) {
+                    scene.web_mus2.resume();
+                    scene.isPaused2 = false;
+                }
+                else {
+                    // plays 
+                    scene.web_mus2.play();
+                }
+            scene.isPlaying2 = true;
+            }
+            else {
+                // pauses 
                 scene.bg_path3[j].resume();
-            });
+                scene.web_mus2.pause();
+                scene.isPaused2 = true;
+                scene.isPlaying2 = false;
+            }
         });
 
+        scene.play2.on('complete', function(){
+            scene.isPlaying2 = false;
+            scene.bg_path3[j].resume();
+        });
+
+        // play button 3 
         this.play3.on('pointerdown', function(){
-            scene.bg_1.pause();
-            scene.bg_1_2.pause();
-            scene.bg_path3[j].pause();
-
-            scene.laughing.stop();
-            scene.dog.stop();
-            scene.weird.play();
-
-            scene.weird.on('complete', function(){
-                scene.bg_1.resume();
-                scene.bg_1_2.resume();
+            if (!scene.isPlaying3) {
+                // stops other music 
+                if(scene.isPlaying1 || scene.isPaused1) {
+                    scene.web_mus1.stop();
+                    scene.isPaused1 = false;
+                    scene.isPlaying1 = false;
+                }
+                if(scene.isPlaying2 || scene.isPaused2) {
+                    scene.web_mus2.stop();
+                    scene.isPaused2 = false;
+                    scene.isPlaying2 = false;
+                }
+                scene.bg_path3[j].pause();
+                // resumes from pause 
+                if (scene.isPaused3) {
+                    scene.web_mus3.resume();
+                    scene.isPaused3 = false;
+                }
+                else {
+                    // plays 
+                    scene.web_mus3.play();
+                }
+            scene.isPlaying3 = true;
+            }
+            else {
+                // pauses 
                 scene.bg_path3[j].resume();
-            });
+                scene.web_mus3.pause();
+                scene.isPaused3 = true;
+                scene.isPlaying3 = false;
+            }
+        });
+
+        scene.play3.on('complete', function(){
+            scene.isPlaying3 = false;
+            scene.bg_path3[j].resume();
         });
 
 
@@ -550,8 +640,9 @@ class play extends Phaser.Scene {
         this.tower = new clickable(this, 250, 250, 'tower');
         this.web3_2close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.clickhere = this.add.rectangle(153, 370, 100, 25, 0xffffff).setAlpha(0.01).setInteractive( { cursor: 'pointer' } );
+        this.dude = this.add.sprite(153, 400, 'dude').setAlpha(0).setScale(0.5).setOrigin(0,0);
         this.url3_2 = this.add.text(152, 127, "https://www.madame-ferebi.com", textStyle).setOrigin(0,0);
-        this.path3_2.add([this.webpageUI3_2, this.webpage3_2, this.death, this.tower, this.clickhere, this.web3_2close, this.url3_2]);
+        this.path3_2.add([this.webpageUI3_2, this.webpage3_2, this.death, this.tower, this.clickhere, this.web3_2close, this.dude, this.url3_2]);
 
         let cards_tween = this.add.tween({
             targets: [this.death, this.tower],
@@ -559,6 +650,8 @@ class play extends Phaser.Scene {
             x: '+=200',
             repeat: -1,
             yoyo: true
+
+        // TODO add tween for dude's alpha on clicking clickhere
         })
 
 
@@ -572,9 +665,25 @@ class play extends Phaser.Scene {
 
         // LINK3_1 SETUP
         scene.link3_1.on('pointerdown', function(){
-            scene.dog.stop();
-            scene.laughing.stop();
-            scene.weird.stop();
+            // resets audio upon clicking link to exit 3_1 
+            if (scene.isPlaying1) {
+                scene.web_mus1.stop();
+                scene.isPaused1 = false;
+                scene.isPlaying1 = false;
+                scene.bg_path3[j].resume();
+            }
+            if (scene.isPlaying2) {
+                scene.web_mus2.stop();
+                scene.isPaused2 = false;
+                scene.isPlaying2 = false;
+                scene.bg_path3[j].resume();
+            }
+            if (scene.isPlaying3) {
+                scene.web_mus3.stop();
+                scene.isPaused3 = false;
+                scene.isPlaying3 = false;
+                scene.bg_path3[j].resume();
+            }
 
             scene.curr = scene.path3_2;
             cards_tween.play();
@@ -826,7 +935,8 @@ class play extends Phaser.Scene {
                 scene.computer.add([scene.path2_1]);
 
                 // after 20 seconds, show the link to next page
-                scene.time.delayedCall(20000, () =>{
+                // TODO change to flashing loop 
+                scene.time.delayedCall(1, () =>{
                     scene.link2_1.setAlpha(1);
                 });
             }
@@ -1016,8 +1126,8 @@ class play extends Phaser.Scene {
 
                     // play knocking
                     scene.knocking.play();
-                    textStyle = { backgroundColor: "white", fontFamily: 'VT323', fontSize: '40px', color: "black", resolution: 2};
-                    scene.instructions = scene.add.text(game.config.width / 2, game.config.height - monitorBorderY * 3, "Press and Hold Space while Moving\nthe Mouse to Pan the Camera", textStyle).setOrigin(0.5, 0.5);
+                    textStyle = { backgroundColor: "white", fontFamily: 'VT323', fontSize: '28px', color: "black", resolution: 2};
+                    scene.instructions = scene.add.text(game.config.width / 2, game.config.height - monitorBorderY - 23, "Press and Hold Space while Moving the Mouse to Pan the Camera", textStyle).setOrigin(0.5, 0.5);
                     
                     // declare doneonce to false
                     let doneonce = false;
@@ -1039,10 +1149,6 @@ class play extends Phaser.Scene {
                             scene.time.delayedCall(10000, () => {
 
                                 // play knocking a second time
-                                scene.knocking.play();
-                                textStyle = { backgroundColor: "white", fontFamily: 'VT323', fontSize: '40px', color: "black", resolution: 2};
-                                scene.instructions = scene.add.text(game.config.width / 2, game.config.height - monitorBorderY * 3, "Press and Hold Space while Moving\nthe Mouse to Pan the Camera", textStyle).setOrigin(0.5, 0.5);
-
                                 scene.angel.setPosition(730, 100);
                                 scene.laughing.setRate(.6);
                                 scene.laughing.setLoop(true);
@@ -1082,7 +1188,7 @@ class play extends Phaser.Scene {
 
             scene.room.setTint(0x000000);
 
-            // add dude pic here 
+            scene.dude.setAlpha(1);
         })
 
     }

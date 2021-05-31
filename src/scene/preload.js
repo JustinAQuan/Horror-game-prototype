@@ -111,6 +111,7 @@ class preload extends Phaser.Scene {
         // LOADS PATH1_2
         this.load.image('webpage1_2', './assets/art/Webpages/page1_2.png');
         this.load.image('link1_2', './assets/art/Webpages/page1_2_link.png');
+        this.load.image('light_flash', './assets/art/light_flash.png');
 
         // LOADS PATH1_3
         this.load.image('webpage1_3.1', './assets/art/Webpages/page1_3_part1.png');
@@ -122,8 +123,12 @@ class preload extends Phaser.Scene {
         this.load.image('link2_1', './assets/art/Webpages/page2_1_link.png');
 
         // LOADS PATH2_2
+        this.load.image('webpage2_2', './assets/art/Webpages/page2_2.png');
+        this.load.image('link2_2', './assets/art/Webpages/page2_2_link.png');
 
         // LOADS PATH2_3
+        this.load.image('webpage2_3', './assets/art/Webpages/page2_3.png');
+        this.load.image('link2_3', './assets/art/Webpages/page2_3_link.png');
 
         // LOADS PATH3_1
         this.load.image('webpage3_1', './assets/art/Webpages/page3_1.png');
@@ -131,7 +136,7 @@ class preload extends Phaser.Scene {
         this.load.image('play_button', './assets/art/Webpages/page3_1_play_button.png');
 
         // LOADS PATH3_2
-        this.load.image('webpage3_2', './assets/art/Webpages/page3_2.png');
+        this.load.image('webpage3_2', './assets/art/Webpages/path3_2.png');
         this.load.image('death', './assets/art/Webpages/tarot_death.png');
         this.load.image('tower', './assets/art/Webpages/tarot_tower.png');
         this.load.image('dude', './assets/art/Webpages/dude_pic.png');
@@ -171,17 +176,23 @@ class preload extends Phaser.Scene {
         this.load.audio('startup', './assets/sound/sfx/startup.wav');
 
         // creepy
-        this.load.audio('weird', './assets/sound/web_audio/web_mus1.wav');
         this.load.audio('laughing', './assets/sound/creepy/laughing.wav');
         this.load.audio('door_knock', './assets/sound/creepy/door_knocking1.wav');
         this.load.audio('drop_spoon', './assets/sound/creepy/dropping_spoon1.wav');
         this.load.audio('slam_desk', './assets/sound/creepy/slam_desk1.wav');
-        this.load.audio('licking', './assets/sound/creepy/yucky_dog.wav');
 
         // event_sfx
         this.load.audio('crackle', './assets/sound/event_sfx/crackleSomething.wav');
         this.load.audio('scary', './assets/sound/event_sfx/reallyScary.wav');
         this.load.audio('ufo', './assets/sound/event_sfx/ufo.wav');
+
+        // 3_1 web music 
+        this.load.audio('web_mus1', './assets/sound/web_audio/web_mus1.wav');
+        this.load.audio('web_mus2', './assets/sound/web_audio/web_mus2.wav');
+        this.load.audio('web_mus3', './assets/sound/web_audio/web_mus3.wav');
+
+        
+
 
 
         // LOADS JSON
