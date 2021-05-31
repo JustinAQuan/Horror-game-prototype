@@ -57,8 +57,10 @@ class preload extends Phaser.Scene {
         //       MENU SCENE        //
         /////////////////////////////
 
-        this.load.image('login', './assets/art/login.png');
-        this.load.image('close_button', './assets/art/close_button.png');
+        this.load.image('login', './assets/art/Desktop/login.png');
+        this.load.image('close_button', './assets/art/Desktop/close_button.png');
+        this.load.image('folder', './assets/art/Desktop/Open_folder.png');
+        this.load.image('instruction_window', './assets/art/Desktop/Instructions.png');
 
         // load music
         this.load.audio('menu_music', './assets/sound/bgm/bg_2.wav');
@@ -70,12 +72,12 @@ class preload extends Phaser.Scene {
         /////////////////////////////
 
         // LOADS MAIN MONITOR
-        this.load.image('homescreen', './assets/art/Desktop_bg.png');
-        this.load.image('monitor_border', './assets/art/Monitor.png');
-        this.load.image('ie', './assets/art/Internet_explorer.png');
-        this.load.image('recycle_bin', './assets/art/Recycle_bin.png');
-        this.load.image('inbox', './assets/art/Inbox.png');
-        this.load.image('my_pc', './assets/art/My_computer.png');
+        this.load.image('homescreen', './assets/art/Desktop/Desktop_bg.png');
+        this.load.image('monitor_border', './assets/art/Desktop/Monitor.png');
+        this.load.image('ie', './assets/art/Desktop/Internet_explorer.png');
+        this.load.image('recycle_bin', './assets/art/Desktop/Recycle_bin.png');
+        this.load.image('inbox', './assets/art/Desktop/Inbox.png');
+        this.load.image('my_pc', './assets/art/Desktop/My_computer.png');
 
 
         // LOADS ROOM
@@ -83,50 +85,61 @@ class preload extends Phaser.Scene {
 
 
         // LOADS OUTSIDE
+        this.load.image('outside', './assets/art/outside.png');
+        this.load.image('angel', './assets/art/Tall_Lady.png');
 
 
         // LOADS DUMMY WINDOWS
-        this.load.image('rb_window', './assets/art/Recycle_binTemplate.png');
-        this.load.image('mypc_window', './assets/art/My_computerTemplate.png');
+        this.load.image('rb_window', './assets/art/Desktop/Recycle_binTemplate.png');
+        this.load.image('mypc_window', './assets/art/Desktop/My_computerTemplate.png');
 
 
         // WEBPAGE PRELOADS
-        this.load.image('ie_window', './assets/art/Internet_ui.png');
-        this.load.image('404', './assets/art/404.jpg');
+        this.load.image('ie_window', './assets/art/Desktop/Internet_ui.png');
+        this.load.image('404', './assets/art/Desktop/404.jpg');
 
 
         // LOADS INBOX
-        this.load.image('inbox_window', './assets/art/Inbox_window.png');
-        this.load.image('email', './assets/art/Email_inboxTemplate.png');
-        this.load.image('email_window', './assets/art/Email_template.png');
+        this.load.image('inbox_window', './assets/art/Desktop/Inbox_window.png');
+        this.load.image('email', './assets/art/Desktop/Email_inboxTemplate.png');
+        this.load.image('email_window', './assets/art/Desktop/Email_template.png');
 
         // LOADS PATH1_1
-        this.load.image('webpage1_1', './assets/art/Page1_1.png');
-        this.load.image('link1_1', './assets/art/page1_1_link.png');
+        this.load.image('webpage1_1', './assets/art/Webpages/Page1_1.png');
+        this.load.image('link1_1', './assets/art/Webpages/page1_1_link.png');
 
         // LOADS PATH1_2
-        this.load.image('webpage1_2', './assets/art/page1_2.png');
-        this.load.image('link1_2', './assets/art/page1_2_link.png');
+        this.load.image('webpage1_2', './assets/art/Webpages/page1_2.png');
+        this.load.image('link1_2', './assets/art/Webpages/page1_2_link.png');
+        this.load.image('light_flash', './assets/art/light_flash.png');
 
         // LOADS PATH1_3
-        this.load.image('webpage1_3.1', './assets/art/page1_3_part1.png');
-        this.load.image('webpage1_3.2', './assets/art/page1_3_part2.png');
-        this.load.image('link1_3', './assets/art/page1_3_link.png');
+        this.load.image('webpage1_3.1', './assets/art/Webpages/page1_3_part1.png');
+        this.load.image('webpage1_3.2', './assets/art/Webpages/page1_3_part2.png');
+        this.load.image('link1_3', './assets/art/Webpages/page1_3_link.png');
 
         // LOADS PATH2_1
+        this.load.image('webpage2_1', './assets/art/Webpages/page2_1.png');
+        this.load.image('link2_1', './assets/art/Webpages/page2_1_link.png');
 
         // LOADS PATH2_2
-        this.load.image('webpage2_2', './assets/art/page2_2.png');
-        this.load.image('link2_2', './assets/art/page2_2_link.png');
+        this.load.image('webpage2_2', './assets/art/Webpages/page2_2.png');
+        this.load.image('link2_2', './assets/art/Webpages/page2_2_link.png');
 
         // LOADS PATH2_3
+        this.load.image('webpage2_3', './assets/art/Webpages/page2_3.png');
+        this.load.image('link2_3', './assets/art/Webpages/page2_3_link.png');
 
         // LOADS PATH3_1
-        this.load.image('webpage3_1', './assets/art/page3_1.png');
-        this.load.image('link3_1', './assets/art/page3_1_link.png');
-        this.load.image('play_button', './assets/art/page3_1_play_button.png');
+        this.load.image('webpage3_1', './assets/art/Webpages/page3_1.png');
+        this.load.image('link3_1', './assets/art/Webpages/page3_1_link.png');
+        this.load.image('play_button', './assets/art/Webpages/page3_1_play_button.png');
 
         // LOADS PATH3_2
+        this.load.image('webpage3_2', './assets/art/Webpages/path3_2.png');
+        this.load.image('death', './assets/art/Webpages/tarot_death.png');
+        this.load.image('tower', './assets/art/Webpages/tarot_tower.png');
+        this.load.image('dude', './assets/art/Webpages/dude_pic.png');
 
         // LOADS PATH3_3
         this.load.image('popup-advert_1', './assets/art/page3_3-popup1.png');
@@ -166,12 +179,23 @@ class preload extends Phaser.Scene {
         this.load.audio('startup', './assets/sound/sfx/startup.wav');
 
         // creepy
-        this.load.audio('weird', './assets/sound/web_audio/web_mus1.wav');
         this.load.audio('laughing', './assets/sound/creepy/laughing.wav');
         this.load.audio('door_knock', './assets/sound/creepy/door_knocking1.wav');
         this.load.audio('drop_spoon', './assets/sound/creepy/dropping_spoon1.wav');
         this.load.audio('slam_desk', './assets/sound/creepy/slam_desk1.wav');
-        this.load.audio('licking', './assets/sound/creepy/yucky_dog.wav');
+
+        // event_sfx
+        this.load.audio('crackle', './assets/sound/event_sfx/crackleSomething.wav');
+        this.load.audio('scary', './assets/sound/event_sfx/reallyScary.wav');
+        this.load.audio('ufo', './assets/sound/event_sfx/ufo.wav');
+
+        // 3_1 web music 
+        this.load.audio('web_mus1', './assets/sound/web_audio/web_mus1.wav');
+        this.load.audio('web_mus2', './assets/sound/web_audio/web_mus2.wav');
+        this.load.audio('web_mus3', './assets/sound/web_audio/web_mus3.wav');
+
+
+
 
 
         // LOADS JSON
@@ -180,5 +204,12 @@ class preload extends Phaser.Scene {
 
         // LOADS BEEG YOSHI
         this.load.image('Beeg Yoshi', './assets/art/test.png');
+
+
+        /////////////////////////////
+        //       END SCENE         //
+        /////////////////////////////
+
+
     }
 }

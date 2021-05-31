@@ -10,39 +10,198 @@ class play extends Phaser.Scene {
         this.emailFSD = this.cache.json.get('emailHeader');
 
         //////////////////////////////
+        //      MAIN CONTROLS       //
+        //////////////////////////////
+
+        // camera follows player's mouse
+        this.cameras.main.startFollow(this.input, false, 0.01, 0.01);
+
+        // initializing spacebar as a keyboard input
+        this.spaceKey = this.input.keyboard.addKey('SPACE');
+        this.escape = this.input.keyboard.addKey('ESC');
+
+        // pause game when player presses esc
+        this.escape.on('down', function(){
+            scene.game.sound.stopAll();
+            scene.scene.pause();
+            scene.scene.launch("pause");
+        });
+
+        //////////////////////////////
+        //       SOUND SETUP        //
+        //////////////////////////////
+
+        // BACKGROUND MUSIC
+
+        this.bg_1 = this.sound.add(
+            'bg_1', 
+            {
+                volume: .5,
+                loop: true,
+                rate: .2
+            }
+        );
+
+        this.bg_1_2 = this.sound.add(
+            'bg_1',
+            {
+                volume: .5,
+                loop: true,
+                rate: .35
+            }
+        );
+
+        this.bg_path1_1 = this.sound.add(
+            'bg_path1_1',
+            {
+                volume: .5,
+            }
+        );
+
+        this.bg_path1_2 = this.sound.add(
+            'bg_path1_2',
+            {
+                volume: .5,
+            }
+        );
+
+        this.bg_path1_3 = this.sound.add(
+            'bg_path1_3',
+            {
+                volume: .5,
+            }
+        );
+
+        this.bg_path1_4 = this.sound.add(
+            'bg_path1_4',
+            {
+                volume: .5,
+            }
+        );
+
+        this.bg_path2_1 = this.sound.add(
+            'bg_path2_1',
+            {
+                volume: .5,
+            }
+        );
+
+        this.bg_path2_2 = this.sound.add(
+            'bg_path2_2',
+            {
+                volume: 1,
+            }
+        );
+
+        this.bg_path2_3 = this.sound.add(
+            'bg_path2_3',
+            {
+                volume: 1,
+            }
+        );
+
+        this.bg_path2_4 = this.sound.add(
+            'bg_path2_4',
+            {
+                volume: .5,
+            }
+        );
+
+        this.bg_path3_1 = this.sound.add(
+            'bg_path3_1',
+            {
+                volume: .5,
+            }
+        );
+
+        this.bg_path3_2 = this.sound.add(
+            'bg_path3_2',
+            {
+                volume: .5,
+            }
+        );
+
+        this.bg_path3_3 = this.sound.add(
+            'bg_path3_3',
+            {
+                volume: .5,
+            }
+        );
+
+        this.bg_path3_4 = this.sound.add(
+            'bg_path3_4',
+            {
+                volume: .5,
+            }
+        );
+
+        this.bg_path1 = [this.bg_path1_1, this.bg_path1_2, this.bg_path1_3, this.bg_path1_4];
+        this.bg_path2 = [this.bg_path2_1, this.bg_path2_2, this.bg_path2_3, this.bg_path2_4];
+        this.bg_path3 = [this.bg_path3_1, this.bg_path3_2, this.bg_path3_3, this.bg_path3_4];
+
+        // 3_1 music 
+        this.web_mus1 = this.sound.add(
+            'web_mus1',
+        );
+
+        this.web_mus2 = this.sound.add(
+            'web_mus2',
+            {
+                volume: 2,
+            }
+        );
+
+        this.web_mus3 = this.sound.add(
+            'web_mus3',
+            {
+                rate: .4,
+            }
+        );
+
+        // CREEPY MUSIC
+
+        this.laughing = this.sound.add(
+            'laughing',
+        );
+        
+
+        // EVENT SFX
+
+        this.knocking = this.sound.add(
+            'door_knock',
+            {
+                rate: .8,
+                volume: 3,
+            }
+        );
+
+        this.drop_spoon = this.sound.add(
+            'drop_spoon',
+        );
+
+        this.slam_desk = this.sound.add(
+            'slam_desk',
+        );
+
+        //////////////////////////////
         //   INITIAL SCENE SETUP    //
         //////////////////////////////
 
         // background music set up
 
         this.time.delayedCall(6000, () => {
-            this.bg_1 = this.sound.add(
-                'bg_1', 
-                {
-                    volume: .5,
-                    loop: true,
-                    rate: .2
-                }
-            );
             this.bg_1.play();
 
             this.time.delayedCall(1000, () =>{
-                this.bg_1_2 = this.sound.add(
-                    'bg_1',
-                    {
-                        volume: .5,
-                        loop: true,
-                        rate: .35
-                    }
-                );
                 this.bg_1_2.play();
             });
         }, null, this);
 
         // creates outside whenever we want
-        // this.outside = this.add.tileSprite().setOrigin(0,0);
+        this.outside = this.add.sprite(715, 50, 'outside').setOrigin(0,0).setScale(.75);
+        this.angel = this.add.sprite(2000, 0, 'angel').setOrigin(0,0).setScale(1.3);
 
-        this.sound.play('startup', {volume: 0.5});
+        this.sound.play('startup', {volume: 0.4});
 
         // creates room
         this.room = this.add.sprite(-game.config.width / 5, -game.config.height / 20, 'room').setOrigin(0, 0);
@@ -78,8 +237,15 @@ class play extends Phaser.Scene {
         this.inboxCon = this.add.container();
         this.inboxCon.setX(2000);               // sets assets offscreen
 
-        // choose random i from array
-        let i = Math.floor(Math.random() * (this.emailFSD.length));
+        let i;
+        if (!pathInput && pathInput != 0){
+            // choose random i from array
+            i = Math.floor(Math.random() * (this.emailFSD.length));
+        }
+        else {
+            // i is picked using a debug key
+            i = pathInput;
+        }
         
         // email config
         let UserEmail = "theuser@hotmail.com"
@@ -123,7 +289,7 @@ class play extends Phaser.Scene {
 
         this.emailCon.add([this.emailWindow, this.emailFrom2, this.emailSub2, this.emailSent, this.emailTo, this.emailClose]);
         this.emailCon.add([this.emailContents, this.emailLink1]);
-4
+
         //////////////////////////////
         //    RECYCLE BIN SETUP     //
         //////////////////////////////
@@ -188,7 +354,7 @@ class play extends Phaser.Scene {
         this.path2_2.setPosition(2000, 0);
         this.path2_3.setPosition(2000, 0);
 
-        // paht 3
+        // path 3
         this.path3_1 = this.add.container();
         this.path3_2 = this.add.container();
         this.path3_3 = this.add.container();
@@ -220,8 +386,11 @@ class play extends Phaser.Scene {
         this.webpage1_2 = this.add.sprite(77, 144, 'webpage1_2').setOrigin(0,0);
         this.link1_2 = new clickable(this, 295, 402, 'link1_2');
         this.web1_2close = new clickable(this, 625, 104, 'close_button').setScale(.8);
+        this.light_flash = this.add.sprite(0, 0, 'light_flash').setAlpha(1).setOrigin(0,0);
         this.url1_2 = this.add.text(152, 127, "http://www.ash-blog-attack.com/post-256414", textStyle).setOrigin(0,0);
-        this.path1_2.add([this.webpageUI1_2, this.webpage1_2, this.link1_2, this.web1_2close, this.url1_2]);
+        this.path1_2.add([this.webpageUI1_2, this.webpage1_2, this.link1_2, this.web1_2close, this.light_flash, this.url1_2]);
+
+        // TODO add tween for light_flash alpha, with ufo.wav 
 
         this.link1_2.on('pointerover', function(){
             scene.link1_2.setTint(0x0000ff);
@@ -250,11 +419,38 @@ class play extends Phaser.Scene {
             }
         });
 
+        // LINK1_1 SETUP
+        scene.link1_1.on('pointerdown', function(){
+            scene.curr = scene.path1_2;
+            scene.path1_2.setPosition(scene.path1_1.x, scene.path1_1.y);
+            scene.computer.add(scene.path1_2);
+
+            scene.computer.remove(scene.path1_1);
+            scene.path1_1.setPosition(2000, 0);
+        });
+
+        // LINK1_2 SETUP
+        scene.link1_2.on('pointerdown', function(){
+            scene.curr = scene.path1_3;
+            scene.path1_3.setPosition(scene.path1_2.x, scene.path1_2.y);
+            scene.computer.add(scene.path1_3);
+            
+            scene.computer.remove(scene.path1_2);
+            scene.path1_2.setPosition(2000, 0);
+        });
+
+        // LINK1_3 SETUP
+        scene.link1_3.on('pointerdown', function(){
+            scene.game.sound.stopAll();
+            scene.scene.stop();
+            scene.scene.launch("endScene");
+        });
+
 
         // path2_1
         this.webpageUI2_1 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0).setInteractive();
-        this.webpage2_1 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.6);
-        this.link2_1 = new clickable(this, 350, 250, 'linkex');
+        this.webpage2_1 = this.add.sprite(77, 144, 'webpage2_1').setOrigin(0,0);
+        this.link2_1 = new clickable(this, 157, 450, 'link2_1').setAlpha(0);
         this.web2_1close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url2_1 = this.add.text(152, 127, "http://www.the-laundry-room.com/sammy39/", textStyle).setOrigin(0,0);
         this.path2_1.add([this.webpageUI2_1, this.webpage2_1, this.link2_1, this.web2_1close, this.url2_1]);
@@ -263,7 +459,7 @@ class play extends Phaser.Scene {
         // path2_2
         this.webpageUI2_2 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0).setInteractive();
         this.webpage2_2 = this.add.sprite(77, 144, 'webpage2_2').setOrigin(0,0);
-        this.link2_2 = new clickable(this, 350, 250, 'link2_2');
+        this.link2_2 = new clickable(this, 210, 475, 'link2_2');
         this.web2_2close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url2_2 = this.add.text(152, 127, "https://www.lPovRIA.org/a-beautiful-song/", textStyle).setOrigin(0,0);
         this.path2_2.add([this.webpageUI2_2, this.webpage2_2, this.link2_2, this.web2_2close, this.url2_2]);
@@ -271,29 +467,196 @@ class play extends Phaser.Scene {
 
         // path2_3
         this.webpageUI2_3 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0).setInteractive();
-        this.webpage2_3 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.6).setTint(0xff0000);
-        this.link2_3 = new clickable(this, 350, 250, 'linkex');
+        this.webpage2_3 = this.add.sprite(77, 144, 'webpage2_3').setOrigin(0,0);
+        this.link2_3 = new clickable(this, 535, 397, 'link2_3');
         this.web2_3close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url2_3 = this.add.text(152, 127, "http://www.aoi.com/x_rUra_aSha_x/", textStyle).setOrigin(0,0);
         this.path2_3.add([this.webpageUI2_3, this.webpage2_3, this.link2_3, this.web2_3close, this.url2_3]);
+
+        // LINK2_1 SETUP
+        scene.link2_1.on('pointerdown', function(){
+            scene.curr = scene.path2_2;
+            scene.path2_2.setPosition(scene.path2_1.x, scene.path2_1.y);
+            scene.computer.add([scene.path2_2]);
+            scene.computer.remove(scene.path2_1);
+            scene.path2_1.setPosition(2000, 0);
+        });
+
+        // LINK2_2 SETUP
+        scene.link2_2.on('pointerdown', function(){
+            scene.curr = scene.path2_3;
+            scene.path2_3.setPosition(scene.path2_2.x, scene.path2_2.y);
+            scene.computer.add([scene.path2_3]);
+            scene.computer.remove(scene.path2_2);
+            scene.path2_2.setPosition(2000, 0);
+        });
+
+        // LINK2_3 SETUP
+        scene.link2_3.on('pointerdown', function(){
+            scene.game.sound.stopAll();
+            scene.scene.stop();
+            scene.scene.launch("endScene");
+        });
 
 
         // path3_1
         this.webpageUI3_1 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0).setInteractive();
         this.webpage3_1 = this.add.sprite(77, 144, 'webpage3_1').setOrigin(0,0);
-        this.link3_1 = new clickable(this, 350, 250, 'link3_1');
+        this.link3_1 = new clickable(this, 500, 350, 'link3_1');
+        this.play1 = new clickable(this, 140, 293, 'play_button');
+        this.play2 = new clickable(this, 140, 374, 'play_button');
+        this.play3 = new clickable(this, 140, 456, 'play_button');
+        this.isPlaying1 = false;
+        this.isPlaying2 = false;
+        this.isPlaying3 = false;
+        this.isPaused1 = false;
+        this.isPaused2 = false;
+        this.isPaused3 = false;
         this.web3_1close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url3_1 = this.add.text(152, 127, "https://www.audio-city.com/user-ratpoison/", textStyle).setOrigin(0,0);
-        this.path3_1.add([this.webpageUI3_1, this.webpage3_1, this.link3_1, this.web3_1close, this.url3_1]);
+        this.path3_1.add([this.webpageUI3_1, this.webpage3_1, this.link3_1, this.play1, this.play2, this.play3, this.web3_1close, this.url3_1]);
+
+        // play button 1
+        this.play1.on('pointerdown', function(){
+            if (!scene.isPlaying1) {
+                // stops other music 
+                if(scene.isPlaying2 || scene.isPaused2) {
+                    scene.web_mus2.stop();
+                    scene.isPaused2 = false;
+                    scene.isPlaying2 = false;
+                }
+                if(scene.isPlaying3 || scene.isPaused3) {
+                    scene.web_mus3.stop();
+                    scene.isPaused3 = false;
+                    scene.isPlaying3 = false;
+                }
+                scene.bg_path3[j].pause();
+                // resumes from pause 
+                if (scene.isPaused1) {
+                    scene.web_mus1.resume();
+                    scene.isPaused1 = false;
+                }
+                else {
+                    // plays 
+                    scene.web_mus1.play();
+                }
+            scene.isPlaying1 = true;
+            }
+            else {
+                // pauses 
+                scene.bg_path3[j].resume();
+                scene.web_mus1.pause();
+                scene.isPaused1 = true;
+                scene.isPlaying1 = false;
+            }
+        });
+
+        scene.play1.on('complete', function(){
+            scene.isPlaying1 = false;
+            scene.bg_path3[j].resume();
+        });
+
+        // play button 2
+        this.play2.on('pointerdown', function(){
+            if (!scene.isPlaying2) {
+                // stops other music 
+                if(scene.isPlaying1 || scene.isPaused1) {
+                    scene.web_mus1.stop();
+                    scene.isPaused1 = false;
+                    scene.isPlaying1 = false;
+                }
+                if(scene.isPlaying3 || scene.isPaused3) {
+                    scene.web_mus3.stop();
+                    scene.isPaused3 = false;
+                    scene.isPlaying3 = false;
+                }
+                scene.bg_path3[j].pause();
+                // resumes from pause 
+                if (scene.isPaused2) {
+                    scene.web_mus2.resume();
+                    scene.isPaused2 = false;
+                }
+                else {
+                    // plays 
+                    scene.web_mus2.play();
+                }
+            scene.isPlaying2 = true;
+            }
+            else {
+                // pauses 
+                scene.bg_path3[j].resume();
+                scene.web_mus2.pause();
+                scene.isPaused2 = true;
+                scene.isPlaying2 = false;
+            }
+        });
+
+        scene.play2.on('complete', function(){
+            scene.isPlaying2 = false;
+            scene.bg_path3[j].resume();
+        });
+
+        // play button 3 
+        this.play3.on('pointerdown', function(){
+            if (!scene.isPlaying3) {
+                // stops other music 
+                if(scene.isPlaying1 || scene.isPaused1) {
+                    scene.web_mus1.stop();
+                    scene.isPaused1 = false;
+                    scene.isPlaying1 = false;
+                }
+                if(scene.isPlaying2 || scene.isPaused2) {
+                    scene.web_mus2.stop();
+                    scene.isPaused2 = false;
+                    scene.isPlaying2 = false;
+                }
+                scene.bg_path3[j].pause();
+                // resumes from pause 
+                if (scene.isPaused3) {
+                    scene.web_mus3.resume();
+                    scene.isPaused3 = false;
+                }
+                else {
+                    // plays 
+                    scene.web_mus3.play();
+                }
+            scene.isPlaying3 = true;
+            }
+            else {
+                // pauses 
+                scene.bg_path3[j].resume();
+                scene.web_mus3.pause();
+                scene.isPaused3 = true;
+                scene.isPlaying3 = false;
+            }
+        });
+
+        scene.play3.on('complete', function(){
+            scene.isPlaying3 = false;
+            scene.bg_path3[j].resume();
+        });
 
 
         // path3_2
         this.webpageUI3_2 = this.add.sprite(70, 100, 'ie_window').setOrigin(0,0).setInteractive();
-        this.webpage3_2 = this.add.sprite(75, 100, 'webpage').setOrigin(0,0).setScale(0.6).setTint(0x00ff00);
-        this.link3_2 = new clickable(this, 350, 250, 'linkex');
+        this.webpage3_2 = this.add.sprite(77, 144, 'webpage3_2').setOrigin(0,0);
+        this.death = new clickable(this, 350, 250, 'death');
+        this.tower = new clickable(this, 250, 250, 'tower');
         this.web3_2close = new clickable(this, 625, 104, 'close_button').setScale(.8);
+        this.clickhere = this.add.rectangle(153, 370, 100, 25, 0xffffff).setAlpha(0.01).setInteractive( { cursor: 'pointer' } );
+        this.dude = this.add.sprite(153, 400, 'dude').setAlpha(0).setScale(0.5).setOrigin(0,0);
         this.url3_2 = this.add.text(152, 127, "https://www.madame-ferebi.com", textStyle).setOrigin(0,0);
-        this.path3_2.add([this.webpageUI3_2, this.webpage3_2, this.link3_2, this.web3_2close, this.url3_2]);
+        this.path3_2.add([this.webpageUI3_2, this.webpage3_2, this.death, this.tower, this.clickhere, this.web3_2close, this.dude, this.url3_2]);
+
+        let cards_tween = this.add.tween({
+            targets: [this.death, this.tower],
+            ease: 'Linear',
+            x: '+=200',
+            repeat: -1,
+            yoyo: true
+
+        // TODO add tween for dude's alpha on clicking clickhere
+        })
 
 
         // path3_3
@@ -303,6 +666,52 @@ class play extends Phaser.Scene {
         this.web3_3close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url3_3 = this.add.text(152, 127, "http://www.the-pantaloon-inquirer.net/feb_28_2002-AnHinY2/", textStyle).setOrigin(0,0);
         this.path3_3.add([this.webpageUI3_3, this.webpage3_3, this.link3_3, this.web3_3close, this.url3_3]);
+
+        // LINK3_1 SETUP
+        scene.link3_1.on('pointerdown', function(){
+            // resets audio upon clicking link to exit 3_1 
+            if (scene.isPlaying1) {
+                scene.web_mus1.stop();
+                scene.isPaused1 = false;
+                scene.isPlaying1 = false;
+                scene.bg_path3[j].resume();
+            }
+            if (scene.isPlaying2) {
+                scene.web_mus2.stop();
+                scene.isPaused2 = false;
+                scene.isPlaying2 = false;
+                scene.bg_path3[j].resume();
+            }
+            if (scene.isPlaying3) {
+                scene.web_mus3.stop();
+                scene.isPaused3 = false;
+                scene.isPlaying3 = false;
+                scene.bg_path3[j].resume();
+            }
+
+            scene.curr = scene.path3_2;
+            cards_tween.play();
+            scene.path3_2.setPosition(scene.path3_1.x, scene.path3_1.y);
+            scene.computer.add([scene.path3_2]);
+            scene.computer.remove(scene.path3_1);
+            scene.path3_1.setPosition(2000, 0);
+        });
+
+        // LINK3_2 SETUP
+        scene.tower.on('pointerdown', function(){
+            scene.curr = scene.path3_3;
+            scene.path3_3.setPosition(scene.path3_2.x, scene.path3_2.y);
+            scene.computer.add([scene.path3_3]);
+            scene.computer.remove(scene.path3_2);
+            scene.path3_2.setPosition(2000, 0);
+        });
+
+        // LINK3_3 SETUP
+        scene.link3_3.on('pointerdown', function(){
+            scene.game.sound.stopAll();
+            scene.scene.stop();
+            scene.scene.launch("endScene");
+        });
 
 
         //////////////////////////////
@@ -405,55 +814,116 @@ class play extends Phaser.Scene {
             else{
                 scene.curr.setPosition(2000, 0);
                 scene.computer.remove([scene.curr]);
-
             }
         })
+
+        // creates a once variable
+        let once = false;
+
+        // selects a random j
+        let j = Math.floor(Math.random() * (4));
 
 
         // MAIN RABBIT WHOLE
         this.emailLink1.on('pointerdown', function(){
+            // sets internet explorer container offscreen
             scene.ieCon.setPosition(2000, 0);
+            scene.computer.bringToTop(scene.curr);
 
+            // path 1
             if(i == 0){
-                // DESTROY OTHER ASSETS FOR CLEANINESS
-                scene.path2_1.destroy();
-                scene.path2_2.destroy();
-                scene.path2_3.destroy();
-                
-                scene.path3_1.destroy();
-                scene.path3_2.destroy();
-                scene.path3_3.destroy();
+
+                // if first time
+                if(!once){
+                    // play bg_path1 and loops continuously
+                    scene.bg_path1[j].play();
+                    
+                    // checks when one song is complete
+
+                    scene.bg_path1_1.on('complete', function(){
+                        console.log(j);
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path1[j].play();
+                    });
+    
+                    scene.bg_path1_2.on('complete', function(){
+                        console.log(j);
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path1[j].play();
+                    });
+    
+                    scene.bg_path1_3.on('complete', function(){
+                        console.log(j);
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path1[j].play();
+                    });
+    
+                    scene.bg_path1_4.on('complete', function(){
+                        console.log(j);
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path1[j].play();
+                    });
+
+                    // DESTROY OTHER ASSETS FOR CLEANINESS
+                    scene.path2_1.destroy();
+                    scene.path2_2.destroy();
+                    scene.path2_3.destroy();
+                    
+                    scene.path3_1.destroy();
+                    scene.path3_2.destroy();
+                    scene.path3_3.destroy();
+                    
+                    once = true;
+                }
+
+                if(scene.computer.exists(scene.path1_2)){
+                    scene.computer.remove(scene.path1_2);
+                    scene.path1_2.setPosition(2000, 0);
+                }
+
+                if(scene.computer.exists(scene.path1_3)){
+                    scene.computer.remove(scene.path1_3);
+                    scene.path1_3.setPosition(2000, 0);
+                }
 
                 // INITIAL WEBPAGE
                 scene.curr = scene.path1_1;
                 scene.path1_1.setRandomPosition(10, -50, 100, 50);
-                scene.computer.add([scene.path1_1]);
-
-                // LINK1_1 SETUP
-                scene.link1_1.on('pointerdown', function(){
-                    scene.curr = scene.path1_2;
-                    scene.path1_2.setPosition(scene.path1_1.x, scene.path1_1.y);
-                    scene.computer.add([scene.path1_2]);
-                    scene.path1_1.destroy();
-                });
-
-                // LINK1_2 SETUP
-                scene.link1_2.on('pointerdown', function(){
-                    scene.curr = scene.path1_3;
-                    scene.path1_3.setPosition(scene.path1_2.x, scene.path1_2.y);
-                    scene.computer.add([scene.path1_3]);
-                    scene.path1_2.destroy();
-                });
-
-                // LINK1_3 SETUP
-                scene.link1_3.on('pointerdown', function(){
-                    console.log("you beat the game yay");
-                    let win = scene.add.sprite(100, 100, 'Beeg Yoshi').setOrigin(0,0).setScale(0.5);
-                    scene.computer.add(win);
-                });
+                scene.computer.add(scene.path1_1);
             }
 
+            // path 2
             else if(i == 1){
+
+                // if first time
+                if(!once){
+                    // play bg_path2 and loops continously
+                    scene.bg_path2[j].play();
+
+                    // checks when one song is complete
+                    scene.bg_path2_1.on('complete', function(){
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path2[j].play();
+                    });
+    
+                    scene.bg_path2_2.on('complete', function(){
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path2[j].play();
+                    });
+    
+                    scene.bg_path2_3.on('complete', function(){
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path2[j].play();
+                    });
+    
+                    scene.bg_path2_4.on('complete', function(){
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path2[j].play();
+                    });
+
+                    once = true;
+                }
+
                 // DESTROY OTHER ASSETS FOR CLEANINESS
                 scene.path1_1.destroy();
                 scene.path1_2.destroy();
@@ -468,32 +938,50 @@ class play extends Phaser.Scene {
                 scene.path2_1.setRandomPosition(10, -50, 100, 50);
                 scene.computer.add([scene.path2_1]);
 
-                // LINK2_1 SETUP
-                scene.link2_1.on('pointerdown', function(){
-                    scene.curr = scene.path2_2;
-                    scene.path2_2.setPosition(scene.path2_1.x, scene.path2_1.y);
-                    scene.computer.add([scene.path2_2]);
-                    scene.path2_1.destroy();
-                });
-
-                // LINK1_2 SETUP
-                scene.link2_2.on('pointerdown', function(){
-                    scene.curr = scene.path2_3;
-                    scene.path2_3.setPosition(scene.path2_2.x, scene.path2_2.y);
-                    scene.computer.add([scene.path2_3]);
-                    scene.path2_2.destroy();
-                });
-
-                // LINK1_3 SETUP
-                scene.link2_3.on('pointerdown', function(){
-                    console.log("you beat the game yay");
-                    let win = scene.add.sprite(100, 100, 'Beeg Yoshi').setOrigin(0,0).setScale(0.5);
-                    scene.computer.add(win)
+                // after 20 seconds, show the link to next page
+                // TODO change to flashing loop 
+                scene.time.delayedCall(1, () =>{
+                    scene.link2_1.setAlpha(1);
                 });
             }
 
+            // path 3
             else if(i == 2){
-                console.log("got into 2");
+
+                // if first time
+                if(!once){
+                    // play bg_path3 and loops continously
+                    scene.bg_path3[j].play();
+
+                    // checks when one song is complete
+
+                    scene.bg_path3_1.on('complete', function(){
+                        console.log(j);
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path3[j].play();
+                    });
+    
+                    scene.bg_path3_2.on('complete', function(){
+                        console.log(j);
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path3[j].play();
+                    });
+    
+                    scene.bg_path3_3.on('complete', function(){
+                        console.log(j);
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path3[j].play();
+                    });
+    
+                    scene.bg_path3_4.on('complete', function(){
+                        console.log(j);
+                        j = Math.floor(Math.random() * (4));
+                        scene.bg_path3[j].play();
+                    });
+
+                    once = true;
+                }
+
                 // DESTROY OTHER ASSETS FOR CLEANINESS
                 scene.path1_1.destroy();
                 scene.path1_2.destroy();
@@ -507,29 +995,6 @@ class play extends Phaser.Scene {
                 scene.curr = scene.path3_1;
                 scene.path3_1.setRandomPosition(10, -50, 100, 50);
                 scene.computer.add([scene.path3_1]);
-
-                // LINK1_1 SETUP
-                scene.link3_1.on('pointerdown', function(){
-                    scene.curr = scene.path3_2;
-                    scene.path3_2.setPosition(scene.path3_1.x, scene.path3_1.y);
-                    scene.computer.add([scene.path3_2]);
-                    scene.path3_1.destroy();
-                });
-
-                // LINK1_2 SETUP
-                scene.link3_2.on('pointerdown', function(){
-                    scene.curr = scene.path3_3;
-                    scene.path3_3.setPosition(scene.path3_2.x, scene.path3_2.y);
-                    scene.computer.add([scene.path3_3]);
-                    scene.path3_2.destroy();
-                });
-
-                // LINK1_3 SETUP
-                scene.link3_3.on('pointerdown', function(){
-                    console.log("you beat the game yay");
-                    let win = scene.add.sprite(100, 100, 'Beeg Yoshi').setOrigin(0,0).setScale(0.5);
-                    scene.computer.add(win);
-                });
             }
         })
 
@@ -538,7 +1003,7 @@ class play extends Phaser.Scene {
         //    WINDOW INTERACTIONS   //
         //////////////////////////////
 
-        // MAIN WINDOWS
+        // ALLOWS MAIN WINDOWS TO BE BROUGHT TO TOP WHEN CLICKED ON
 
         this.inboxWindow.on('pointerdown', function(){
             scene.computer.bringToTop(scene.inboxCon);
@@ -561,7 +1026,7 @@ class play extends Phaser.Scene {
         })
 
         
-        // PATH WINDOWS
+        // ALLOWS PATH WINDOWS TO BE BROUGHT TO TOP WHEN CLICKED ON
 
         this.webpageUI1_1.on('pointerdown', function(){
             scene.computer.bringToTop(scene.path1_1);
@@ -599,7 +1064,7 @@ class play extends Phaser.Scene {
             scene.computer.bringToTop(scene.path3_3);
         });
 
-        // setting up close feature for each webpage
+        // ALLOWS WEBPAGES TO BE CLOSED
 
         this.web1_1close.on('pointerdown', function(){
             scene.path1_1.setPosition(2000, 0);
@@ -652,27 +1117,84 @@ class play extends Phaser.Scene {
         //      SPOOKY SETUP        //
         //////////////////////////////
 
+        let knockOnce = false;
+
+        // knocking twice after opening up the first email links
         this.emailLink1.on('pointerdown', function(){
-            
+
+            if(!knockOnce){
+                knockOnce = true;
+
+                // after 3 seconds of clicking on the email link for any path
+                scene.time.delayedCall(3000, () => {
+
+                    // play knocking
+                    scene.knocking.play();
+                    textStyle = { backgroundColor: "white", fontFamily: 'VT323', fontSize: '28px', color: "black", resolution: 2};
+                    scene.instructions = scene.add.text(game.config.width / 2, game.config.height - monitorBorderY - 23, "Press and Hold Space while Moving the Mouse to Pan the Camera", textStyle).setOrigin(0.5, 0.5);
+                    
+                    // declare doneonce to false
+                    let doneonce = false;
+
+                    // destroy instructions on space press
+                    scene.spaceKey.on('down', function(){
+                        scene.instructions.destroy();
+                    });
+
+                    // when space key is lifted
+                    scene.spaceKey.on('up', function(){
+
+                        // only do this once
+                        if(!doneonce){
+                            // set doneonce to true
+                            doneonce = true;
+
+                            //after 10 seconds delay
+                            scene.time.delayedCall(10000, () => {
+
+                                // play knocking a second time
+                                scene.angel.setPosition(730, 100);
+                                scene.laughing.setRate(.6);
+                                scene.laughing.setLoop(true);
+                                scene.laughing.play();
+
+                                scene.time.delayedCall(5000, () =>{
+                                    scene.angel.setPosition(2000, 0);
+                                    scene.laughing.stop();
+                                    scene.laughing.setLoop(false);
+                                    scene.laughing.setRate(1);
+                                });
+                            });
+
+                        }
+
+                    });
+
+                });
+
+            }
+
         });
 
-
-        //////////////////////////////
-        //      MAIN CONTROLS       //
-        //////////////////////////////
-
-        // camera follows player's mouse
-        this.cameras.main.startFollow(this.input, false, 0.01, 0.01);
-
-        // initializing spacebar as a keyboard input
-        this.spaceKey = this.input.keyboard.addKey('SPACE');
-        this.escape = this.input.keyboard.addKey('ESC');
-
-        // pause game when player presses esc
-        this.escape.on('down', function(){
-            scene.scene.pause();
-            scene.scene.launch("pause");
+        // when tarot death card is clicked
+        scene.death.on('pointerdown', function(){
+            scene.sound.play('scary');
+            scene.computer.remove(scene.path2_2);
+            scene.path3_2.setPosition(2000, 0);
+            scene.webpage3_2.setTint(0xff0000);
         });
+
+        // when red "CLICK HERE" is clicked
+        this.clickhere.on('pointerdown', function(){
+            scene.sound.play('click');
+
+            scene.sound.play('crackle');
+
+            scene.room.setTint(0x000000);
+
+            scene.dude.setAlpha(1);
+        })
+
     }
 
     update() {
