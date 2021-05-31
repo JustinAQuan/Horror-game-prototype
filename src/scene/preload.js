@@ -191,10 +191,6 @@ class preload extends Phaser.Scene {
         this.load.audio('web_mus2', './assets/sound/web_audio/web_mus2.wav');
         this.load.audio('web_mus3', './assets/sound/web_audio/web_mus3.wav');
 
-        
-
-
-
         // LOADS JSON
         this.load.json('emailHeader', './assets/json/email.json');
 
