@@ -51,7 +51,7 @@ class menu extends Phaser.Scene {
 
         this.instructCon.add([this.instructionsWindow,this.closeInstruct,this.instructions]);
 
-        // after a 5 second delay
+        // after a 4 second delay
         this.time.delayedCall(4000, function() {
             scene.time.addEvent({
                 delay: 100,
