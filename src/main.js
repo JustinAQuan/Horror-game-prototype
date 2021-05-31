@@ -27,7 +27,7 @@ let monitorBorderX = 34;
 let monitorBorderY = 33;
 var text1;
 // initializes debug variables 
-let pathInput;
+let pathInput = null;
 let pathText;
 
 /**************************************************
