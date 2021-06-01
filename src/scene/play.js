@@ -699,6 +699,8 @@ class play extends Phaser.Scene {
             scene.computer.remove(scene.path3_2);
             scene.path3_2.setPosition(2000, 0);
 
+            //link 3_2 setup acts like a constructor for page3_3
+            //popus are initiated here after loading path3_3 container
             function popupMaster() {
                 scene.time.delayedCall(1800, () => {
                     scene.createPopup();
@@ -1244,7 +1246,7 @@ class play extends Phaser.Scene {
     getRandomIntInclusive(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+        return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
     update() {

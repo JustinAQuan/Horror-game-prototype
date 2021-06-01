@@ -150,6 +150,7 @@ class preload extends Phaser.Scene {
         // LOADS GENERIC
         this.load.image('webpage', './assets/art/reallygoodwebpage.png');
         this.load.image('linkex', './assets/art/linkex.png');
+        this.load.image('glitch', './assets/art/Webpages/glitch_effect.png');
 
 
         // LOADS AUDIO
