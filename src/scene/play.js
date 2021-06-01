@@ -858,45 +858,17 @@ class play extends Phaser.Scene {
                         })
                     });
 
-                    //  R E D U N D A N T
-
-                    /*
-                                        scene.bg_path1_1.on('complete', function() {
-                                            console.log(j);
-                                            j = Math.floor(Math.random() * (4));
-                                            scene.bg_path1[j].play();
-                                        });
-
-                                        scene.bg_path1_2.on('complete', function() {
-                                            console.log(j);
-                                            j = Math.floor(Math.random() * (4));
-                                            scene.bg_path1[j].play();
-                                        });
-
-                                        scene.bg_path1_3.on('complete', function() {
-                                            console.log(j);
-                                            j = Math.floor(Math.random() * (4));
-                                            scene.bg_path1[j].play();
-                                        });
-
-                                        scene.bg_path1_4.on('complete', function() {
-                                            console.log(j);
-                                            j = Math.floor(Math.random() * (4));
-                                            scene.bg_path1[j].play();
-                                        });
-                    */
-
-                    // DESTROY OTHER ASSETS FOR CLEANINESS
-                    scene.path2_1.destroy();
-                    scene.path2_2.destroy();
-                    scene.path2_3.destroy();
-
-                    scene.path3_1.destroy();
-                    scene.path3_2.destroy();
-                    scene.path3_3.destroy();
-
                     once = true;
                 }
+
+                // DESTROY OTHER ASSETS FOR CLEANINESS
+                scene.path2_1.destroy();
+                scene.path2_2.destroy();
+                scene.path2_3.destroy();
+
+                scene.path3_1.destroy();
+                scene.path3_2.destroy();
+                scene.path3_3.destroy();
 
                 if (scene.computer.exists(scene.path1_2)) {
                     scene.computer.remove(scene.path1_2);
@@ -923,24 +895,12 @@ class play extends Phaser.Scene {
                     scene.bg_path2[j].play();
 
                     // checks when one song is complete
-                    scene.bg_path2_1.on('complete', function() {
-                        j = Math.floor(Math.random() * (4));
-                        scene.bg_path2[j].play();
-                    });
-
-                    scene.bg_path2_2.on('complete', function() {
-                        j = Math.floor(Math.random() * (4));
-                        scene.bg_path2[j].play();
-                    });
-
-                    scene.bg_path2_3.on('complete', function() {
-                        j = Math.floor(Math.random() * (4));
-                        scene.bg_path2[j].play();
-                    });
-
-                    scene.bg_path2_4.on('complete', function() {
-                        j = Math.floor(Math.random() * (4));
-                        scene.bg_path2[j].play();
+                    scene.bg_path2.forEach(element => {
+                        element.on('complete', function() {
+                            console.log(j);
+                            j = scene.getRandomIntInclusive(0, 3);
+                            scene.bg_path2[j].play();
+                        })
                     });
 
                     once = true;
@@ -976,29 +936,12 @@ class play extends Phaser.Scene {
                     scene.bg_path3[j].play();
 
                     // checks when one song is complete
-
-                    scene.bg_path3_1.on('complete', function() {
-                        console.log(j);
-                        j = Math.floor(Math.random() * (4));
-                        scene.bg_path3[j].play();
-                    });
-
-                    scene.bg_path3_2.on('complete', function() {
-                        console.log(j);
-                        j = Math.floor(Math.random() * (4));
-                        scene.bg_path3[j].play();
-                    });
-
-                    scene.bg_path3_3.on('complete', function() {
-                        console.log(j);
-                        j = Math.floor(Math.random() * (4));
-                        scene.bg_path3[j].play();
-                    });
-
-                    scene.bg_path3_4.on('complete', function() {
-                        console.log(j);
-                        j = Math.floor(Math.random() * (4));
-                        scene.bg_path3[j].play();
+                    scene.bg_path2.forEach(element => {
+                        element.on('complete', function() {
+                            console.log(j);
+                            j = scene.getRandomIntInclusive(0, 3);
+                            scene.bg_path2[j].play();
+                        })
                     });
 
                     once = true;
