@@ -672,8 +672,8 @@ class play extends Phaser.Scene {
 
         // path3_3
         this.webpageUI3_3 = this.add.sprite(70, 100, 'ie_window').setOrigin(0, 0).setInteractive();
-        this.webpage3_3 = this.add.sprite(77, 144, 'webpage').setOrigin(0, 0).setScale(0.6).setTint(0x0000ff);
-        this.link3_3 = new clickable(this, 350, 250, 'linkex');
+        this.webpage3_3 = this.add.sprite(77, 144, 'webpage3_3').setOrigin(0, 0);
+        this.link3_3 = new clickable(this, 554, 463, 'link3_3');
         this.web3_3close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url3_3 = this.add.text(152, 127, "http://www.the-pantaloon-inquirer.net/feb_28_2002-AnHinY2/", textStyle).setOrigin(0, 0);
         this.path3_3.add([this.webpageUI3_3, this.webpage3_3, this.link3_3, this.web3_3close, this.url3_3]);

@@ -142,6 +142,8 @@ class preload extends Phaser.Scene {
         this.load.image('dude', './assets/art/Webpages/dude_pic.png');
 
         // LOADS PATH3_3
+        this.load.image('webpage3_3', './assets/art/Webpages/page3_3.png');
+        this.load.image('link3_3', './assets/art/Webpages/page3_3_link.png');
         this.load.image('popup-advert_1', './assets/art/Webpages/page3_3-popup1.png');
         this.load.image('popup-advert_2', './assets/art/Webpages/page3_3-popup2.png');
         this.load.image('popup-advert_3', './assets/art/Webpages/page3_3-popup3.png');
