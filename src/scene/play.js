@@ -936,11 +936,11 @@ class play extends Phaser.Scene {
                     scene.bg_path3[j].play();
 
                     // checks when one song is complete
-                    scene.bg_path2.forEach(element => {
+                    scene.bg_path3.forEach(element => {
                         element.on('complete', function() {
                             console.log(j);
                             j = scene.getRandomIntInclusive(0, 3);
-                            scene.bg_path2[j].play();
+                            scene.bg_path3[j].play();
                         })
                     });
 
