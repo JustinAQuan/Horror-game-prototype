@@ -1,9 +1,9 @@
 class preload extends Phaser.Scene {
-    constructor(){
+    constructor() {
         super("preloadScene");
     }
 
-    preload(){
+    preload() {
         let scene = this;
 
         /////////////////////////////
@@ -37,14 +37,14 @@ class preload extends Phaser.Scene {
         });
         percentText.setOrigin(0.5, 0.5);
 
-        this.load.on('progress', function (value) {
+        this.load.on('progress', function(value) {
             percentText.setText(parseInt(value * 100) + '%');
             progressBar.clear();
             progressBar.fillStyle(0xffffff, 1);
             progressBar.fillRect(250, 280, 300 * value, 30);
         });
 
-        this.load.on('complete', function () {
+        this.load.on('complete', function() {
             progressBar.destroy();
             progressBox.destroy();
             loadingText.destroy();
@@ -92,7 +92,7 @@ class preload extends Phaser.Scene {
         // LOADS DUMMY WINDOWS
         this.load.image('rb_window', './assets/art/Desktop/Recycle_binTemplate.png');
         this.load.image('mypc_window', './assets/art/Desktop/My_computerTemplate.png');
-        
+
 
         // WEBPAGE PRELOADS
         this.load.image('ie_window', './assets/art/Desktop/Internet_ui.png');
@@ -142,11 +142,15 @@ class preload extends Phaser.Scene {
         this.load.image('dude', './assets/art/Webpages/dude_pic.png');
 
         // LOADS PATH3_3
+        this.load.image('popup-advert_1', './assets/art/Webpages/page3_3-popup1.png');
+        this.load.image('popup-advert_2', './assets/art/Webpages/page3_3-popup2.png');
+        this.load.image('popup-advert_3', './assets/art/Webpages/page3_3-popup3.png');
 
 
         // LOADS GENERIC
         this.load.image('webpage', './assets/art/reallygoodwebpage.png');
         this.load.image('linkex', './assets/art/linkex.png');
+        this.load.image('glitch', './assets/art/Webpages/glitch_effect.png');
 
 
         // LOADS AUDIO
@@ -185,6 +189,7 @@ class preload extends Phaser.Scene {
         this.load.audio('crackle', './assets/sound/event_sfx/crackleSomething.wav');
         this.load.audio('scary', './assets/sound/event_sfx/reallyScary.wav');
         this.load.audio('ufo', './assets/sound/event_sfx/ufo.wav');
+        this.load.audio('popup', './assets/sound/event_sfx/sfx_popup.wav');
 
         // 3_1 web music 
         this.load.audio('web_mus1', './assets/sound/web_audio/web_mus1.wav');
@@ -194,7 +199,7 @@ class preload extends Phaser.Scene {
         // LOADS JSON
         this.load.json('emailHeader', './assets/json/email.json');
 
-        
+
         // LOADS BEEG YOSHI
         this.load.image('Beeg Yoshi', './assets/art/test.png');
 
