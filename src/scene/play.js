@@ -188,6 +188,7 @@ class play extends Phaser.Scene {
 
         // creates room
         this.room = this.add.sprite(-game.config.width / 5, -game.config.height / 20, 'room').setOrigin(0, 0);
+        this.light_flash = this.add.sprite(-150, -30, 'light_flash').setAlpha(0).setOrigin(0, 0);
 
 
         //////////////////////////////
@@ -365,11 +366,20 @@ class play extends Phaser.Scene {
         this.webpage1_2 = this.add.sprite(77, 144, 'webpage1_2').setOrigin(0, 0);
         this.link1_2 = new clickable(this, 295, 402, 'link1_2');
         this.web1_2close = new clickable(this, 625, 104, 'close_button').setScale(.8);
-        this.light_flash = this.add.sprite(0, 0, 'light_flash').setAlpha(1).setOrigin(0, 0);
         this.url1_2 = this.add.text(152, 127, "http://www.ash-blog-attack.com/post-256414", textStyle).setOrigin(0, 0);
-        this.path1_2.add([this.webpageUI1_2, this.webpage1_2, this.link1_2, this.web1_2close, this.light_flash, this.url1_2]);
+        this.path1_2.add([this.webpageUI1_2, this.webpage1_2, this.link1_2, this.web1_2close, this.url1_2]);
 
-        // TODO add tween for light_flash alpha, with ufo.wav 
+        let ufo_tween = this.add.tween({
+            targets: [this.light_flash],
+            ease: 'Linear',
+            alpha: 1,
+            repeat: -1,
+            yoyo: true
+        });
+
+        ufo_tween.stop();
+
+        // TODO add tween for light_flash alpha, with ufo.wav
 
         this.link1_2.on('pointerover', function() {
             scene.link1_2.setTint(0x0000ff);
@@ -413,15 +423,29 @@ class play extends Phaser.Scene {
             scene.path1_3.setPosition(scene.path1_2.x, scene.path1_2.y);
             scene.computer.add(scene.path1_3);
 
+            ufo_tween.play();
+
             scene.computer.remove(scene.path1_2);
             scene.path1_2.setPosition(2000, 0);
+
+            textStyle = { backgroundColor: "white", fontFamily: 'VT323', fontSize: '28px', color: "black", resolution: 2 };
+            scene.scrollInstruct = scene.add.text(game.config.width / 2, game.config.height - monitorBorderY - 50, "Use the mouse wheel to scroll the page", textStyle).setOrigin(0.5, 0.5);
+
+            scene.input.on('wheel', function(pointer, gameObjects, deltaX, deltaY, deltaZ) {
+                if (deltaY > 0) {
+                    scene.scrollInstruct.destroy();
+                }
+            });
         });
 
         // LINK1_3 SETUP
         scene.link1_3.on('pointerdown', function() {
             scene.game.sound.stopAll();
+
+            ufo_tween.stop(0);
+
             scene.scene.stop();
-            scene.scene.launch("endScene");
+            scene.scene.launch("endScene", { ending: "PATH 1" });
         });
 
 
@@ -473,7 +497,7 @@ class play extends Phaser.Scene {
         scene.link2_3.on('pointerdown', function() {
             scene.game.sound.stopAll();
             scene.scene.stop();
-            scene.scene.launch("endScene");
+            scene.scene.launch("endScene", { ending: "PATH 2" });
         });
 
 
@@ -627,7 +651,7 @@ class play extends Phaser.Scene {
             yoyo: true
 
             // TODO add tween for dude's alpha on clicking clickhere
-        })
+        });
 
 
         // path3_3
@@ -689,7 +713,7 @@ class play extends Phaser.Scene {
         scene.link3_3.on('pointerdown', function() {
             scene.game.sound.stopAll();
             scene.scene.stop();
-            scene.scene.launch("endScene");
+            scene.scene.launch("endScene", { ending: "PATH 3" });
         });
 
 
@@ -1167,7 +1191,7 @@ class play extends Phaser.Scene {
         // when tarot death card is clicked
         scene.death.on('pointerdown', function() {
             scene.sound.play('scary');
-            scene.computer.remove(scene.path2_2);
+            scene.computer.remove(scene.path3_2);
             scene.path3_2.setPosition(2000, 0);
             scene.webpage3_2.setTint(0xff0000);
         });
@@ -1176,7 +1200,9 @@ class play extends Phaser.Scene {
         this.clickhere.on('pointerdown', function() {
             scene.sound.play('click');
             scene.sound.play('crackle');
-            scene.room.setTint(0x000000);
+
+            scene.room.setTint(0x110000);
+
             scene.dude.setAlpha(1);
         })
 
