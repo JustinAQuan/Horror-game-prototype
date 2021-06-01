@@ -142,9 +142,9 @@ class preload extends Phaser.Scene {
         this.load.image('dude', './assets/art/Webpages/dude_pic.png');
 
         // LOADS PATH3_3
-        this.load.image('popup-advert_1', './assets/art/page3_3-popup1.png');
-        this.load.image('popup-advert_2', './assets/art/page3_3-popup2.png');
-        this.load.image('popup-advert_3', './assets/art/page3_3-popup3.png');
+        this.load.image('popup-advert_1', './assets/art/Webpages/page3_3-popup1.png');
+        this.load.image('popup-advert_2', './assets/art/Webpages/page3_3-popup2.png');
+        this.load.image('popup-advert_3', './assets/art/Webpages/page3_3-popup3.png');
 
 
         // LOADS GENERIC
@@ -188,6 +188,7 @@ class preload extends Phaser.Scene {
         this.load.audio('crackle', './assets/sound/event_sfx/crackleSomething.wav');
         this.load.audio('scary', './assets/sound/event_sfx/reallyScary.wav');
         this.load.audio('ufo', './assets/sound/event_sfx/ufo.wav');
+        this.load.audio('popup', './assets/sound/event_sfx/sfx_popup.wav');
 
         // 3_1 web music 
         this.load.audio('web_mus1', './assets/sound/web_audio/web_mus1.wav');

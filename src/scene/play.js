@@ -619,7 +619,6 @@ class play extends Phaser.Scene {
         this.dude = this.add.sprite(153, 400, 'dude').setAlpha(0).setScale(0.5).setOrigin(0, 0);
         this.url3_2 = this.add.text(152, 127, "https://www.madame-ferebi.com", textStyle).setOrigin(0, 0);
         this.path3_2.add([this.webpageUI3_2, this.webpage3_2, this.death, this.tower, this.clickhere, this.web3_2close, this.dude, this.url3_2]);
-
         let cards_tween = this.add.tween({
             targets: [this.death, this.tower],
             ease: 'Linear',
@@ -638,7 +637,6 @@ class play extends Phaser.Scene {
         this.web3_3close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url3_3 = this.add.text(152, 127, "http://www.the-pantaloon-inquirer.net/feb_28_2002-AnHinY2/", textStyle).setOrigin(0, 0);
         this.path3_3.add([this.webpageUI3_3, this.webpage3_3, this.link3_3, this.web3_3close, this.url3_3]);
-
         // LINK3_1 SETUP
         scene.link3_1.on('pointerdown', function() {
             // resets audio upon clicking link to exit 3_1 
@@ -676,6 +674,15 @@ class play extends Phaser.Scene {
             scene.computer.add([scene.path3_3]);
             scene.computer.remove(scene.path3_2);
             scene.path3_2.setPosition(2000, 0);
+
+            function popupMaster() {
+                scene.time.delayedCall(1100, () => {
+                    scene.createPopup();
+                    popupMaster();
+                });
+            }
+            popupMaster();
+
         });
 
         // LINK3_3 SETUP
@@ -791,7 +798,7 @@ class play extends Phaser.Scene {
         let once = false;
 
         // selects a random j
-        let j = Math.floor(Math.random() * (4));
+        let j = this.getRandomIntInclusive(0, 3);
 
 
         // MAIN RABBIT WHOLE
@@ -809,30 +816,41 @@ class play extends Phaser.Scene {
                     scene.bg_path1[j].play();
 
                     // checks when one song is complete
-
-                    scene.bg_path1_1.on('complete', function() {
-                        console.log(j);
-                        j = Math.floor(Math.random() * (4));
-                        scene.bg_path1[j].play();
+                    scene.bg_path1.forEach(element => {
+                        element.on('complete', function() {
+                            console.log(j);
+                            j = scene.getRandomIntInclusive(0, 3);
+                            scene.bg_path1[j].play();
+                        })
                     });
 
-                    scene.bg_path1_2.on('complete', function() {
-                        console.log(j);
-                        j = Math.floor(Math.random() * (4));
-                        scene.bg_path1[j].play();
-                    });
+                    //  R E D U N D A N T
 
-                    scene.bg_path1_3.on('complete', function() {
-                        console.log(j);
-                        j = Math.floor(Math.random() * (4));
-                        scene.bg_path1[j].play();
-                    });
+                    /*
+                                        scene.bg_path1_1.on('complete', function() {
+                                            console.log(j);
+                                            j = Math.floor(Math.random() * (4));
+                                            scene.bg_path1[j].play();
+                                        });
 
-                    scene.bg_path1_4.on('complete', function() {
-                        console.log(j);
-                        j = Math.floor(Math.random() * (4));
-                        scene.bg_path1[j].play();
-                    });
+                                        scene.bg_path1_2.on('complete', function() {
+                                            console.log(j);
+                                            j = Math.floor(Math.random() * (4));
+                                            scene.bg_path1[j].play();
+                                        });
+
+                                        scene.bg_path1_3.on('complete', function() {
+                                            console.log(j);
+                                            j = Math.floor(Math.random() * (4));
+                                            scene.bg_path1[j].play();
+                                        });
+
+                                        scene.bg_path1_4.on('complete', function() {
+                                            console.log(j);
+                                            j = Math.floor(Math.random() * (4));
+                                            scene.bg_path1[j].play();
+                                        });
+                    */
 
                     // DESTROY OTHER ASSETS FOR CLEANINESS
                     scene.path2_1.destroy();
@@ -1157,14 +1175,50 @@ class play extends Phaser.Scene {
         // when red "CLICK HERE" is clicked
         this.clickhere.on('pointerdown', function() {
             scene.sound.play('click');
-
             scene.sound.play('crackle');
-
             scene.room.setTint(0x000000);
-
             scene.dude.setAlpha(1);
         })
 
+    }
+
+    //  pop-up handling
+    createPopup() {
+        let scene = this;
+        let path = scene.path3_3;
+        let rightEdge = 624;
+        let bottomEdge = 511;
+        let popups = ['popup-advert_1', 'popup-advert_2', 'popup-advert_3'];
+        let index = scene.getRandomIntInclusive(0, 2);
+        let key = popups[index];
+        let popup = this.add.sprite(0, 0, key).setAlpha(1).setScale(1).setOrigin(0, 0);
+
+        let left = 77,
+            right = rightEdge - popup.displayWidth,
+            bottom = bottomEdge - popup.displayHeight,
+            top = 144;
+
+        let x = scene.getRandomIntInclusive(left, right);
+        let y = scene.getRandomIntInclusive(bottom, top);
+
+        popup.setPosition(x, y);
+
+        popup.setInteractive({ cursor: 'pointer' });
+        path.add(popup);
+
+        scene.sound.play('popup');
+
+        popup.on('pointerdown', function() {
+            scene.sound.play('click');
+            popup.destroy();
+        });
+    }
+
+
+    getRandomIntInclusive(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
     }
 
     update() {
