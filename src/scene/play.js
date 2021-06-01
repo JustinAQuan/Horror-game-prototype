@@ -211,6 +211,13 @@ class play extends Phaser.Scene {
 
 
         //////////////////////////////
+        //       ANIMS SETUP        //
+        //////////////////////////////
+
+        
+
+
+        //////////////////////////////
         //       INBOX SETUP        //
         //////////////////////////////
 
@@ -651,6 +658,7 @@ class play extends Phaser.Scene {
         this.dude = this.add.sprite(153, 400, 'dude').setAlpha(0).setScale(0.5).setOrigin(0, 0);
         this.url3_2 = this.add.text(152, 127, "https://www.madame-ferebi.com", textStyle).setOrigin(0, 0);
         this.path3_2.add([this.webpageUI3_2, this.webpage3_2, this.death, this.tower, this.clickhere, this.web3_2close, this.dude, this.url3_2]);
+
         let cards_tween = this.add.tween({
             targets: [this.death, this.tower],
             ease: 'Linear',

@@ -157,7 +157,6 @@ class preload extends Phaser.Scene {
 
         // music
         this.load.audio('bg_1', './assets/sound/bgm/bg_1.wav');
-        this.load.audio('bg_2', './assets/sound/bgm/bg_2.wav');
 
         this.load.audio('bg_path1_1', './assets/sound/bgm/bg_path1_1.wav');
         this.load.audio('bg_path1_2', './assets/sound/bgm/bg_path1_2.wav');
@@ -186,6 +185,7 @@ class preload extends Phaser.Scene {
         this.load.audio('slam_desk', './assets/sound/creepy/slam_desk1.wav');
 
         // event_sfx
+        this.load.audio('breathing', './assets/sound/event_sfx/breathing.wav');
         this.load.audio('crackle', './assets/sound/event_sfx/crackleSomething.wav');
         this.load.audio('scary', './assets/sound/event_sfx/reallyScary.wav');
         this.load.audio('ufo', './assets/sound/event_sfx/ufo.wav');
@@ -196,18 +196,14 @@ class preload extends Phaser.Scene {
         this.load.audio('web_mus2', './assets/sound/web_audio/web_mus2.wav');
         this.load.audio('web_mus3', './assets/sound/web_audio/web_mus3.wav');
 
+
         // LOADS JSON
         this.load.json('emailHeader', './assets/json/email.json');
 
-
-        // LOADS BEEG YOSHI
-        this.load.image('Beeg Yoshi', './assets/art/test.png');
-
-
-        /////////////////////////////
-        //       END SCENE         //
-        /////////////////////////////
-
-
+        
+        // LOADS TEXTURE ATLAS
+        this.load.atlas('KUKU_anims', './assets/art/Anims/KUKU.png', './assets/art/Anims/KUKU.json');
+        this.load.atlas('Q-WALKER_anims', './assets/art/Anims/Q-WALKER.png', './assets/art/Anims/Q-WALKER.json');
+        this.load.atlas('SKYNET_anims', './assets/art/Anims/SKYNET.png', './assets/art/Anims/SKYNET.json');
     }
 }
