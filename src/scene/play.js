@@ -700,7 +700,7 @@ class play extends Phaser.Scene {
             scene.path3_2.setPosition(2000, 0);
 
             function popupMaster() {
-                scene.time.delayedCall(1100, () => {
+                scene.time.delayedCall(1800, () => {
                     scene.createPopup();
                     popupMaster();
                 });
