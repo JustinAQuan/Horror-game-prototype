@@ -488,8 +488,9 @@ class play extends Phaser.Scene {
         this.webpage2_3 = this.add.sprite(77, 144, 'webpage2_3').setOrigin(0, 0);
         this.link2_3 = new clickable(this, 535, 397, 'link2_3');
         this.web2_3close = new clickable(this, 625, 104, 'close_button').setScale(.8);
+        this.eye = this.add.sprite(400, 444, 'eye').setAlpha(0).setOrigin(0, 0);
         this.url2_3 = this.add.text(152, 127, "http://www.aoi.com/x_rUra_aSha_x/", textStyle).setOrigin(0, 0);
-        this.path2_3.add([this.webpageUI2_3, this.webpage2_3, this.link2_3, this.web2_3close, this.url2_3]);
+        this.path2_3.add([this.webpageUI2_3, this.webpage2_3, this.link2_3, this.web2_3close, this.eye, this.url2_3]);
 
         // LINK2_1 SETUP
         scene.link2_1.on('pointerdown', function() {
