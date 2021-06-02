@@ -508,6 +508,8 @@ class play extends Phaser.Scene {
             scene.computer.add([scene.path2_3]);
             scene.computer.remove(scene.path2_2);
             scene.path2_2.setPosition(2000, 0);
+
+            scene.sound.play('breathing');
         });
 
         // LINK2_3 SETUP
