@@ -214,7 +214,7 @@ class play extends Phaser.Scene {
         //       ANIMS SETUP        //
         //////////////////////////////
 
-        
+
 
 
         //////////////////////////////
@@ -473,11 +473,11 @@ class play extends Phaser.Scene {
         this.url2_2 = this.add.text(152, 127, "https://www.lPovRIA.org/a-beautiful-song/", textStyle).setOrigin(0, 0);
         this.path2_2.add([this.webpageUI2_2, this.webpage2_2, this.link2_2, this.web2_2close, this.url2_2]);
 
-        this.link2_2.on('pointerover', function(){
+        this.link2_2.on('pointerover', function() {
             scene.link2_2.setTint(0x0000ff);
         });
 
-        this.link2_2.on('pointerout', function(){
+        this.link2_2.on('pointerout', function() {
             scene.link2_2.clearTint();
         });
 
@@ -718,7 +718,7 @@ class play extends Phaser.Scene {
             //link 3_2 setup acts like a constructor for page3_3
             //popus are initiated here after loading path3_3 container
             function popupMaster() {
-                scene.time.delayedCall(1800, () => {
+                scene.time.delayedCall(2500, () => {
                     scene.createPopup();
                     popupMaster();
                 });
