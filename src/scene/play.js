@@ -6,6 +6,7 @@ class play extends Phaser.Scene {
     create() {
         let scene = this;
         this.curr = null;
+        this.web3_3signal = true;
 
         this.emailFSD = this.cache.json.get('emailHeader');
 
@@ -707,6 +708,17 @@ class play extends Phaser.Scene {
             scene.path3_1.setPosition(2000, 0);
         });
 
+        function popupMaster() {
+            let signal_ = scene.web3_3signal;
+            if (signal_ == true) {
+                scene.time.delayedCall(2500, () => {
+                    scene.createPopup();
+                    popupMaster();
+                });
+            }
+
+        }
+
         // LINK3_2 SETUP
         scene.tower.on('pointerdown', function() {
             scene.curr = scene.path3_3;
@@ -717,14 +729,8 @@ class play extends Phaser.Scene {
 
             //link 3_2 setup acts like a constructor for page3_3
             //popus are initiated here after loading path3_3 container
-            function popupMaster() {
-                scene.time.delayedCall(2500, () => {
-                    scene.createPopup();
-                    popupMaster();
-                });
-            }
+            scene.web3_3signal = true;
             popupMaster();
-
         });
 
         // LINK3_3 SETUP
@@ -733,7 +739,6 @@ class play extends Phaser.Scene {
             scene.scene.stop();
             scene.scene.launch("endScene", { ending: "PATH 3" });
         });
-
 
         //////////////////////////////
         //      EVENT SETUP         //
@@ -1081,6 +1086,7 @@ class play extends Phaser.Scene {
         });
 
         this.web3_3close.on('pointerdown', function() {
+            scene.web3_3signal = false;
             scene.path3_3.setPosition(2000, 0);
             scene.computer.remove(scene.path3_3);
         });
