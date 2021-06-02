@@ -678,6 +678,14 @@ class play extends Phaser.Scene {
         this.web3_3close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url3_3 = this.add.text(152, 127, "http://www.the-pantaloon-inquirer.net/feb_28_2002-AnHinY2/", textStyle).setOrigin(0, 0);
         this.path3_3.add([this.webpageUI3_3, this.webpage3_3, this.link3_3, this.web3_3close, this.url3_3]);
+
+        //path3_3 animation config
+        this.anims.create({
+            key: 'glitch',
+            frames: this.anims.generateFrameNumbers('glitch_effect', { start: 0, end: 60, first: 0 }),
+            frameRate: 5
+        });
+
         // LINK3_1 SETUP
         scene.link3_1.on('pointerdown', function() {
             // resets audio upon clicking link to exit 3_1 
@@ -1089,6 +1097,12 @@ class play extends Phaser.Scene {
             scene.web3_3signal = false;
             scene.path3_3.setPosition(2000, 0);
             scene.computer.remove(scene.path3_3);
+            let glitch = scene.add.sprite(monitorBorderX, monitorBorderY, 'glitch_effect').setOrigin(0, 0);
+            glitch.anims.play('glitch');
+            glitch.on('animationcomplete', () => { // callback after anim completes
+                glitch.anims.play('glitch');
+                glitch.destroy();
+            });
         });
 
 
