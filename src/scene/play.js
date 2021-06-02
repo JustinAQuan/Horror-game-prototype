@@ -217,7 +217,6 @@ class play extends Phaser.Scene {
 
 
 
-
         //////////////////////////////
         //       INBOX SETUP        //
         //////////////////////////////
