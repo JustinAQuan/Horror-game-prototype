@@ -431,6 +431,7 @@ class play extends Phaser.Scene {
             scene.computer.add(scene.path1_3);
 
             ufo_tween.play();
+            scene.sound.play('ufo');
 
             scene.computer.remove(scene.path1_2);
             scene.path1_2.setPosition(2000, 0);
