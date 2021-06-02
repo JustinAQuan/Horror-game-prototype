@@ -1122,7 +1122,15 @@ class play extends Phaser.Scene {
                 scene.time.delayedCall(3000, () => {
 
                     // play knocking
-                    scene.knocking.play();
+                    if (i == 0) {
+                        scene.knocking.play();
+                    }
+                    else if (i == 1) {
+                        scene.slam_desk.play();
+                    }
+                    else if (i == 2) {
+                        scene.drop_spoon.play();
+                    }
                     textStyle = { backgroundColor: "white", fontFamily: 'VT323', fontSize: '28px', color: "black", resolution: 2 };
                     scene.instructions = scene.add.text(game.config.width / 2, game.config.height - monitorBorderY - 23, "Press and Hold Space while Moving the Mouse to Pan the Camera", textStyle).setOrigin(0.5, 0.5);
 
