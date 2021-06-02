@@ -655,7 +655,7 @@ class play extends Phaser.Scene {
         // path3_2
         this.webpageUI3_2 = this.add.sprite(70, 100, 'ie_window').setOrigin(0, 0).setInteractive();
         this.webpage3_2 = this.add.sprite(77, 144, 'webpage3_2').setOrigin(0, 0);
-        this.death = new clickable(this, 350, 250, 'death');
+        this.death = new clickable(this, 550, 250, 'death');
         this.tower = new clickable(this, 250, 250, 'tower');
         this.web3_2close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.clickhere = this.add.rectangle(153, 370, 100, 25, 0xffffff).setAlpha(0.01).setInteractive({ cursor: 'pointer' });
@@ -663,16 +663,23 @@ class play extends Phaser.Scene {
         this.url3_2 = this.add.text(152, 127, "https://www.madame-ferebi.com", textStyle).setOrigin(0, 0);
         this.path3_2.add([this.webpageUI3_2, this.webpage3_2, this.death, this.tower, this.clickhere, this.web3_2close, this.dude, this.url3_2]);
 
-        let cards_tween = this.add.tween({
-            targets: [this.death, this.tower],
-            ease: 'Linear',
-            x: '+=200',
+        let death_tween = this.add.tween({
+            targets: [this.death],
+            ease: 'Sine',
+            x: '-=200',
             repeat: -1,
             yoyo: true
-
-            // TODO add tween for dude's alpha on clicking clickhere
         });
 
+        let tower_tween = this.add.tween({
+            targets: [this.tower],
+            ease: 'Sine',
+            x: '+=200',
+            y: '+=200',
+            repeat: -1,
+            yoyo: true
+        });
+    // TODO add tween for dude's alpha on clicking clickhere
 
         // path3_3
         this.webpageUI3_3 = this.add.sprite(70, 100, 'ie_window').setOrigin(0, 0).setInteractive();
@@ -712,7 +719,8 @@ class play extends Phaser.Scene {
             }
 
             scene.curr = scene.path3_2;
-            cards_tween.play();
+            death_tween.play();
+            tower_tween.play();
             scene.path3_2.setPosition(scene.path3_1.x, scene.path3_1.y);
             scene.computer.add([scene.path3_2]);
             scene.computer.remove(scene.path3_1);
