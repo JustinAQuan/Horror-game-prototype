@@ -101,6 +101,9 @@ class preload extends Phaser.Scene {
         // LOADS DUMMY WINDOWS
         this.load.image('rb_window', './assets/art/Desktop/Recycle_binTemplate.png');
         this.load.image('mypc_window', './assets/art/Desktop/My_computerTemplate.png');
+        this.load.image('crit_error', './assets/art/Desktop/critical_error.png');
+        this.load.image('fail_okay_button', './assets/art/Desktop/fail_message_okay.png');
+        this.load.image('fail_message', './assets/art/Desktop/fail_message.png');
 
 
         // WEBPAGE PRELOADS
