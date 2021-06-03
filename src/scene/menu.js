@@ -30,6 +30,9 @@ class menu extends Phaser.Scene {
         this.homescreen = this.add.sprite(monitorBorderX, monitorBorderY, 'homescreen').setOrigin(0,0);
         this.folder = new clickable(this, 75, 490, 'folder', "icon").setOrigin(0,0).setScale(.7);
         this.add.text(73, 530, "Instructions", {fontFamily: 'VT323', fontSize: "12px", color: '#ffffff', resolution: 2}).setOrigin(0,0);
+        this.creditsFolder = new clickable(this, 75, 420, 'folder', 'icon').setOrigin(0, 0).setScale(0.7);
+        this.add.text(73, 460, "Credits", {fontFamily: 'VT323', fontSize: "12px", color: '#ffffff', resolution: 2}).setOrigin(0,0);
+        
 
         // title text (this can be made in combination with menu image)
         this.title = this.add.text(game.config.width / 2, game.config.height / 2 - 50, Title, {fontFamily: 'VT323', fontSize: "100px", color: '#000000'}).setOrigin(.5,.5);
@@ -43,6 +46,10 @@ class menu extends Phaser.Scene {
         this.instructCon = this.add.container();
         this.instructCon.setPosition(2000, 0);
 
+        // adds credits window 
+        this.creditsCon = this.add.container();
+        this.creditsCon.setPosition(2000, 0);
+
         let text = "Press and hold \"Space\" to look around the room using the mouse.\n\nUse left mouse click to interact.\n\nPress \"ESC\" to Pause the game.\n\nClose this window by clicking on the \"X\" in the top right.\n\nIf you are GRADING this game and want to see each path,\ntry pressing \"1\", \"2\", or \"3\" on your keyboard in the menu!\n(That's the screen you're on RIGHT NOW!)";
 
         this.instructionsWindow = this.add.sprite(game.config.width / 2, game.config.height / 2 - 30, 'instruction_window').setOrigin(.5,.5);
@@ -50,6 +57,12 @@ class menu extends Phaser.Scene {
         this.instructions = this.add.text(380, 234, text, {fontFamily: 'VT323', fontSize: "13px", color: '#000000', resolution: 2}).setOrigin(.5,.5);
 
         this.instructCon.add([this.instructionsWindow,this.closeInstruct,this.instructions]);
+
+        // credits window 
+        this.creditsWindow = this.add.sprite(game.config.width / 2, game.config.height / 2 - 30, 'text_doc1').setOrigin(.5,.5);
+        this.closeCredits = new clickable(this, 593, 103, 'close_button');
+
+        this.creditsCon.add([this.creditsWindow, this.closeCredits]);
 
         // after a 4 second delay
         this.time.delayedCall(4000, function() {
@@ -74,6 +87,16 @@ class menu extends Phaser.Scene {
 
         this.closeInstruct.on('pointerdown', function(){
             scene.instructCon.setPosition(2000, 0);
+        })
+
+        // clicking on credits folder
+        this.creditsFolder.on('pointerdown', function(){
+            scene.creditsCon.setPosition(0, 0);
+        });
+
+        // closing credits folder 
+        this.closeCredits.on('pointerdown', function(){
+            scene.creditsCon.setPosition(2000, 0);
         })
 
         // when player clicks on login

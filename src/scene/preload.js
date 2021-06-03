@@ -61,6 +61,11 @@ class preload extends Phaser.Scene {
         this.load.image('close_button', './assets/art/Desktop/close_button.png');
         this.load.image('folder', './assets/art/Desktop/Open_folder.png');
         this.load.image('instruction_window', './assets/art/Desktop/Instructions.png');
+        this.load.image('text_doc1', './assets/art/Desktop/text_doc1.png');
+        this.load.image('text_doc2', './assets/art/Desktop/text_doc2.png');
+        this.load.image('text_doc3', './assets/art/Desktop/text_doc3.png');
+        this.load.image('text_doc4', './assets/art/Desktop/text_doc4.png');
+
 
         // load music
         this.load.audio('menu_music', './assets/sound/bgm/bg_2.wav');
