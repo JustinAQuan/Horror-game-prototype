@@ -85,7 +85,7 @@ class preload extends Phaser.Scene {
 
 
         // LOADS OUTSIDE
-        this.load.image('outside', './assets/art/outside.png');
+        this.load.image('window_background', './assets/art/window_background.png');
         this.load.image('angel', './assets/art/Tall_Lady.png');
 
 
