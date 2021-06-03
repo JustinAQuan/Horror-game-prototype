@@ -17,15 +17,38 @@ class end extends Phaser.Scene {
         this.homescreen = this.add.sprite(monitorBorderX, monitorBorderY, 'homescreen').setOrigin(0,0);
 
         if(this.ending == "PATH 1"){
-            this.add.text(game.config.width / 2, game.config.height / 2 - 50, "YAY YOU\mFINISHED\nPATH 1", {fontFamily: 'VT323', fontSize: "100px", color: 0xffffff, align: "center"}).setOrigin(.5,.5);
+            this.anims.create({
+                key: 'skynet',
+                frames: this.anims.generateFrameNames('SKYNET_anims', {prefix: 'SKYNET_', end: 16, zeroPad: 2}),
+                frameRate: 12
+            });
+
+            this.skynet = this.add.sprite(-80, 0, 'SKYNET').setOrigin(0,0).setScale(1.5);
+            this.skynet.play('skynet');
         }
 
         else if(this.ending == "PATH 2"){
-            this.add.text(game.config.width / 2, game.config.height / 2 - 50, "YAY YOU\nFINISHED\nPATH 2", {fontFamily: 'VT323', fontSize: "100px", color: 0xffffff, align: "center"}).setOrigin(.5,.5);
+            this.anims.create({
+                key: 'qwalker',
+                frames: this.anims.generateFrameNames('Q-WALKER_anims', {prefix: 'Q-WALKER_', end: 14, zeroPad: 2}),
+                repeat: -1,
+                frameRate: 12
+            });
+
+            this.skynet = this.add.sprite(0, 0, 'SKYNET').setOrigin(0,0).setScale(1.5);
+            this.skynet.play('qwalker');
         }
 
         else if(this.ending == "PATH 3"){
-            this.add.text(game.config.width / 2, game.config.height / 2 - 50, "YAY YOU\nFINISHED\nPATH 3", {fontFamily: 'VT323', fontSize: "100px", color: 0xffffff, align: "center"}).setOrigin(.5,.5);
+            this.anims.create({
+                key: 'kuku',
+                frames: this.anims.generateFrameNames('KUKU_anims', {prefix: 'KUKU_', end: 16, zeroPad: 2}),
+                repeat: -1,
+                frameRate: 12
+            });
+
+            this.skynet = this.add.sprite(0, 0, 'SKYNET').setOrigin(0,0).setScale(1.5);
+            this.skynet.play('kuku');
         }
 
         else{
@@ -36,8 +59,8 @@ class end extends Phaser.Scene {
             });
         }
 
-        this.retryblock = this.add.rectangle(game.config.width / 2, game.config.height / 2 + 155, 120, 60, 0x666666).setOrigin(.5,.5).setInteractive( {cursor: 'pointer'} );
-        this.retry = this.add.text(game.config.width / 2, game.config.height / 2 + 150, "Retry", {fontFamily: 'VT323', fontSize: "50px", color: 0xffffff}).setOrigin(.5,.5).setInteractive( {cursor: 'pointer'} );
+        this.retryblock = this.add.rectangle(game.config.width / 2, game.config.height / 2 + 160, 300, 60, 0x666666).setOrigin(.5,.5).setInteractive( {cursor: 'pointer'} );
+        this.retry = this.add.text(game.config.width / 2, game.config.height / 2 + 156, "PLAY AGAIN?", {fontFamily: 'VT323', fontSize: "50px", color: 0xffffff}).setOrigin(.5,.5).setInteractive( {cursor: 'pointer'} );
     
         this.retryblock.on('pointerdown', function(){
             scene.sound.play('click');

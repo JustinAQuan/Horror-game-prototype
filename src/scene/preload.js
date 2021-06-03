@@ -101,6 +101,9 @@ class preload extends Phaser.Scene {
         // LOADS DUMMY WINDOWS
         this.load.image('rb_window', './assets/art/Desktop/Recycle_binTemplate.png');
         this.load.image('mypc_window', './assets/art/Desktop/My_computerTemplate.png');
+        this.load.image('crit_error', './assets/art/Desktop/critical_error.png');
+        this.load.image('fail_okay_button', './assets/art/Desktop/fail_message_okay.png');
+        this.load.image('fail_message', './assets/art/Desktop/fail_message.png');
 
 
         // WEBPAGE PRELOADS
@@ -161,13 +164,7 @@ class preload extends Phaser.Scene {
         this.load.image('popup-advert_2', './assets/art/Webpages/page3_3-popup2.png');
         this.load.image('popup-advert_3', './assets/art/Webpages/page3_3-popup3.png');
 
-
-        // LOADS GENERIC
-        this.load.image('webpage', './assets/art/reallygoodwebpage.png');
-        this.load.image('linkex', './assets/art/linkex.png');
-
-
-
+        
         // LOADS AUDIO
 
         // music
@@ -219,6 +216,10 @@ class preload extends Phaser.Scene {
         // LOADS JSON
         this.load.json('emailHeader', './assets/json/email.json');
 
+        
+        // LOAD STARTERS
+        this.load.image('SKYNET', './assets/art/Anims/SKYNET_START.jpg');
+        
 
         // LOADS TEXTURE ATLAS
         this.load.atlas('KUKU_anims', './assets/art/Anims/KUKU.png', './assets/art/Anims/KUKU.json');

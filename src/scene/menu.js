@@ -143,9 +143,6 @@ class menu extends Phaser.Scene {
                 scene.clicked = true;                   // sets clicked to true, so no spam
                 scene.menu_bgm.stop();                  // stops menu music
                 scene.sound.play('keyboard');           // starts keyboard sound effect
-                if (pathInput || pathInput == 0) {
-                    pathText.destroy();
-                }
                 scene.time.delayedCall(2000, function(){
                     scene.clicked = false;
                     scene.scene.sleep("menuScene");         // puts menuScene to sleep
