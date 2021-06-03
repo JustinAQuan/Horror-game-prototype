@@ -31,7 +31,7 @@ class menu extends Phaser.Scene {
         this.folder = new clickable(this, 75, 490, 'folder', "icon").setOrigin(0,0).setScale(.7);
         this.add.text(73, 530, "Instructions", {fontFamily: 'VT323', fontSize: "12px", color: '#ffffff', resolution: 2}).setOrigin(0,0);
         this.creditsFolder = new clickable(this, 75, 420, 'folder', 'icon').setOrigin(0, 0).setScale(0.7);
-        this.add.text(73, 460, "Credits", {fontFamily: 'VT323', fontSize: "12px", color: '#ffffff', resolution: 2}).setOrigin(0,0);
+        this.add.text(76, 460, "Credits", {fontFamily: 'VT323', fontSize: "12px", color: '#ffffff', resolution: 2}).setOrigin(0,0);
         
 
         // title text (this can be made in combination with menu image)
@@ -59,7 +59,7 @@ class menu extends Phaser.Scene {
         this.instructCon.add([this.instructionsWindow,this.closeInstruct,this.instructions]);
 
         // credits window 
-        this.creditsWindow = this.add.sprite(game.config.width / 2, game.config.height / 2 - 30, 'text_doc1').setOrigin(.5,.5);
+        this.creditsWindow = this.add.sprite(game.config.width / 2, game.config.height / 2 - 30, 'credits_window').setOrigin(.5,.5);
         this.closeCredits = new clickable(this, 593, 103, 'close_button');
 
         this.creditsCon.add([this.creditsWindow, this.closeCredits]);
