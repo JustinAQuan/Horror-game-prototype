@@ -183,7 +183,7 @@ class play extends Phaser.Scene {
 
         // creates outside whenever we want
         this.window_background = this.add.sprite(570, 150, 'window_background').setOrigin(0, 0)
-        this.angel = this.add.sprite(2000, 0, 'angel').setOrigin(0, 0).setScale(1.3);
+        this.angel = this.add.sprite(2000, 0, 'angel').setOrigin(0, 0);
 
         this.sound.play('startup', { volume: 0.4 });
 
@@ -1202,7 +1202,7 @@ class play extends Phaser.Scene {
                             scene.time.delayedCall(10000, () => {
 
                                 // play knocking a second time
-                                scene.angel.setPosition(730, 100);
+                                scene.angel.setPosition(730, 150);
                                 scene.laughing.setRate(.6);
                                 scene.laughing.setLoop(true);
                                 scene.laughing.play();
