@@ -144,14 +144,12 @@ class play extends Phaser.Scene {
             }
         );
 
-        // CREEPY MUSIC
+        // EVENT SFX
 
-        this.laughing = this.sound.add(
-            'laughing',
+        this.scratching = this.sound.add(
+            'scratching',
         );
 
-
-        // EVENT SFX
 
         this.knocking = this.sound.add(
             'door_knock', {
@@ -169,6 +167,13 @@ class play extends Phaser.Scene {
 
         this.slam_desk = this.sound.add(
             'slam_desk',
+        );
+
+        this.boom = this.sound.add(
+            'boom', 
+            {
+                loop: true,
+            }
         );
 
         //////////////////////////////
@@ -428,6 +433,8 @@ class play extends Phaser.Scene {
 
             scene.computer.remove(scene.path1_1);
             scene.path1_1.setPosition(2000, 0);
+
+            scene.boom.stop();
         });
 
         // LINK1_2 SETUP
@@ -1192,6 +1199,10 @@ class play extends Phaser.Scene {
             if (!knockOnce) {
                 knockOnce = true;
 
+                if (i == 0) {
+                    scene.boom.play();
+                }
+
                 // after 3 seconds of clicking on the email link for any path
                 scene.time.delayedCall(3000, () => {
 
@@ -1229,15 +1240,15 @@ class play extends Phaser.Scene {
 
                                 // play knocking a second time
                                 scene.angel.setPosition(730, 150);
-                                scene.laughing.setRate(.6);
-                                scene.laughing.setLoop(true);
-                                scene.laughing.play();
+                                scene.scratching.setRate(.6);
+                                scene.scratching.setLoop(true);
+                                scene.scratching.play();
 
                                 scene.time.delayedCall(5000, () => {
                                     scene.angel.setPosition(2000, 0);
-                                    scene.laughing.stop();
-                                    scene.laughing.setLoop(false);
-                                    scene.laughing.setRate(1);
+                                    scene.scratching.stop();
+                                    scene.scratching.setLoop(false);
+                                    scene.scratching.setRate(1);
                                 });
                             });
 

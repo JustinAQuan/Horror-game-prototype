@@ -206,6 +206,8 @@ class preload extends Phaser.Scene {
         this.load.audio('scary', './assets/sound/event_sfx/reallyScary.wav');
         this.load.audio('ufo', './assets/sound/event_sfx/ufo.wav');
         this.load.audio('squeak', './assets/sound/event_sfx/squeak.wav');
+        this.load.audio('scratching', './assets/sound/event_sfx/scratching.wav');
+        this.load.audio('boom', './assets/sound/event_sfx/boom.wav');
         this.load.audio('popup', './assets/sound/event_sfx/sfx_popup.wav');
 
         // 3_1 web music 
