@@ -398,8 +398,8 @@ class play extends Phaser.Scene {
         this.webpage1_3_2 = this.add.sprite(77, 144, 'webpage1_3.2').setOrigin(0, 0);
         this.link1_3 = new clickable(this, 80, 320, 'link1_3').setOrigin(0, 0);
         this.web1_3close = new clickable(this, 625, 104, 'close_button').setScale(.8);
-        this.scrollbar_bottom = this.add.sprite(613, 144, 'scrollbar_bottom').setOrigin(0, 0);
-        this.scrollbar_top = this.add.sprite(613, 144, 'scrollbar_top').setOrigin(0, 0);
+        this.scrollbar_bottom = this.add.sprite(619, 144, 'scrollbar_bottom').setOrigin(0, 0);
+        this.scrollbar_top = this.add.sprite(619, 144, 'scrollbar_top').setOrigin(0, 0);
         this.url1_3 = this.add.text(152, 127, "http://www.aliens-heaven.org", textStyle).setOrigin(0, 0);
         this.path1_3.add([this.webpageUI1_3, this.webpage1_3_2, this.link1_3, this.webpage1_3_1, this.web1_3close, this.scrollbar_bottom,  this.scrollbar_top, this.url1_3]);
 
