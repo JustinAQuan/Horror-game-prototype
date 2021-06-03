@@ -86,7 +86,7 @@ class preload extends Phaser.Scene {
 
         // LOADS OUTSIDE
         this.load.image('window_background', './assets/art/window_background.png');
-        this.load.image('angel', './assets/art/Tall_Lady.png');
+        this.load.image('angel', './assets/art/tall_lady.png');
 
 
         // LOADS DUMMY WINDOWS
@@ -208,6 +208,7 @@ class preload extends Phaser.Scene {
         this.load.atlas('KUKU_anims', './assets/art/Anims/KUKU.png', './assets/art/Anims/KUKU.json');
         this.load.atlas('Q-WALKER_anims', './assets/art/Anims/Q-WALKER.png', './assets/art/Anims/Q-WALKER.json');
         this.load.atlas('SKYNET_anims', './assets/art/Anims/SKYNET.png', './assets/art/Anims/SKYNET.json');
+        this.load.spritesheet('light_effect', './assets/art/Anims/light_effect.png', { frameWidth: 1024, frameHeight: 1024, startFrame: 0, endFrame: 8 });
         this.load.spritesheet('glitch_effect', './assets/art/Anims/glitch_effect.png', { frameWidth: 547, frameHeight: 367, startFrame: 0, endFrame: 4 });
         this.load.spritesheet('glitch_effect2', './assets/art/glitch_effect_2.png', { frameWidth: 732, frameHeight: 534, startFrame: 0, endFrame: 5 });
 

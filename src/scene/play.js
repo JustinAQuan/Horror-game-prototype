@@ -189,8 +189,16 @@ class play extends Phaser.Scene {
 
         // creates room
         this.room = this.add.sprite(-game.config.width / 5, -game.config.height / 20, 'room').setOrigin(0, 0);
-        this.light_flash = this.add.sprite(-150, -30, 'light_flash').setAlpha(0).setOrigin(0, 0);
+        this.anims.create({
+            key: 'light_effect',
+            frames: this.anims.generateFrameNumbers('light_effect', { start: 0, end: 8, first: 0 }),
+            frameRate: 8
+        });
 
+        let light_effect = scene.add.sprite(0, 0, 'light_effect').setAlpha(0).setOrigin(0, 0);
+
+        
+            
 
         //////////////////////////////
         //      MONITOR SETUP       //
@@ -376,18 +384,6 @@ class play extends Phaser.Scene {
         this.url1_2 = this.add.text(152, 127, "http://www.ash-blog-attack.com/post-256414", textStyle).setOrigin(0, 0);
         this.path1_2.add([this.webpageUI1_2, this.webpage1_2, this.link1_2, this.web1_2close, this.url1_2]);
 
-        let ufo_tween = this.add.tween({
-            targets: [this.light_flash],
-            ease: 'Linear',
-            alpha: 1,
-            repeat: -1,
-            yoyo: true
-        });
-
-        ufo_tween.stop();
-
-        // TODO add tween for light_flash alpha, with ufo.wav
-
         this.link1_2.on('pointerover', function() {
             scene.link1_2.setTint(0x0000ff);
         })
@@ -430,7 +426,25 @@ class play extends Phaser.Scene {
             scene.path1_3.setPosition(scene.path1_2.x, scene.path1_2.y);
             scene.computer.add(scene.path1_3);
 
-            ufo_tween.play();
+            // light_effect anim tied to zoomed in camera 
+            let light_effect2 = scene.add.sprite(0, 0, 'light_effect').setOrigin(0, 0);
+            light_effect2.anims.play('light_effect');
+            light_effect2.on('animationcomplete', () => { // callback after anim completes
+                light_effect2.anims.play('light_effect');
+                light_effect2.destroy();
+                console.log("its penis friday wlel weell well");
+            });
+
+            // light_effect anim tied to zoomed out camera 
+            light_effect.setAlpha(1);
+            light_effect.anims.play('light_effect');
+            light_effect.on('animationcomplete', () => { // callback after anim completes
+                light_effect.anims.play('light_effect');
+                light_effect.destroy();
+                console.log("its penis friday");
+            });
+
+
             scene.sound.play('ufo');
 
             scene.computer.remove(scene.path1_2);
@@ -444,13 +458,14 @@ class play extends Phaser.Scene {
                     scene.scrollInstruct.destroy();
                 }
             });
+
+            
+            
         });
 
         // LINK1_3 SETUP
         scene.link1_3.on('pointerdown', function() {
             scene.game.sound.stopAll();
-
-            ufo_tween.stop(0);
 
             scene.scene.stop();
             scene.scene.launch("endScene", { ending: "PATH 1" });
