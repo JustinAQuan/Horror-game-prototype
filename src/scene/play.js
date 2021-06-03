@@ -162,6 +162,9 @@ class play extends Phaser.Scene {
 
         this.drop_spoon = this.sound.add(
             'drop_spoon',
+            {
+                volume: 0.6,
+            }
         );
 
         this.slam_desk = this.sound.add(
