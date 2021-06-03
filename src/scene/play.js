@@ -10,6 +10,10 @@ class play extends Phaser.Scene {
 
         this.emailFSD = this.cache.json.get('emailHeader');
 
+        if (pathInput || pathInput == 0) {
+            pathText.destroy();
+        }
+
         //////////////////////////////
         //      MAIN CONTROLS       //
         //////////////////////////////
@@ -456,15 +460,13 @@ class play extends Phaser.Scene {
 
             textStyle = { backgroundColor: "white", fontFamily: 'VT323', fontSize: '28px', color: "black", resolution: 2 };
             scene.scrollInstruct = scene.add.text(game.config.width / 2, game.config.height - monitorBorderY - 50, "Use the mouse wheel to scroll the page", textStyle).setOrigin(0.5, 0.5);
+            scene.computer.add(scene.scrollInstruct);
 
             scene.input.on('wheel', function(pointer, gameObjects, deltaX, deltaY, deltaZ) {
                 if (deltaY > 0) {
                     scene.scrollInstruct.destroy();
                 }
-            });
-
-            
-            
+            }); 
         });
 
         // LINK1_3 SETUP
@@ -1296,6 +1298,7 @@ class play extends Phaser.Scene {
                 game.config.height * 1.1 + 20); // height: 680 (therefore, can scroll down until 650 pixels)
 
             this.computer.setY(180);
+            this.computer.setX(-150);
             this.computer.setScale(.75);
 
             if (this.instructions) {
@@ -1309,6 +1312,7 @@ class play extends Phaser.Scene {
                 game.config.height); // height: 600
 
             this.computer.setY(0);
+            this.computer.setX(0);
             this.computer.setScale(1);
         }
     }
