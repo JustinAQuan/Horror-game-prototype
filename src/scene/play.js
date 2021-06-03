@@ -140,6 +140,7 @@ class play extends Phaser.Scene {
         this.web_mus3 = this.sound.add(
             'web_mus3', {
                 rate: .4,
+                volume: 0.4,
             }
         );
 
