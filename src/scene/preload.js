@@ -182,6 +182,7 @@ class preload extends Phaser.Scene {
         // sfx
         this.load.audio('click', './assets/sound/sfx/sfx_click.wav');
         this.load.audio('double_click', './assets/sound/sfx/sfx_double_click.wav');
+        this.load.audio('mouse_scroll', './assets/sound/sfx/sfx_mouse_scroll.wav');
         this.load.audio('startup', './assets/sound/sfx/startup.wav');
 
         // creepy
