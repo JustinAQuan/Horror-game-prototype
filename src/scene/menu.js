@@ -46,9 +46,17 @@ class menu extends Phaser.Scene {
         this.instructCon = this.add.container();
         this.instructCon.setPosition(2000, 0);
 
-        // adds credits window 
+        // adds credits file window 
         this.creditsCon = this.add.container();
         this.creditsCon.setPosition(2000, 0);
+
+        // adds credits page 1 window 
+        this.credits_page1_con = this.add.container();
+        this.credits_page1_con.setPosition(2000, 0);
+
+        // adds credits page 2 window 
+        this.credits_page2_con = this.add.container();
+        this.credits_page2_con.setPosition(2000, 0);
 
         let text = "Press and hold \"Space\" to look around the room using the mouse.\n\nUse left mouse click to interact.\n\nPress \"ESC\" to Pause the game.\n\nClose this window by clicking on the \"X\" in the top right.\n\nIf you are GRADING this game and want to see each path,\ntry pressing \"1\", \"2\", or \"3\" on your keyboard in the menu!\n(That's the screen you're on RIGHT NOW!)";
 
@@ -58,11 +66,25 @@ class menu extends Phaser.Scene {
 
         this.instructCon.add([this.instructionsWindow,this.closeInstruct,this.instructions]);
 
-        // credits window 
-        this.creditsWindow = this.add.sprite(game.config.width / 2, game.config.height / 2 - 30, 'credits_window').setOrigin(.5,.5);
-        this.closeCredits = new clickable(this, 593, 103, 'close_button');
+        // credits file window 
+        this.creditsWindow = this.add.sprite(game.config.width / 2, game.config.height / 2 - 30, 'credits_folder').setOrigin(.5,.5);
+        this.credits_link1 = new clickable(this, 330, 215, 'credits_link1');
+        this.credits_link2 = new clickable(this, 326, 252, 'credits_link2');
+        this.closeCredits = new clickable(this, 553, 150, 'close_button');
 
-        this.creditsCon.add([this.creditsWindow, this.closeCredits]);
+        this.creditsCon.add([this.creditsWindow, this.credits_link1, this.credits_link2, this.closeCredits]);
+
+        // credits page 1
+        this.credits_page1 = this.add.sprite(game.config.width / 2, game.config.height / 2 - 30, 'credits_page1').setOrigin(.5,.5);
+        this.close_credits1 = new clickable(this, 593, 103, 'close_button');
+
+        this.credits_page1_con.add([this.credits_page1, this.close_credits1]);
+
+        // credits page 2
+        this.credits_page2 = this.add.sprite(game.config.width / 2, game.config.height / 2 - 30, 'text_doc1').setOrigin(.5,.5);
+        this.close_credits2 = new clickable(this, 593, 103, 'close_button');
+
+        this.credits_page2_con.add([this.credits_page2, this.close_credits2]);
 
         // after a 4 second delay
         this.time.delayedCall(4000, function() {
@@ -97,6 +119,22 @@ class menu extends Phaser.Scene {
         // closing credits folder 
         this.closeCredits.on('pointerdown', function(){
             scene.creditsCon.setPosition(2000, 0);
+        })
+
+        this.credits_link1.on('pointerdown', function(){
+            scene.credits_page1_con.setPosition(0, 0);
+        })
+
+        this.close_credits1.on('pointerdown', function(){
+            scene.credits_page1_con.setPosition(2000, 0);
+        })
+
+        this.credits_link2.on('pointerdown', function(){
+            scene.credits_page2_con.setPosition(0, 0);
+        })
+
+        this.close_credits2.on('pointerdown', function(){
+            scene.credits_page2_con.setPosition(2000, 0);
         })
 
         // when player clicks on login
