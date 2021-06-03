@@ -1242,7 +1242,6 @@ class play extends Phaser.Scene {
 
                                 // play knocking a second time
                                 scene.angel.setPosition(730, 150);
-                                scene.scratching.setRate(.6);
                                 scene.scratching.setLoop(true);
                                 scene.scratching.play();
 
@@ -1250,7 +1249,6 @@ class play extends Phaser.Scene {
                                     scene.angel.setPosition(2000, 0);
                                     scene.scratching.stop();
                                     scene.scratching.setLoop(false);
-                                    scene.scratching.setRate(1);
                                 });
                             });
 
