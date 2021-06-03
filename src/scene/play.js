@@ -507,9 +507,27 @@ class play extends Phaser.Scene {
         this.webpage2_3 = this.add.sprite(77, 144, 'webpage2_3').setOrigin(0, 0);
         this.link2_3 = new clickable(this, 535, 397, 'link2_3');
         this.web2_3close = new clickable(this, 625, 104, 'close_button').setScale(.8);
-        this.eye = this.add.sprite(400, 444, 'eye').setAlpha(0).setOrigin(0, 0);
-        this.url2_3 = this.add.text(152, 127, "http://www.aoi.com/x_rUra_aSha_x/", textStyle).setOrigin(0, 0);
-        this.path2_3.add([this.webpageUI2_3, this.webpage2_3, this.link2_3, this.web2_3close, this.eye, this.url2_3]);
+        this.eye1 = new clickable(this, 460, 444, 'eye').setAlpha(0).setOrigin(0, 0);
+        this.eye2 = this.add.sprite(360, 282, 'eye').setAlpha(0).setOrigin(0, 0);
+        this.url2_3 = this.add.text(152, 127, "http://www.aoi.com/x_rUra_aSha_x/", 
+        textStyle).setOrigin(0, 0);
+        this.path2_3.add([this.webpageUI2_3, this.webpage2_3, this.link2_3, this.web2_3close, this.eye1, this.eye2, this.url2_3]);
+
+        scene.eye1.on('pointerdown', function() {
+            if (scene.eye2.alpha != 1) {
+                scene.eye2.setAlpha(1);
+                eye_tween.stop();
+                scene.sound.play('squeak');
+            }
+        });
+
+        let eye_tween = this.add.tween({
+            targets: [this.eye1],
+            easeIn: 'Linear',
+            alpha: '+=1',
+            repeat: -1,
+            yoyo: true
+        });
 
         // LINK2_1 SETUP
         scene.link2_1.on('pointerdown', function() {
@@ -518,7 +536,6 @@ class play extends Phaser.Scene {
             scene.computer.add([scene.path2_2]);
             scene.computer.remove(scene.path2_1);
             scene.path2_1.setPosition(2000, 0);
-
             scene.sound.play('breathing');
         });
 
@@ -529,6 +546,7 @@ class play extends Phaser.Scene {
             scene.computer.add([scene.path2_3]);
             scene.computer.remove(scene.path2_2);
             scene.path2_2.setPosition(2000, 0);
+            eye_tween.play();
         });
 
         // LINK2_3 SETUP
