@@ -696,6 +696,12 @@ class play extends Phaser.Scene {
             frameRate: 4
         });
 
+        this.anims.create({
+            key: 'glitch2',
+            frames: this.anims.generateFrameNumbers('glitch_effect2', { start: 0, end: 5, first: 0 }),
+            frameRate: 4
+        });
+
         
 
         // LINK3_1 SETUP
@@ -760,6 +766,15 @@ class play extends Phaser.Scene {
             glitch.on('animationcomplete', () => { // callback after anim completes
                 glitch.anims.play('glitch');
                 glitch.destroy();
+            });
+
+            // plays glitch_effect_2 when opening page 
+            // TODO change when animation plays 
+            let glitch2 = scene.add.sprite(0, 0, 'glitch_effect2').setOrigin(0, 0);
+            glitch2.anims.play('glitch2');
+            glitch2.on('animationcomplete', () => { // callback after anim completes
+                glitch2.anims.play('glitch2');
+                glitch2.destroy();
             });
         });
 
