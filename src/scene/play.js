@@ -692,9 +692,11 @@ class play extends Phaser.Scene {
         //path3_3 animation config
         this.anims.create({
             key: 'glitch',
-            frames: this.anims.generateFrameNumbers('glitch_effect', { start: 0, end: 60, first: 0 }),
-            frameRate: 5
+            frames: this.anims.generateFrameNumbers('glitch_effect', { start: 0, end: 4, first: 0 }),
+            frameRate: 4
         });
+
+        
 
         // LINK3_1 SETUP
         scene.link3_1.on('pointerdown', function() {
@@ -750,6 +752,15 @@ class play extends Phaser.Scene {
             //popus are initiated here after loading path3_3 container
             scene.web3_3signal = true;
             popupMaster();
+
+            // plays glitch_effect when opening page 
+            // TODO fix x and y based on window position
+            let glitch = scene.add.sprite(scene.webpage3_3.x, scene.webpage3_3.y, 'glitch_effect').setOrigin(0, 0);
+            glitch.anims.play('glitch');
+            glitch.on('animationcomplete', () => { // callback after anim completes
+                glitch.anims.play('glitch');
+                glitch.destroy();
+            });
         });
 
         // LINK3_3 SETUP
@@ -1105,15 +1116,9 @@ class play extends Phaser.Scene {
         });
 
         this.web3_3close.on('pointerdown', function() {
-            scene.web3_3signal = false;
             scene.path3_3.setPosition(2000, 0);
             scene.computer.remove(scene.path3_3);
-            let glitch = scene.add.sprite(monitorBorderX, monitorBorderY, 'glitch_effect').setOrigin(0, 0);
-            glitch.anims.play('glitch');
-            glitch.on('animationcomplete', () => { // callback after anim completes
-                glitch.anims.play('glitch');
-                glitch.destroy();
-            });
+            scene.web3_3signal = false;
         });
 
 
