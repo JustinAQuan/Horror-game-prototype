@@ -762,6 +762,7 @@ class play extends Phaser.Scene {
             // plays glitch_effect when opening page 
             // TODO fix x and y based on window position
             let glitch = scene.add.sprite(scene.webpage3_3.x, scene.webpage3_3.y, 'glitch_effect').setOrigin(0, 0);
+            scene.path3_3.add(glitch);
             glitch.anims.play('glitch');
             glitch.on('animationcomplete', () => { // callback after anim completes
                 glitch.anims.play('glitch');
@@ -771,6 +772,7 @@ class play extends Phaser.Scene {
             // plays glitch_effect_2 when opening page 
             // TODO change when animation plays 
             let glitch2 = scene.add.sprite(monitorBorderX, monitorBorderY, 'glitch_effect2').setOrigin(0, 0);
+            scene.computer.add(glitch2);
             glitch2.anims.play('glitch2');
             glitch2.on('animationcomplete', () => { // callback after anim completes
                 glitch2.anims.play('glitch2');
