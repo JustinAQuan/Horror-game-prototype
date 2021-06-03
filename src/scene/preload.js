@@ -161,13 +161,7 @@ class preload extends Phaser.Scene {
         this.load.image('popup-advert_2', './assets/art/Webpages/page3_3-popup2.png');
         this.load.image('popup-advert_3', './assets/art/Webpages/page3_3-popup3.png');
 
-
-        // LOADS GENERIC
-        this.load.image('webpage', './assets/art/reallygoodwebpage.png');
-        this.load.image('linkex', './assets/art/linkex.png');
-
-
-
+        
         // LOADS AUDIO
 
         // music
@@ -216,6 +210,10 @@ class preload extends Phaser.Scene {
         // LOADS JSON
         this.load.json('emailHeader', './assets/json/email.json');
 
+        
+        // LOAD STARTERS
+        this.load.image('SKYNET', './assets/art/Anims/SKYNET_START.jpg');
+        
 
         // LOADS TEXTURE ATLAS
         this.load.atlas('KUKU_anims', './assets/art/Anims/KUKU.png', './assets/art/Anims/KUKU.json');
