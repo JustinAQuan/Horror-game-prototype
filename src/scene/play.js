@@ -770,7 +770,7 @@ class play extends Phaser.Scene {
 
             // plays glitch_effect_2 when opening page 
             // TODO change when animation plays 
-            let glitch2 = scene.add.sprite(0, 0, 'glitch_effect2').setOrigin(0, 0);
+            let glitch2 = scene.add.sprite(monitorBorderX, monitorBorderY, 'glitch_effect2').setOrigin(0, 0);
             glitch2.anims.play('glitch2');
             glitch2.on('animationcomplete', () => { // callback after anim completes
                 glitch2.anims.play('glitch2');
