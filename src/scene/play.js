@@ -182,7 +182,7 @@ class play extends Phaser.Scene {
         }, null, this);
 
         // creates outside whenever we want
-        this.window_background = this.add.sprite(715, 50, 'window_background').setOrigin(0, 0).setScale(.75);
+        this.window_background = this.add.sprite(570, 150, 'window_background').setOrigin(0, 0)
         this.angel = this.add.sprite(2000, 0, 'angel').setOrigin(0, 0).setScale(1.3);
 
         this.sound.play('startup', { volume: 0.4 });
