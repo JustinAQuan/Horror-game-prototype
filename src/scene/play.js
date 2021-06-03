@@ -398,15 +398,21 @@ class play extends Phaser.Scene {
         this.webpage1_3_2 = this.add.sprite(77, 144, 'webpage1_3.2').setOrigin(0, 0);
         this.link1_3 = new clickable(this, 80, 300, 'link1_3').setOrigin(0, 0);
         this.web1_3close = new clickable(this, 625, 104, 'close_button').setScale(.8);
+        this.scrollbar_top = this.add.sprite(613, 144, 'scrollbar_top').setAlpha(1).setOrigin(0, 0);
+        this.scrollbar_bottom = this.add.sprite(613, 144, 'scrollbar_bottom').setAlpha(0).setOrigin(0, 0);
         this.url1_3 = this.add.text(152, 127, "http://www.aliens-heaven.org", textStyle).setOrigin(0, 0);
-        this.path1_3.add([this.webpageUI1_3, this.webpage1_3_2, this.link1_3, this.webpage1_3_1, this.web1_3close, this.url1_3]);
+        this.path1_3.add([this.webpageUI1_3, this.webpage1_3_2, this.link1_3, this.webpage1_3_1, this.web1_3close, this.scrollbar_top, this.scrollbar_bottom, this.url1_3]);
 
         scene.input.on('wheel', function(pointer, gameObjects, deltaX, deltaY, deltaZ) {
             if (deltaY > 0) {
                 scene.path1_3.bringToTop(scene.webpage1_3_2);
                 scene.path1_3.bringToTop(scene.link1_3);
+                scene.scrollbar_top.setAlpha(0);
+                scene.scrollbar_bottom.setAlpha(1);
             } else if (deltaY < 0) {
                 scene.path1_3.bringToTop(scene.webpage1_3_1);
+                scene.scrollbar_top.setAlpha(1);
+                scene.scrollbar_bottom.setAlpha(0);
             }
         });
 
@@ -432,7 +438,6 @@ class play extends Phaser.Scene {
             light_effect2.on('animationcomplete', () => { // callback after anim completes
                 light_effect2.anims.play('light_effect');
                 light_effect2.destroy();
-                console.log("its penis friday wlel weell well");
             });
 
             // light_effect anim tied to zoomed out camera 
@@ -441,7 +446,6 @@ class play extends Phaser.Scene {
             light_effect.on('animationcomplete', () => { // callback after anim completes
                 light_effect.anims.play('light_effect');
                 light_effect.destroy();
-                console.log("its penis friday");
             });
 
 
