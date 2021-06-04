@@ -65,12 +65,14 @@ class end extends Phaser.Scene {
         this.retryblock.on('pointerdown', function(){
             scene.sound.play('click');
             scene.scene.stop();
+            restart = true;
             scene.scene.wake("menuScene");
         });
 
         this.retry.on('pointerdown', function(){
             scene.sound.play('click');
             scene.scene.stop();
+            restart = true;
             scene.scene.wake("menuScene");
         });
     }

@@ -153,6 +153,11 @@ class menu extends Phaser.Scene {
     }
 
     update() {
+        // music reset 
+        if (restart) {
+            this.menu_bgm.play();
+            restart = false;
+        }
         // handles debug input
         if(Phaser.Input.Keyboard.JustDown(this.one) && pathInput != 0) {
             if (pathInput){

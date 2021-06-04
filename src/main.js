@@ -29,6 +29,8 @@ var text1;
 // initializes debug variables 
 let pathInput = null;
 let pathText;
+// whether game has been reset
+let restart = false;
 
 /**************************************************
  *                 CREDIT
