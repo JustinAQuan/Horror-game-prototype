@@ -6,6 +6,7 @@ class play extends Phaser.Scene {
     create() {
         let scene = this;
         this.curr = null;
+        this.cutscene = false;
         this.web3_3signal = true;
 
         this.emailFSD = this.cache.json.get('emailHeader');
@@ -204,10 +205,9 @@ class play extends Phaser.Scene {
         });
 
         let light_effect = scene.add.sprite(0, 0, 'light_effect').setAlpha(0).setOrigin(0, 0);
+        this.creep = this.add.sprite(200, 200, 'creep').setOrigin(0.5,0.5).setAlpha(0).setScale(5);
 
         
-            
-
         //////////////////////////////
         //      MONITOR SETUP       //
         //////////////////////////////
@@ -230,7 +230,21 @@ class play extends Phaser.Scene {
         //////////////////////////////
         //       ANIMS SETUP        //
         //////////////////////////////
-
+        this.anims.create({
+            key: 'static1',
+            frames: this.anims.generateFrameNames('static1_anims', {prefix: 'static1_', end: 11, zeroPad: 2}),
+            frameRate: 12
+        });
+        this.anims.create({
+            key: 'static2',
+            frames: this.anims.generateFrameNames('static2_anims', {prefix: 'static2_', end: 11, zeroPad: 2}),
+            frameRate: 12
+        });
+        this.anims.create({
+            key: 'static3',
+            frames: this.anims.generateFrameNames('static3_anims', {prefix: 'static3_', end: 11, zeroPad: 2}),
+            frameRate: 12
+        });
 
 
         //////////////////////////////
@@ -399,7 +413,6 @@ class play extends Phaser.Scene {
             scene.link1_2.clearTint();
         })
 
-
         // path1_3
         this.webpageUI1_3 = this.add.sprite(70, 100, 'ie_window').setOrigin(0, 0).setInteractive();
         this.webpage1_3_1 = this.add.sprite(77, 144, 'webpage1_3.1').setOrigin(0, 0);
@@ -423,6 +436,8 @@ class play extends Phaser.Scene {
                 scene.sound.play("mouse_scroll");
             }
         });
+
+
 
         // LINK1_1 SETUP
         scene.link1_1.on('pointerdown', function() {
@@ -475,11 +490,30 @@ class play extends Phaser.Scene {
 
         // LINK1_3 SETUP
         scene.link1_3.on('pointerdown', function() {
-            scene.game.sound.stopAll();
+            scene.spaceKey.enabled = false;
+            scene.cutscene = true;
+            
+            scene.cameras.main.setBounds(-game.config.width / 5, // x: -160
+                -game.config.height / 20, // y: -30
+                game.config.width * 1.5, // width: 1200 (therefore, can scroll right until 1040 pixels)
+                game.config.height * 1.1 + 20); // height: 680 (therefore, can scroll down until 650 pixels)
 
-            scene.scene.stop();
-            scene.scene.launch("endScene", { ending: "PATH 1" });
+            scene.computer.setY(180);
+            scene.computer.setX(-150);
+            scene.computer.setScale(.75);
+
+            if (scene.instructions) {
+                scene.instructions.destroy();
+            }
+
+            scene.time.delayedCall(10000, () =>{
+                scene.game.sound.stopAll();
+
+                scene.scene.stop();
+                scene.scene.launch("endScene", { ending: "PATH 1" });
+            });
         });
+
 
 
         // path2_1
@@ -489,7 +523,6 @@ class play extends Phaser.Scene {
         this.web2_1close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url2_1 = this.add.text(152, 127, "http://www.the-laundry-room.com/sammy39/", textStyle).setOrigin(0, 0);
         this.path2_1.add([this.webpageUI2_1, this.webpage2_1, this.link2_1, this.web2_1close, this.url2_1]);
-
 
         // path2_2
         this.webpageUI2_2 = this.add.sprite(70, 100, 'ie_window').setOrigin(0, 0).setInteractive();
@@ -506,7 +539,6 @@ class play extends Phaser.Scene {
         this.link2_2.on('pointerout', function() {
             scene.link2_2.clearTint();
         });
-
 
         // path2_3
         this.webpageUI2_3 = this.add.sprite(70, 100, 'ie_window').setOrigin(0, 0).setInteractive();
@@ -535,6 +567,8 @@ class play extends Phaser.Scene {
             yoyo: true
         });
 
+
+
         // LINK2_1 SETUP
         scene.link2_1.on('pointerdown', function() {
             scene.curr = scene.path2_2;
@@ -557,9 +591,60 @@ class play extends Phaser.Scene {
 
         // LINK2_3 SETUP
         scene.link2_3.on('pointerdown', function() {
-            scene.game.sound.stopAll();
-            scene.scene.stop();
-            scene.scene.launch("endScene", { ending: "PATH 2" });
+            scene.spaceKey.enabled = false;
+            scene.cutscene = true;
+            
+            scene.cameras.main.setBounds(-game.config.width / 5, // x: -160
+                -game.config.height / 20, // y: -30
+                game.config.width * 1.5, // width: 1200 (therefore, can scroll right until 1040 pixels)
+                game.config.height * 1.1 + 20); // height: 680 (therefore, can scroll down until 650 pixels)
+
+            scene.computer.setY(180);
+            scene.computer.setX(-150);
+            scene.computer.setScale(.75);
+
+            if (scene.instructions) {
+                scene.instructions.destroy();
+            }
+
+            scene.homescreen.destroy();
+            scene.ie.destroy();
+            scene.ieCon.destroy();
+            scene.rb.destroy();
+            scene.rbCon.destroy();
+            scene.inbox.destroy();
+            scene.inboxCon.destroy();
+            scene.myPC.destroy();
+            scene.myPCCon.destroy();
+            scene.emailCon.destroy();
+            scene.path2_3.destroy();
+
+            scene.time.delayedCall(2000, () =>{
+                scene.creep.setAlpha(1);
+                scene.laughing.setRate(.6);
+                scene.laughing.setLoop(true);
+                scene.laughing.play();
+            });
+
+            scene.time.delayedCall(6000, () =>{
+                scene.static = scene.add.sprite(-200, -100, 'static1', 0).setOrigin(0,0).setAlpha(.5);
+                scene.static.play('static1');
+                scene.static.once('animationcomplete', () =>{
+                    scene.static.play('static2');
+                    console.log('playing static2');
+                    scene.static.once('animationcomplete', () =>{
+                        scene.static.play('static3');
+                        console.log('playing static3');
+                    });
+                });
+            });
+
+            scene.time.delayedCall(10000, () =>{
+                scene.game.sound.stopAll();
+
+                scene.scene.stop();
+                scene.scene.launch("endScene", { ending: "PATH 2" });
+            });
         });
 
 
@@ -825,9 +910,30 @@ class play extends Phaser.Scene {
 
         // LINK3_3 SETUP
         scene.link3_3.on('pointerdown', function() {
-            scene.game.sound.stopAll();
-            scene.scene.stop();
-            scene.scene.launch("endScene", { ending: "PATH 3" });
+            scene.spaceKey.enabled = false;
+            scene.cutscene = true;
+            
+            scene.cameras.main.setBounds(-game.config.width / 5, // x: -160
+                -game.config.height / 20, // y: -30
+                game.config.width * 1.5, // width: 1200 (therefore, can scroll right until 1040 pixels)
+                game.config.height * 1.1 + 20); // height: 680 (therefore, can scroll down until 650 pixels)
+
+            scene.computer.setY(180);
+            scene.computer.setX(-150);
+            scene.computer.setScale(.75);
+
+            if (scene.instructions) {
+                scene.instructions.destroy();
+            }
+
+            
+
+            scene.time.delayedCall(10000, () =>{
+                scene.game.sound.stopAll();
+
+                scene.scene.stop();
+                scene.scene.launch("endScene", { ending: "PATH 3" });
+            });
         });
 
         //////////////////////////////
@@ -1326,7 +1432,7 @@ class play extends Phaser.Scene {
             if (this.instructions) {
                 this.instructions.destroy();
             }
-        } else { // can only see screen monitor when not pressing space
+        } else if(this.cutscene == false) { // can only see screen monitor when not pressing space
             this.cameras.main.setBounds(
                 0, // x: 0
                 0, // y: 0
