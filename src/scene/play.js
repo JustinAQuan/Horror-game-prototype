@@ -1284,6 +1284,8 @@ class play extends Phaser.Scene {
             scene.computer.remove(scene.path3_2);
             scene.path3_2.setPosition(2000, 0);
             scene.webpage3_2.setTint(0xff0000);
+            scene.text_doc_con = scene.add.container();
+            scene.text_doc_con.setPosition(0, 0);
             // random number determines which text doc pops up 
             scene.text_val = Phaser.Math.Between(0, 3);
             console.log(scene.text_val);
@@ -1300,11 +1302,10 @@ class play extends Phaser.Scene {
                 scene.text_doc = scene.add.sprite(50, 50, 'text_doc4').setOrigin(0, 0);
             }
             scene.text_close = new clickable(scene, 442, 58, 'close_button');
-
+            scene.text_doc_con.add([scene.text_doc, scene.text_close]); 
             // closes popup text box
             scene.text_close.on('pointerdown', function() {
-                scene.text_doc.destroy();
-                scene.text_close.destroy();
+                scene.text_doc_con.destroy();
             })
         });
 
