@@ -61,6 +61,15 @@ class preload extends Phaser.Scene {
         this.load.image('close_button', './assets/art/Desktop/close_button.png');
         this.load.image('folder', './assets/art/Desktop/Open_folder.png');
         this.load.image('instruction_window', './assets/art/Desktop/Instructions.png');
+        this.load.image('credits_folder', './assets/art/Desktop/credits_folder.png');
+        this.load.image('credits_link1', './assets/art/Desktop/credits_link1.png');
+        this.load.image('credits_link2', './assets/art/Desktop/credits_link2.png');
+        this.load.image('credits_page1', './assets/art/Desktop/credits.png');
+        this.load.image('text_doc1', './assets/art/Desktop/text_doc1.png');
+        this.load.image('text_doc2', './assets/art/Desktop/text_doc2.png');
+        this.load.image('text_doc3', './assets/art/Desktop/text_doc3.png');
+        this.load.image('text_doc4', './assets/art/Desktop/text_doc4.png');
+
 
         // load music
         this.load.audio('menu_music', './assets/sound/bgm/bg_2.wav');
@@ -85,13 +94,16 @@ class preload extends Phaser.Scene {
 
 
         // LOADS OUTSIDE
-        this.load.image('outside', './assets/art/outside.png');
-        this.load.image('angel', './assets/art/Tall_Lady.png');
+        this.load.image('window_background', './assets/art/window_background.png');
+        this.load.image('angel', './assets/art/tall_lady.png');
 
 
         // LOADS DUMMY WINDOWS
         this.load.image('rb_window', './assets/art/Desktop/Recycle_binTemplate.png');
         this.load.image('mypc_window', './assets/art/Desktop/My_computerTemplate.png');
+        this.load.image('crit_error', './assets/art/Desktop/critical_error.png');
+        this.load.image('fail_okay_button', './assets/art/Desktop/fail_message_okay.png');
+        this.load.image('fail_message', './assets/art/Desktop/fail_message.png');
 
 
         // WEBPAGE PRELOADS
@@ -117,6 +129,9 @@ class preload extends Phaser.Scene {
         this.load.image('webpage1_3.1', './assets/art/Webpages/page1_3_part1.png');
         this.load.image('webpage1_3.2', './assets/art/Webpages/page1_3_part2.png');
         this.load.image('link1_3', './assets/art/Webpages/page1_3_link.png');
+        this.load.image('link1_3', './assets/art/Webpages/page1_3_link.png');
+        this.load.image('scrollbar_top', './assets/art/Webpages/scrollbar_top.png');
+        this.load.image('scrollbar_bottom', './assets/art/Webpages/scrollbar_bottom.png');
 
         // LOADS PATH2_1
         this.load.image('webpage2_1', './assets/art/Webpages/page2_1.png');
@@ -129,6 +144,7 @@ class preload extends Phaser.Scene {
         // LOADS PATH2_3
         this.load.image('webpage2_3', './assets/art/Webpages/page2_3.png');
         this.load.image('link2_3', './assets/art/Webpages/page2_3_link.png');
+        this.load.image('eye', './assets/art/Webpages/eye.png');
 
         // LOADS PATH3_1
         this.load.image('webpage3_1', './assets/art/Webpages/page3_1.png');
@@ -148,13 +164,7 @@ class preload extends Phaser.Scene {
         this.load.image('popup-advert_2', './assets/art/Webpages/page3_3-popup2.png');
         this.load.image('popup-advert_3', './assets/art/Webpages/page3_3-popup3.png');
 
-
-        // LOADS GENERIC
-        this.load.image('webpage', './assets/art/reallygoodwebpage.png');
-        this.load.image('linkex', './assets/art/linkex.png');
-
-
-
+        
         // LOADS AUDIO
 
         // music
@@ -178,6 +188,7 @@ class preload extends Phaser.Scene {
         // sfx
         this.load.audio('click', './assets/sound/sfx/sfx_click.wav');
         this.load.audio('double_click', './assets/sound/sfx/sfx_double_click.wav');
+        this.load.audio('mouse_scroll', './assets/sound/sfx/sfx_mouse_scroll.wav');
         this.load.audio('startup', './assets/sound/sfx/startup.wav');
 
         // creepy
@@ -191,6 +202,9 @@ class preload extends Phaser.Scene {
         this.load.audio('crackle', './assets/sound/event_sfx/crackleSomething.wav');
         this.load.audio('scary', './assets/sound/event_sfx/reallyScary.wav');
         this.load.audio('ufo', './assets/sound/event_sfx/ufo.wav');
+        this.load.audio('squeak', './assets/sound/event_sfx/squeak.wav');
+        this.load.audio('scratching', './assets/sound/event_sfx/scratching.wav');
+        this.load.audio('boom', './assets/sound/event_sfx/boom.wav');
         this.load.audio('popup', './assets/sound/event_sfx/sfx_popup.wav');
 
         // 3_1 web music 
@@ -202,11 +216,19 @@ class preload extends Phaser.Scene {
         // LOADS JSON
         this.load.json('emailHeader', './assets/json/email.json');
 
+        
+        // LOAD STARTERS
+        this.load.image('SKYNET', './assets/art/Anims/SKYNET_START.jpg');
+        
 
         // LOADS TEXTURE ATLAS
         this.load.atlas('KUKU_anims', './assets/art/Anims/KUKU.png', './assets/art/Anims/KUKU.json');
         this.load.atlas('Q-WALKER_anims', './assets/art/Anims/Q-WALKER.png', './assets/art/Anims/Q-WALKER.json');
         this.load.atlas('SKYNET_anims', './assets/art/Anims/SKYNET.png', './assets/art/Anims/SKYNET.json');
-        this.load.spritesheet('glitch_effect', './assets/art/Anims/glitch_effect.png', { frameWidth: 732, frameHeight: 367, startFrame: 0, endFrame: 60 });
+        this.load.atlas('eye_anims', './assets/art/Anims/eye.png', './assets/art/Anims/eye.json');
+        this.load.spritesheet('light_effect', './assets/art/Anims/light_effect.png', { frameWidth: 1024, frameHeight: 1024, startFrame: 0, endFrame: 8 });
+        this.load.spritesheet('glitch_effect', './assets/art/Anims/glitch_effect.png', { frameWidth: 547, frameHeight: 367, startFrame: 0, endFrame: 4 });
+        this.load.spritesheet('glitch_effect2', './assets/art/glitch_effect_2.png', { frameWidth: 732, frameHeight: 534, startFrame: 0, endFrame: 5 });
+
     }
 }
