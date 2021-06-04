@@ -149,14 +149,12 @@ class play extends Phaser.Scene {
             }
         );
 
-        // CREEPY MUSIC
+        // EVENT SFX
 
-        this.laughing = this.sound.add(
-            'laughing',
+        this.scratching = this.sound.add(
+            'scratching',
         );
 
-
-        // EVENT SFX
 
         this.knocking = this.sound.add(
             'door_knock', {
@@ -174,6 +172,13 @@ class play extends Phaser.Scene {
 
         this.slam_desk = this.sound.add(
             'slam_desk',
+        );
+
+        this.boom = this.sound.add(
+            'boom', 
+            {
+                loop: true,
+            }
         );
 
         //////////////////////////////
@@ -447,6 +452,8 @@ class play extends Phaser.Scene {
 
             scene.computer.remove(scene.path1_1);
             scene.path1_1.setPosition(2000, 0);
+
+            scene.boom.stop();
         });
 
         // LINK1_2 SETUP
@@ -567,7 +574,13 @@ class play extends Phaser.Scene {
             yoyo: true
         });
 
-
+        // eye animation 
+        this.anims.create({
+            key: 'eyes',
+            frames: this.anims.generateFrameNames('eye_anims', {prefix: 'Layer', end: 11, zeroPad: 0}),
+            frameRate: 4
+        });
+        
 
         // LINK2_1 SETUP
         scene.link2_1.on('pointerdown', function() {
@@ -587,6 +600,14 @@ class play extends Phaser.Scene {
             scene.computer.remove(scene.path2_2);
             scene.path2_2.setPosition(2000, 0);
             eye_tween.play();
+
+            let eyes = scene.add.sprite(50, 70, 'eye_anims').setOrigin(0,0).setScale(0.5);
+            scene.path2_3.add(eyes);
+            eyes.anims.play('eyes');
+            eyes.on('animationcomplete', () => { 
+                eyes.play('eyes');
+                eyes.destroy();
+            });
         });
 
         // LINK2_3 SETUP
@@ -1300,6 +1321,10 @@ class play extends Phaser.Scene {
             if (!knockOnce) {
                 knockOnce = true;
 
+                if (i == 0) {
+                    scene.boom.play();
+                }
+
                 // after 3 seconds of clicking on the email link for any path
                 scene.time.delayedCall(3000, () => {
 
@@ -1337,15 +1362,13 @@ class play extends Phaser.Scene {
 
                                 // play knocking a second time
                                 scene.angel.setPosition(730, 150);
-                                scene.laughing.setRate(.6);
-                                scene.laughing.setLoop(true);
-                                scene.laughing.play();
+                                scene.scratching.setLoop(true);
+                                scene.scratching.play();
 
                                 scene.time.delayedCall(5000, () => {
                                     scene.angel.setPosition(2000, 0);
-                                    scene.laughing.stop();
-                                    scene.laughing.setLoop(false);
-                                    scene.laughing.setRate(1);
+                                    scene.scratching.stop();
+                                    scene.scratching.setLoop(false);
                                 });
                             });
 
@@ -1365,16 +1388,59 @@ class play extends Phaser.Scene {
             scene.computer.remove(scene.path3_2);
             scene.path3_2.setPosition(2000, 0);
             scene.webpage3_2.setTint(0xff0000);
+            scene.text_doc_con = scene.add.container();
+            scene.text_doc_con.setPosition(0, 0);
+            // random number determines which text doc pops up 
+            scene.text_val = Phaser.Math.Between(0, 3);
+            console.log(scene.text_val);
+            if (scene.text_val == 0){
+                scene.text_doc = scene.add.sprite(50, 50, 'text_doc1').setOrigin(0, 0);
+            }
+            else if (scene.text_val == 1){
+                scene.text_doc = scene.add.sprite(50, 50, 'text_doc2').setOrigin(0, 0);
+            }
+            else if (scene.text_val == 2){
+                scene.text_doc = scene.add.sprite(50, 50, 'text_doc3').setOrigin(0, 0);
+            }
+            else if (scene.text_val == 3){
+                scene.text_doc = scene.add.sprite(50, 50, 'text_doc4').setOrigin(0, 0);
+            }
+            scene.text_close = new clickable(scene, 442, 58, 'close_button');
+            scene.text_doc_con.add([scene.text_doc, scene.text_close]); 
+            // closes popup text box
+            scene.text_close.on('pointerdown', function() {
+                scene.text_doc_con.destroy();
+            })
         });
 
         // when red "CLICK HERE" is clicked
         this.clickhere.on('pointerdown', function() {
             scene.sound.play('click');
             scene.sound.play('crackle');
-
             scene.room.setTint(0x110000);
-
             scene.dude.setAlpha(1);
+
+            // TODO virus popup 
+            scene.virus_con = scene.add.container();
+            scene.virus_con.setPosition(0, 0);
+            scene.virus_popup = scene.add.sprite(300, 300, 'virus_popup');
+            scene.virus_close = new clickable(scene, 516, 285, 'close_button');
+            scene.virus_con.add([scene.virus_popup, scene.virus_close]);
+
+            // TODO critical error
+            scene.error_con = scene.add.container();
+            scene.error_con.setPosition(0, 0);
+            scene.critical_error = scene.add.sprite(300, 300, 'critical_error');
+            scene.error_close = new clickable(scene, 516, 285, 'close_button');
+            scene.error_con.add([scene.critical_error, scene.error_close]);
+
+            // TODO fail message
+            scene.fail_con = scene.add.container();
+            scene.fail_con.setPosition(0, 0);
+            scene.fail_message = scene.add.sprite(300, 300, 'fail_message');
+            scene.fail_message_okay = new clickable(scene, 516, 285, 'fail_message_okay');
+            scene.fail_close = new clickable(scene, 516, 285, 'close_button');
+            scene.fail_con.add([scene.fail_message, scene.fail_message_okay, scene.fail_close]); 
         })
 
     }

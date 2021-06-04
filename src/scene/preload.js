@@ -65,11 +65,6 @@ class preload extends Phaser.Scene {
         this.load.image('credits_link1', './assets/art/Desktop/credits_link1.png');
         this.load.image('credits_link2', './assets/art/Desktop/credits_link2.png');
         this.load.image('credits_page1', './assets/art/Desktop/credits.png');
-        this.load.image('text_doc1', './assets/art/Desktop/text_doc1.png');
-        this.load.image('text_doc2', './assets/art/Desktop/text_doc2.png');
-        this.load.image('text_doc3', './assets/art/Desktop/text_doc3.png');
-        this.load.image('text_doc4', './assets/art/Desktop/text_doc4.png');
-
 
         // load music
         this.load.audio('menu_music', './assets/sound/bgm/bg_2.wav');
@@ -168,6 +163,16 @@ class preload extends Phaser.Scene {
         this.load.image('popup-advert_2', './assets/art/Webpages/page3_3-popup2.png');
         this.load.image('popup-advert_3', './assets/art/Webpages/page3_3-popup3.png');
 
+        // LOADS POPUPS 
+        this.load.image('text_doc1', './assets/art/Desktop/text_doc1.png');
+        this.load.image('text_doc2', './assets/art/Desktop/text_doc2.png');
+        this.load.image('text_doc3', './assets/art/Desktop/text_doc3.png');
+        this.load.image('text_doc4', './assets/art/Desktop/text_doc4.png');
+        this.load.image('virus_popup', './assets/art/Desktop/virus_popup_1.png');
+        this.load.image('critical_error', './assets/art/Desktop/critical_error.png');
+        this.load.image('fail_message', './assets/art/Desktop/fail_message.png');
+        this.load.image('fail_message_okay', './assets/art/Desktop/fail_message_okay.png');
+
         
         // LOADS AUDIO
 
@@ -207,6 +212,8 @@ class preload extends Phaser.Scene {
         this.load.audio('scary', './assets/sound/event_sfx/reallyScary.wav');
         this.load.audio('ufo', './assets/sound/event_sfx/ufo.wav');
         this.load.audio('squeak', './assets/sound/event_sfx/squeak.wav');
+        this.load.audio('scratching', './assets/sound/event_sfx/scratching.wav');
+        this.load.audio('boom', './assets/sound/event_sfx/boom.wav');
         this.load.audio('popup', './assets/sound/event_sfx/sfx_popup.wav');
 
         // 3_1 web music 
@@ -230,6 +237,7 @@ class preload extends Phaser.Scene {
         this.load.atlas('static1_anims', './assets/art/Anims/static1.png', './assets/art/Anims/static1.json');
         this.load.atlas('static2_anims', './assets/art/Anims/static2.png', './assets/art/Anims/static2.json');
         this.load.atlas('static3_anims', './assets/art/Anims/static3.png', './assets/art/Anims/static3.json');
+        this.load.atlas('eye_anims', './assets/art/Anims/eye.png', './assets/art/Anims/eye.json');
         this.load.spritesheet('light_effect', './assets/art/Anims/light_effect.png', { frameWidth: 1024, frameHeight: 1024, startFrame: 0, endFrame: 8 });
         this.load.spritesheet('glitch_effect', './assets/art/Anims/glitch_effect.png', { frameWidth: 547, frameHeight: 367, startFrame: 0, endFrame: 4 });
         this.load.spritesheet('glitch_effect2', './assets/art/glitch_effect_2.png', { frameWidth: 732, frameHeight: 534, startFrame: 0, endFrame: 5 });
