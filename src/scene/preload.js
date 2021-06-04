@@ -164,6 +164,10 @@ class preload extends Phaser.Scene {
         this.load.image('text_doc2', './assets/art/Desktop/text_doc2.png');
         this.load.image('text_doc3', './assets/art/Desktop/text_doc3.png');
         this.load.image('text_doc4', './assets/art/Desktop/text_doc4.png');
+        this.load.image('virus_popup', './assets/art/Desktop/virus_popup_1.png');
+        this.load.image('critical_error', './assets/art/Desktop/critical_error.png');
+        this.load.image('fail_message', './assets/art/Desktop/fail_message.png');
+        this.load.image('fail_message_okay', './assets/art/Desktop/fail_message_okay.png');
 
         
         // LOADS AUDIO
