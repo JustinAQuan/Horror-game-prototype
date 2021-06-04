@@ -65,11 +65,6 @@ class preload extends Phaser.Scene {
         this.load.image('credits_link1', './assets/art/Desktop/credits_link1.png');
         this.load.image('credits_link2', './assets/art/Desktop/credits_link2.png');
         this.load.image('credits_page1', './assets/art/Desktop/credits.png');
-        this.load.image('text_doc1', './assets/art/Desktop/text_doc1.png');
-        this.load.image('text_doc2', './assets/art/Desktop/text_doc2.png');
-        this.load.image('text_doc3', './assets/art/Desktop/text_doc3.png');
-        this.load.image('text_doc4', './assets/art/Desktop/text_doc4.png');
-
 
         // load music
         this.load.audio('menu_music', './assets/sound/bgm/bg_2.wav');
@@ -163,6 +158,12 @@ class preload extends Phaser.Scene {
         this.load.image('popup-advert_1', './assets/art/Webpages/page3_3-popup1.png');
         this.load.image('popup-advert_2', './assets/art/Webpages/page3_3-popup2.png');
         this.load.image('popup-advert_3', './assets/art/Webpages/page3_3-popup3.png');
+
+        // LOADS POPUPS 
+        this.load.image('text_doc1', './assets/art/Desktop/text_doc1.png');
+        this.load.image('text_doc2', './assets/art/Desktop/text_doc2.png');
+        this.load.image('text_doc3', './assets/art/Desktop/text_doc3.png');
+        this.load.image('text_doc4', './assets/art/Desktop/text_doc4.png');
 
         
         // LOADS AUDIO

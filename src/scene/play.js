@@ -1284,7 +1284,31 @@ class play extends Phaser.Scene {
             scene.computer.remove(scene.path3_2);
             scene.path3_2.setPosition(2000, 0);
             scene.webpage3_2.setTint(0xff0000);
+            // random number determines which text doc pops up 
+            scene.text_val = Phaser.Math.Between(0, 3);
+            console.log(scene.text_val);
+            if (scene.text_val == 0){
+                scene.text_doc = scene.add.sprite(50, 50, 'text_doc1').setOrigin(0, 0);
+            }
+            else if (scene.text_val == 1){
+                scene.text_doc = scene.add.sprite(50, 50, 'text_doc2').setOrigin(0, 0);
+            }
+            else if (scene.text_val == 2){
+                scene.text_doc = scene.add.sprite(50, 50, 'text_doc3').setOrigin(0, 0);
+            }
+            else if (scene.text_val == 3){
+                scene.text_doc = scene.add.sprite(50, 50, 'text_doc4').setOrigin(0, 0);
+            }
+            scene.text_close = new clickable(scene, 442, 58, 'close_button');
+
+            // closes popup text box
+            scene.text_close.on('pointerdown', function() {
+                scene.text_doc.destroy();
+                scene.text_close.destroy();
+            })
         });
+
+        
 
         // when red "CLICK HERE" is clicked
         this.clickhere.on('pointerdown', function() {
