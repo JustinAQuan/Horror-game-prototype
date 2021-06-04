@@ -1419,28 +1419,44 @@ class play extends Phaser.Scene {
             scene.sound.play('crackle');
             scene.room.setTint(0x110000);
             scene.dude.setAlpha(1);
+            // creates random popup upon clicking 'click here' 
+            scene.popup_val = Phaser.Math.Between(0, 2);
+            if (scene.popup_val == 0) {
+                // virus popup 
+                scene.virus_con = scene.add.container();
+                scene.virus_con.setPosition(0, 0);
+                scene.virus_popup = scene.add.sprite(300, 300, 'virus_popup');
+                scene.virus_close = new clickable(scene, 516, 285, 'close_button');
+                scene.virus_con.add([scene.virus_popup, scene.virus_close]);
 
-            // TODO virus popup 
-            scene.virus_con = scene.add.container();
-            scene.virus_con.setPosition(0, 0);
-            scene.virus_popup = scene.add.sprite(300, 300, 'virus_popup');
-            scene.virus_close = new clickable(scene, 516, 285, 'close_button');
-            scene.virus_con.add([scene.virus_popup, scene.virus_close]);
+                scene.virus_close.on('pointerdown', function() {
+                    scene.virus_con.destroy();
+                })
+            }
+            else if (scene.popup_val == 1) {
+                // critical error
+                scene.error_con = scene.add.container();
+                scene.error_con.setPosition(0, 0);
+                scene.critical_error = scene.add.sprite(300, 300, 'critical_error');
+                scene.error_close = new clickable(scene, 352, 289, 'close_button');
+                scene.error_con.add([scene.critical_error, scene.error_close]);
 
-            // TODO critical error
-            scene.error_con = scene.add.container();
-            scene.error_con.setPosition(0, 0);
-            scene.critical_error = scene.add.sprite(300, 300, 'critical_error');
-            scene.error_close = new clickable(scene, 516, 285, 'close_button');
-            scene.error_con.add([scene.critical_error, scene.error_close]);
+                scene.error_close.on('pointerdown', function() {
+                    scene.error_con.destroy();
+                })
+            }
+            else if (scene.popup_val == 2) {
+                // fail message
+                scene.fail_con = scene.add.container();
+                scene.fail_con.setPosition(0, 0);
+                scene.fail_message = scene.add.sprite(300, 300, 'fail_message');
+                scene.fail_message_okay = new clickable(scene, 300, 350, 'fail_message_okay');
+                scene.fail_con.add([scene.fail_message, scene.fail_message_okay]); 
 
-            // TODO fail message
-            scene.fail_con = scene.add.container();
-            scene.fail_con.setPosition(0, 0);
-            scene.fail_message = scene.add.sprite(300, 300, 'fail_message');
-            scene.fail_message_okay = new clickable(scene, 516, 285, 'fail_message_okay');
-            scene.fail_close = new clickable(scene, 516, 285, 'close_button');
-            scene.fail_con.add([scene.fail_message, scene.fail_message_okay, scene.fail_close]); 
+                scene.fail_message_okay.on('pointerdown', function() {
+                    scene.fail_con.destroy();
+                })
+            }
         })
 
     }
