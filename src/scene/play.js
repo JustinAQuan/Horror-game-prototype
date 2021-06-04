@@ -568,7 +568,8 @@ class play extends Phaser.Scene {
             scene.computer.remove(scene.path2_2);
             scene.path2_2.setPosition(2000, 0);
             eye_tween.play();
-            let eyes = scene.add.sprite(-50, 0, 'eye_anims').setOrigin(0,0);
+
+            let eyes = scene.add.sprite(25, 75, 'eye_anims').setOrigin(0,0).setScale(0.5);
             scene.path2_3.add(eyes);
             eyes.anims.play('eyes');
             eyes.on('animationcomplete', () => { 
