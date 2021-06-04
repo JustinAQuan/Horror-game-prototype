@@ -35,8 +35,8 @@ class end extends Phaser.Scene {
                 frameRate: 12
             });
 
-            this.skynet = this.add.sprite(0, 0, 'SKYNET').setOrigin(0,0).setScale(1.5);
-            this.skynet.play('qwalker');
+            this.qwalker = this.add.sprite(0, 0, 'SKYNET').setOrigin(0,0).setScale(1.5);
+            this.qwalker.play('qwalker');
         }
 
         else if(this.ending == "PATH 3"){
@@ -47,8 +47,8 @@ class end extends Phaser.Scene {
                 frameRate: 12
             });
 
-            this.skynet = this.add.sprite(0, 0, 'SKYNET').setOrigin(0,0).setScale(1.5);
-            this.skynet.play('kuku');
+            this.kuku = this.add.sprite(0, 0, 'SKYNET').setOrigin(0,0).setScale(1.5);
+            this.kuku.play('kuku');
         }
 
         else{
