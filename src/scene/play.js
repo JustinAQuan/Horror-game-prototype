@@ -563,10 +563,19 @@ class play extends Phaser.Scene {
         // path2_1
         this.webpageUI2_1 = this.add.sprite(70, 100, 'ie_window').setOrigin(0, 0).setInteractive();
         this.webpage2_1 = this.add.sprite(77, 144, 'webpage2_1').setOrigin(0, 0);
-        this.link2_1 = new clickable(this, 157, 450, 'link2_1').setAlpha(0);
+        this.link2_1 = new clickable(this, 157, 450, 'link2_1').setAlpha(1);
         this.web2_1close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url2_1 = this.add.text(152, 127, "http://www.the-laundry-room.com/sammy39/", textStyle).setOrigin(0, 0);
         this.path2_1.add([this.webpageUI2_1, this.webpage2_1, this.link2_1, this.web2_1close, this.url2_1]);
+
+        // link blinks 
+        let link_tween = this.add.tween({
+            targets: [this.link2_1],
+            easeIn: 'Linear',
+            alpha: '-=0.5',
+            repeat: -1,
+            yoyo: true
+        });
 
         // path2_2
         this.webpageUI2_2 = this.add.sprite(70, 100, 'ie_window').setOrigin(0, 0).setInteractive();
@@ -1185,11 +1194,7 @@ class play extends Phaser.Scene {
                 scene.path2_1.setRandomPosition(10, -50, 100, 50);
                 scene.computer.add([scene.path2_1]);
 
-                // after 20 seconds, show the link to next page
-                // TODO change to flashing loop 
-                scene.time.delayedCall(1, () => {
-                    scene.link2_1.setAlpha(1);
-                });
+                link_tween.play();
             }
 
             // path 3
@@ -1452,7 +1457,11 @@ class play extends Phaser.Scene {
             scene.sound.play('click');
             scene.sound.play('crackle');
             scene.room.setTint(0x110000);
-            scene.dude.setAlpha(1);
+            scene.add.tween({
+                targets: [scene.dude],
+                ease: 'Linear',
+                alpha: '+=1',
+            });
             // creates random popup upon clicking 'click here' 
             scene.popup_val = Phaser.Math.Between(0, 2);
             if (scene.popup_val == 0) {
