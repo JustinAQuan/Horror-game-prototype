@@ -151,6 +151,10 @@ class play extends Phaser.Scene {
 
         // EVENT SFX
 
+        this.laughing = this.sound.add(
+            'laughing',
+        );
+
         this.scratching = this.sound.add(
             'scratching',
         );
