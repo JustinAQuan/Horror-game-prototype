@@ -120,7 +120,6 @@ class preload extends Phaser.Scene {
         // LOADS PATH1_2
         this.load.image('webpage1_2', './assets/art/Webpages/page1_2.png');
         this.load.image('link1_2', './assets/art/Webpages/page1_2_link.png');
-        this.load.image('light_flash', './assets/art/light_flash.png');
 
         // LOADS PATH1_3
         this.load.image('webpage1_3.1', './assets/art/Webpages/page1_3_part1.png');
@@ -243,6 +242,7 @@ class preload extends Phaser.Scene {
         this.load.spritesheet('light_effect', './assets/art/Anims/light_effect.png', { frameWidth: 1024, frameHeight: 1024, startFrame: 0, endFrame: 8 });
         this.load.spritesheet('glitch_effect', './assets/art/Anims/glitch_effect.png', { frameWidth: 547, frameHeight: 367, startFrame: 0, endFrame: 4 });
         this.load.spritesheet('glitch_effect2', './assets/art/glitch_effect_2.png', { frameWidth: 732, frameHeight: 534, startFrame: 0, endFrame: 5 });
+        this.load.spritesheet('fog', './assets/art/Anims/fog.png', { frameWidth: 471, frameHeight: 250.5, startFrame: 0, endFrame: 23 });
 
     }
 }

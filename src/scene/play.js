@@ -198,6 +198,15 @@ class play extends Phaser.Scene {
         // creates outside whenever we want
         this.window_background = this.add.sprite(570, 150, 'window_background').setOrigin(0, 0)
         this.angel = this.add.sprite(2000, 0, 'angel').setOrigin(0, 0);
+        // fog anim setup
+        this.anims.create({
+            key: 'fog_effect',
+            frames: this.anims.generateFrameNumbers('fog', { start: 0, end: 23, first: 0 }),
+            frameRate: 6,
+            yoyo: true,
+            repeat: -1,
+        });
+        let fog = this.add.sprite(570, 370, 'fog_effect').setOrigin(0, 0);
 
         this.sound.play('startup', { volume: 0.4 });
 
@@ -462,12 +471,19 @@ class play extends Phaser.Scene {
             let light_tween = scene.add.tween({
                 targets: [scene.light],
                 easeIn: 'Linear',
-                alpha: '-=0.5',
+                alpha: '-=0.3',
                 repeat: 6,
                 yoyo: true
             });
             light_tween.on('complete', function() {
                 scene.light.destroy();
+            });
+
+            fog.setAlpha(1);
+            fog.anims.play('fog_effect');
+            fog.on('animationcomplete', () => { // callback after anim completes
+                fog.anims.play('fog_effect');
+                fog.destroy();
             });
         });
 
@@ -1088,7 +1104,7 @@ class play extends Phaser.Scene {
 
             // path 1
             if (i == 0) {
-                scene.light.setAlpha(1);
+                scene.light.setAlpha(0.5);
                 // if first time
                 if (!once) {
                     // play bg_path1 and loops continuously
