@@ -206,10 +206,11 @@ class play extends Phaser.Scene {
         this.anims.create({
             key: 'light_effect',
             frames: this.anims.generateFrameNumbers('light_effect', { start: 0, end: 8, first: 0 }),
-            frameRate: 8
+            frameRate: 8,
+            repeat: 2,
         });
 
-        let light_effect = scene.add.sprite(0, 0, 'light_effect').setAlpha(0).setOrigin(0, 0);
+        let light_effect = scene.add.sprite(300, -30, 'light_effect').setAlpha(0).setOrigin(0, 0);
         this.creep = this.add.sprite(200, 200, 'creep').setOrigin(0.5,0.5).setAlpha(0).setScale(5);
 
         
@@ -463,7 +464,7 @@ class play extends Phaser.Scene {
             scene.computer.add(scene.path1_3);
 
             // light_effect anim tied to zoomed in camera 
-            let light_effect2 = scene.add.sprite(0, 0, 'light_effect').setOrigin(0, 0);
+            let light_effect2 = scene.add.sprite(0, -200, 'light_effect').setOrigin(0, 0);
             light_effect2.anims.play('light_effect');
             light_effect2.on('animationcomplete', () => { // callback after anim completes
                 light_effect2.anims.play('light_effect');
