@@ -987,6 +987,7 @@ class play extends Phaser.Scene {
             let glitch = scene.add.sprite(scene.webpage3_3.x, scene.webpage3_3.y, 'glitch_effect').setOrigin(0, 0);
             scene.path3_3.add(glitch);
             glitch.anims.play('glitch');
+            scene.sound.play('glitch_sfx');
             glitch.on('animationcomplete', () => { // callback after anim completes
                 glitch.anims.play('glitch');
                 glitch.destroy();

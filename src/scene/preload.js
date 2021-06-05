@@ -217,6 +217,7 @@ class preload extends Phaser.Scene {
         this.load.audio('boom', './assets/sound/event_sfx/boom.wav');
         this.load.audio('person_sfx', './assets/sound/event_sfx/person_sfx.wav');
         this.load.audio('static_sfx', './assets/sound/event_sfx/static_sfx.wav');
+        this.load.audio('glitch_sfx', './assets/sound/event_sfx/glitch_sfx.wav');
         this.load.audio('popup', './assets/sound/event_sfx/sfx_popup.wav');
 
         // 3_1 web music 
