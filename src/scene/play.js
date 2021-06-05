@@ -664,6 +664,7 @@ class play extends Phaser.Scene {
             scene.window_people.setPosition(2000, 0);
             scene.window_person2.setPosition(2000, 0);
             scene.window_person3.setPosition(560, 530);
+            scene.sound.play('person_sfx');
             eye_tween.play();
 
             let eyes = scene.add.sprite(50, 70, 'eye_anims').setOrigin(0,0).setScale(0.5);
@@ -709,13 +710,13 @@ class play extends Phaser.Scene {
 
             scene.time.delayedCall(2000, () =>{
                 scene.laughing.setRate(.6);
-                scene.laughing.setLoop(true);
                 scene.laughing.play();
             });
 
             scene.time.delayedCall(6000, () =>{
                 scene.static = scene.add.sprite(-200, -100, 'static1', 0).setOrigin(0,0).setAlpha(.5);
                 scene.static.play('static1');
+                scene.sound.play('static_sfx');
                 scene.static.once('animationcomplete', () =>{
                     scene.static.play('static2');
                     console.log('playing static2');
