@@ -230,10 +230,17 @@ class play extends Phaser.Scene {
             repeat: 1,
         });
 
+        this.anims.create({
+            key: 'person_anim',
+            frames: this.anims.generateFrameNumbers('room_person', { start: 0, end: 36, first: 0 }),
+            frameRate: 21,
+        });
+
         // adding window sprites 
         this.light = this.add.sprite(-game.config.width / 5, -game.config.height / 20, 'light').setAlpha(0).setOrigin(0, 0);
         let light_effect = scene.add.sprite(300, -30, 'light_effect').setAlpha(0).setOrigin(0, 0);
-        this.creep = this.add.sprite(200, 200, 'creep').setOrigin(0.5,0.5).setAlpha(0).setScale(5);
+        this.person_anim = this.add.sprite(200, 730, 'person_anim').setOrigin(0.5,0.5).setAlpha(1).setScale(1.5);
+        //this.person_anim.anims.play('person_anim');
 
         
         //////////////////////////////
@@ -674,6 +681,7 @@ class play extends Phaser.Scene {
             scene.spaceKey.enabled = false;
             scene.cutscene = true;
             scene.window_person3.setPosition(2000, 0);
+            scene.person_anim.anims.play('person_anim');
             
             scene.cameras.main.setBounds(-game.config.width / 5, // x: -160
                 -game.config.height / 20, // y: -30
@@ -701,7 +709,6 @@ class play extends Phaser.Scene {
             scene.path2_3.destroy();
 
             scene.time.delayedCall(2000, () =>{
-                scene.creep.setAlpha(1);
                 scene.laughing.setRate(.6);
                 scene.laughing.setLoop(true);
                 scene.laughing.play();
