@@ -186,7 +186,6 @@ class play extends Phaser.Scene {
         //////////////////////////////
 
         // background music set up
-
         this.time.delayedCall(6000, () => {
             this.bg_1.play();
 
@@ -198,6 +197,7 @@ class play extends Phaser.Scene {
         // creates outside whenever we want
         this.window_background = this.add.sprite(570, 150, 'window_background').setOrigin(0, 0)
         this.angel = this.add.sprite(2000, 0, 'angel').setOrigin(0, 0);
+
         // fog anim setup
         this.anims.create({
             key: 'fog_effect',
@@ -208,6 +208,7 @@ class play extends Phaser.Scene {
         });
         let fog = this.add.sprite(570, 370, 'fog_effect').setOrigin(0, 0);
 
+        // startup sound 
         this.sound.play('startup', { volume: 0.4 });
 
         // creates room
@@ -221,6 +222,7 @@ class play extends Phaser.Scene {
             repeat: 1,
         });
 
+        // adding window sprites 
         this.light = this.add.sprite(-game.config.width / 5, -game.config.height / 20, 'light').setAlpha(0).setOrigin(0, 0);
         let light_effect = scene.add.sprite(300, -30, 'light_effect').setAlpha(0).setOrigin(0, 0);
         this.creep = this.add.sprite(200, 200, 'creep').setOrigin(0.5,0.5).setAlpha(0).setScale(5);
@@ -468,17 +470,6 @@ class play extends Phaser.Scene {
 
             scene.boom.stop();
 
-            let light_tween = scene.add.tween({
-                targets: [scene.light],
-                easeIn: 'Linear',
-                alpha: '-=0.3',
-                repeat: 6,
-                yoyo: true
-            });
-            light_tween.on('complete', function() {
-                scene.light.destroy();
-            });
-
             fog.setAlpha(1);
             fog.anims.play('fog_effect');
             fog.on('animationcomplete', () => { // callback after anim completes
@@ -507,6 +498,7 @@ class play extends Phaser.Scene {
             light_effect.on('animationcomplete', () => { // callback after anim completes
                 light_effect.anims.play('light_effect');
                 light_effect.destroy();
+                fog.destroy();
             });
 
 
@@ -539,6 +531,20 @@ class play extends Phaser.Scene {
             scene.computer.setY(180);
             scene.computer.setX(-150);
             scene.computer.setScale(.75);
+
+            // light flashes 
+            let light_tween = scene.add.tween({
+                targets: [scene.light],
+                easeIn: 'Linear',
+                alpha: '-=0.5',
+                repeat: 2,
+                yoyo: true
+            });
+            light_tween.on('complete', function() {
+                // screen turns white 
+                scene.light.destroy();
+                scene.add.rectangle(-game.config.width / 5, -game.config.height / 20, 1200, 900, 0xffffff).setAlpha(0.9).setOrigin(0, 0);
+            });
 
             if (scene.instructions) {
                 scene.instructions.destroy();
