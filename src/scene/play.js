@@ -719,10 +719,8 @@ class play extends Phaser.Scene {
                 scene.sound.play('static_sfx');
                 scene.static.once('animationcomplete', () =>{
                     scene.static.play('static2');
-                    console.log('playing static2');
                     scene.static.once('animationcomplete', () =>{
                         scene.static.play('static3');
-                        console.log('playing static3');
                     });
                 });
             });
@@ -1157,7 +1155,6 @@ class play extends Phaser.Scene {
                     // checks when one song is complete
                     scene.bg_path1.forEach(element => {
                         element.on('complete', function() {
-                            console.log(j);
                             j = scene.getRandomIntInclusive(0, 3);
                             scene.bg_path1[j].play();
                         })
@@ -1203,7 +1200,6 @@ class play extends Phaser.Scene {
                     // checks when one song is complete
                     scene.bg_path2.forEach(element => {
                         element.on('complete', function() {
-                            console.log(j);
                             j = scene.getRandomIntInclusive(0, 3);
                             scene.bg_path2[j].play();
                         })
@@ -1240,7 +1236,6 @@ class play extends Phaser.Scene {
                     // checks when one song is complete
                     scene.bg_path3.forEach(element => {
                         element.on('complete', function() {
-                            console.log(j);
                             j = scene.getRandomIntInclusive(0, 3);
                             scene.bg_path3[j].play();
                         })
