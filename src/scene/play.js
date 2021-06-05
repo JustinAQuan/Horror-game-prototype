@@ -204,7 +204,7 @@ class play extends Phaser.Scene {
         this.window_people = this.add.sprite(2000, 0, 'window_people').setOrigin(0, 0);
         this.window_person1 = this.add.sprite(2000, 0, 'window_person1').setOrigin(0, 0);
         this.window_person2 = this.add.sprite(2000, 0, 'window_person2').setOrigin(0, 0);
-        this.window_person3 = this.add.sprite(2000, 0, 'window_person3').setOrigin(0, 0);
+        this.window_person3 = this.add.sprite(2000, 0, 'window_person3').setOrigin(0, 0).setScale(4);
 
         // fog anim setup
         this.anims.create({
@@ -240,7 +240,6 @@ class play extends Phaser.Scene {
         this.light = this.add.sprite(-game.config.width / 5, -game.config.height / 20, 'light').setAlpha(0).setOrigin(0, 0);
         let light_effect = scene.add.sprite(300, -30, 'light_effect').setAlpha(0).setOrigin(0, 0);
         this.person_anim = this.add.sprite(200, 730, 'person_anim').setOrigin(0.5,0.5).setAlpha(1).setScale(1.5);
-        //this.person_anim.anims.play('person_anim');
 
         
         //////////////////////////////
@@ -516,7 +515,7 @@ class play extends Phaser.Scene {
                 fog.destroy();
             });
 
-
+            scene.window_people.setPosition(2000, 0);
             scene.sound.play('ufo');
 
             scene.computer.remove(scene.path1_2);
@@ -664,7 +663,7 @@ class play extends Phaser.Scene {
             scene.path2_2.setPosition(2000, 0);
             scene.window_people.setPosition(2000, 0);
             scene.window_person2.setPosition(2000, 0);
-            scene.window_person3.setPosition(603, 540);
+            scene.window_person3.setPosition(560, 530);
             eye_tween.play();
 
             let eyes = scene.add.sprite(50, 70, 'eye_anims').setOrigin(0,0).setScale(0.5);
@@ -1395,6 +1394,7 @@ class play extends Phaser.Scene {
 
                 if (i == 0) {
                     scene.boom.play();
+                    scene.window_people.setPosition(1013, 315);
                 }
 
                 // after 3 seconds of clicking on the email link for any path
