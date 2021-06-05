@@ -3,7 +3,7 @@
 Windows Startup Sound:<br>
 https://soundbible.com/1654-Windows-95-Startup.html 
  
- W95FA Font Family:<br>
+W95FA Font Family:<br>
 Created by Alina Sava<br>
 https://fontsarena.com/w95fa-by-fontsarena/
 
