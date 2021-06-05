@@ -60,7 +60,7 @@ class end extends Phaser.Scene {
         }
 
         this.retryblock = this.add.rectangle(game.config.width / 2, game.config.height / 2 + 160, 300, 60, 0x666666).setOrigin(.5,.5).setInteractive( {cursor: 'pointer'} );
-        this.retry = this.add.text(game.config.width / 2, game.config.height / 2 + 156, "PLAY AGAIN?", {fontFamily: 'VT323', fontSize: "50px", color: 0xffffff}).setOrigin(.5,.5).setInteractive( {cursor: 'pointer'} );
+        this.retry = this.add.text(game.config.width / 2, game.config.height / 2 + 156, "REBOOT?", {fontFamily: 'VT323', fontSize: "50px", color: 0xffffff}).setOrigin(.5,.5).setInteractive( {cursor: 'pointer'} );
     
         this.retryblock.on('pointerdown', function(){
             scene.sound.play('click');
