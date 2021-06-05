@@ -209,9 +209,10 @@ class play extends Phaser.Scene {
             key: 'light_effect',
             frames: this.anims.generateFrameNumbers('light_effect', { start: 0, end: 8, first: 0 }),
             frameRate: 8,
-            repeat: 2,
+            repeat: 1,
         });
 
+        this.light = this.add.sprite(-game.config.width / 5, -game.config.height / 20, 'light').setAlpha(0).setOrigin(0, 0);
         let light_effect = scene.add.sprite(300, -30, 'light_effect').setAlpha(0).setOrigin(0, 0);
         this.creep = this.add.sprite(200, 200, 'creep').setOrigin(0.5,0.5).setAlpha(0).setScale(5);
 
@@ -457,6 +458,17 @@ class play extends Phaser.Scene {
             scene.path1_1.setPosition(2000, 0);
 
             scene.boom.stop();
+
+            let light_tween = scene.add.tween({
+                targets: [scene.light],
+                easeIn: 'Linear',
+                alpha: '-=0.5',
+                repeat: 6,
+                yoyo: true
+            });
+            light_tween.on('complete', function() {
+                scene.light.destroy();
+            });
         });
 
         // LINK1_2 SETUP
@@ -1076,7 +1088,7 @@ class play extends Phaser.Scene {
 
             // path 1
             if (i == 0) {
-
+                scene.light.setAlpha(1);
                 // if first time
                 if (!once) {
                     // play bg_path1 and loops continuously
@@ -1395,7 +1407,6 @@ class play extends Phaser.Scene {
             scene.text_doc_con.setPosition(0, 0);
             // random number determines which text doc pops up 
             scene.text_val = Phaser.Math.Between(0, 3);
-            console.log(scene.text_val);
             if (scene.text_val == 0){
                 scene.text_doc = scene.add.sprite(50, 50, 'text_doc1').setOrigin(0, 0);
             }
