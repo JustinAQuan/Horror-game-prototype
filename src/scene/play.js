@@ -946,7 +946,6 @@ class play extends Phaser.Scene {
             popupMaster();
 
             // plays glitch_effect when opening page 
-            // TODO fix x and y based on window position
             let glitch = scene.add.sprite(scene.webpage3_3.x, scene.webpage3_3.y, 'glitch_effect').setOrigin(0, 0);
             scene.path3_3.add(glitch);
             glitch.anims.play('glitch');
@@ -956,7 +955,6 @@ class play extends Phaser.Scene {
             });
 
             // plays glitch_effect_2 when opening page 
-            // TODO change when animation plays 
             let glitch2 = scene.add.sprite(monitorBorderX, monitorBorderY, 'glitch_effect2').setOrigin(0, 0);
             scene.computer.add(glitch2);
             glitch2.anims.play('glitch2');
@@ -1521,7 +1519,12 @@ class play extends Phaser.Scene {
         popup.setInteractive({ cursor: 'pointer' });
         path.add(popup);
 
-        scene.sound.play('popup');
+        scene.popup = this.sound.add(
+            'popup', {
+                volume: 0.3,
+            }
+        );
+        scene.popup.play();
 
         popup.on('pointerdown', function() {
             scene.sound.play('click');
