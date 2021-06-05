@@ -856,6 +856,10 @@ class play extends Phaser.Scene {
         this.clickhere = this.add.rectangle(153, 370, 100, 25, 0xffffff).setAlpha(0.01).setInteractive({ cursor: 'pointer' });
         this.dude = this.add.sprite(153, 400, 'dude').setAlpha(0).setScale(0.5).setOrigin(0, 0);
         this.url3_2 = this.add.text(152, 127, "https://www.madame-ferebi.com", textStyle).setOrigin(0, 0);
+        this.text_doc_con = this.add.container();
+        this.virus_con = this.add.container();
+        this.error_con = this.add.container();
+        this.fail_con = this.add.container();
         this.path3_2.add([this.webpageUI3_2, this.webpage3_2, this.death, this.tower, this.clickhere, this.web3_2close, this.dude, this.url3_2]);
 
         let death_tween = this.add.tween({
@@ -874,7 +878,6 @@ class play extends Phaser.Scene {
             repeat: -1,
             yoyo: true
         });
-    // TODO add tween for dude's alpha on clicking clickhere
 
         // path3_3
         this.webpageUI3_3 = this.add.sprite(70, 100, 'ie_window').setOrigin(0, 0).setInteractive();
@@ -883,6 +886,8 @@ class play extends Phaser.Scene {
         this.web3_3close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url3_3 = this.add.text(152, 127, "http://www.the-pantaloon-inquirer.net/feb_28_2002-AnHinY2/", textStyle).setOrigin(0, 0);
         this.path3_3.add([this.webpageUI3_3, this.webpage3_3, this.link3_3, this.web3_3close, this.url3_3]);
+
+            
 
         //path3_3 animation config
         this.anims.create({
@@ -948,6 +953,11 @@ class play extends Phaser.Scene {
             scene.computer.add([scene.path3_3]);
             scene.computer.remove(scene.path3_2);
             scene.path3_2.setPosition(2000, 0);
+            // destroys popups 
+            scene.text_doc_con.destroy();
+            scene.virus_con.destroy();
+            scene.error_con.destroy();
+            scene.fail_con.destroy();
 
             //link 3_2 setup acts like a constructor for page3_3
             //popus are initiated here after loading path3_3 container
@@ -1428,7 +1438,6 @@ class play extends Phaser.Scene {
             scene.computer.remove(scene.path3_2);
             scene.path3_2.setPosition(2000, 0);
             scene.webpage3_2.setTint(0xff0000);
-            scene.text_doc_con = scene.add.container();
             scene.text_doc_con.setPosition(0, 0);
             // random number determines which text doc pops up 
             scene.text_val = Phaser.Math.Between(0, 3);
@@ -1448,7 +1457,7 @@ class play extends Phaser.Scene {
             scene.text_doc_con.add([scene.text_doc, scene.text_close]); 
             // closes popup text box
             scene.text_close.on('pointerdown', function() {
-                scene.text_doc_con.destroy();
+                scene.text_doc_con.setPosition(2000, 0);
             })
         });
 
@@ -1466,38 +1475,35 @@ class play extends Phaser.Scene {
             scene.popup_val = Phaser.Math.Between(0, 2);
             if (scene.popup_val == 0) {
                 // virus popup 
-                scene.virus_con = scene.add.container();
                 scene.virus_con.setPosition(0, 0);
                 scene.virus_popup = scene.add.sprite(300, 300, 'virus_popup');
                 scene.virus_close = new clickable(scene, 516, 285, 'close_button');
                 scene.virus_con.add([scene.virus_popup, scene.virus_close]);
 
                 scene.virus_close.on('pointerdown', function() {
-                    scene.virus_con.destroy();
+                    scene.virus_con.setPosition(2000, 0);
                 })
             }
             else if (scene.popup_val == 1) {
                 // critical error
-                scene.error_con = scene.add.container();
                 scene.error_con.setPosition(0, 0);
                 scene.critical_error = scene.add.sprite(300, 300, 'critical_error');
                 scene.error_close = new clickable(scene, 352, 289, 'close_button');
                 scene.error_con.add([scene.critical_error, scene.error_close]);
 
                 scene.error_close.on('pointerdown', function() {
-                    scene.error_con.destroy();
+                    scene.error_con.setPosition(2000, 0);
                 })
             }
             else if (scene.popup_val == 2) {
                 // fail message
-                scene.fail_con = scene.add.container();
                 scene.fail_con.setPosition(0, 0);
                 scene.fail_message = scene.add.sprite(300, 300, 'fail_message');
                 scene.fail_message_okay = new clickable(scene, 300, 350, 'fail_message_okay');
                 scene.fail_con.add([scene.fail_message, scene.fail_message_okay]); 
 
                 scene.fail_message_okay.on('pointerdown', function() {
-                    scene.fail_con.destroy();
+                    scene.fail_con.setPosition(2000, 0);
                 })
             }
         })
