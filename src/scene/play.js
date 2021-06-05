@@ -203,6 +203,8 @@ class play extends Phaser.Scene {
 
         // creates room
         this.room = this.add.sprite(-game.config.width / 5, -game.config.height / 20, 'room').setOrigin(0, 0);
+
+        // 1_3 light effect anim 
         this.anims.create({
             key: 'light_effect',
             frames: this.anims.generateFrameNumbers('light_effect', { start: 0, end: 8, first: 0 }),
