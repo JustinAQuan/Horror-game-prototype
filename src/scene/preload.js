@@ -94,7 +94,10 @@ class preload extends Phaser.Scene {
         // LOADS OUTSIDE
         this.load.image('window_background', './assets/art/window_background.png');
         this.load.image('angel', './assets/art/tall_lady.png');
-
+        this.load.image('window_people', './assets/art/window_people.png');
+        this.load.image('window_person1', './assets/art/far_bg_person.png');
+        this.load.image('window_person2', './assets/art/small_foreground_dude.png');
+        this.load.image('window_person3', './assets/art/big_foreground_dude.png');
 
         // LOADS DUMMY WINDOWS
         this.load.image('rb_window', './assets/art/Desktop/Recycle_binTemplate.png');

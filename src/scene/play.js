@@ -201,6 +201,10 @@ class play extends Phaser.Scene {
         // creates outside whenever we want
         this.window_background = this.add.sprite(570, 150, 'window_background').setOrigin(0, 0)
         this.angel = this.add.sprite(2000, 0, 'angel').setOrigin(0, 0);
+        this.window_people = this.add.sprite(2000, 0, 'window_people').setOrigin(0, 0);
+        this.window_person1 = this.add.sprite(2000, 0, 'window_person1').setOrigin(0, 0);
+        this.window_person2 = this.add.sprite(2000, 0, 'window_person2').setOrigin(0, 0);
+        this.window_person3 = this.add.sprite(2000, 0, 'window_person3').setOrigin(0, 0);
 
         // fog anim setup
         this.anims.create({
@@ -639,6 +643,8 @@ class play extends Phaser.Scene {
             scene.computer.add([scene.path2_2]);
             scene.computer.remove(scene.path2_1);
             scene.path2_1.setPosition(2000, 0);
+            scene.window_person1.setPosition(2000, 0);
+            scene.window_person2.setPosition(770, 495);
             scene.sound.play('breathing');
         });
 
@@ -649,6 +655,9 @@ class play extends Phaser.Scene {
             scene.computer.add([scene.path2_3]);
             scene.computer.remove(scene.path2_2);
             scene.path2_2.setPosition(2000, 0);
+            scene.window_people.setPosition(2000, 0);
+            scene.window_person2.setPosition(2000, 0);
+            scene.window_person3.setPosition(603, 540);
             eye_tween.play();
 
             let eyes = scene.add.sprite(50, 70, 'eye_anims').setOrigin(0,0).setScale(0.5);
@@ -664,6 +673,7 @@ class play extends Phaser.Scene {
         scene.link2_3.on('pointerdown', function() {
             scene.spaceKey.enabled = false;
             scene.cutscene = true;
+            scene.window_person3.setPosition(2000, 0);
             
             scene.cameras.main.setBounds(-game.config.width / 5, // x: -160
                 -game.config.height / 20, // y: -30
@@ -1176,7 +1186,8 @@ class play extends Phaser.Scene {
 
             // path 2
             else if (i == 1) {
-
+                scene.window_people.setPosition(1013, 315);
+                scene.window_person1.setPosition(875, 405);
                 // if first time
                 if (!once) {
                     // play bg_path2 and loops continously
