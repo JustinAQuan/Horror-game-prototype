@@ -956,16 +956,25 @@ class play extends Phaser.Scene {
             let signal_ = scene.web3_3signal;
             if (clickable && signal_) {
                 scene.time.delayedCall(2500, () => {
-                    scene.createPopup(true, 'popup');
+                    scene.createPopup(true, 'popup', {
+                        left: 77,
+                        top: 144,
+                        rightEdge: 624,
+                        bottomEdge: 511,
+                    });
                     popupMaster(true);
                 });
             } else {
                 scene.time.delayedCall(100, () => {
-                    scene.createPopup(false, 'popup_virus');
+                    scene.createPopup(false, 'popup_virus', {
+                        left: 34,
+                        top: 70,
+                        rightEdge: 650,
+                        bottomEdge: 567,
+                    });
                     popupMaster(false);
                 });
             }
-
         }
 
         // LINK3_2 SETUP
@@ -1029,7 +1038,7 @@ class play extends Phaser.Scene {
                 scene.instructions.destroy();
             }
 
-            scene.time.delayedCall(15000, () => {
+            scene.time.delayedCall(12000, () => {
                 scene.game.sound.stopAll();
 
                 scene.scene.stop();
@@ -1529,11 +1538,9 @@ class play extends Phaser.Scene {
     }
 
     //  pop-up handling
-    createPopup(clickable, sound) {
+    createPopup(clickable, sound, bounds) {
         let scene = this;
         let path = scene.path3_3;
-        let rightEdge = 624;
-        let bottomEdge = 511;
         let popups = ['popup-advert_1', 'popup-advert_2', 'popup-advert_3'];
         let endPopups = ['virus_popup', 'critical_error'];
         let index;
@@ -1549,13 +1556,11 @@ class play extends Phaser.Scene {
 
         let popup = this.add.sprite(0, 0, key).setAlpha(1).setScale(1).setOrigin(0, 0);
 
-        let left = 77,
-            right = rightEdge - popup.displayWidth,
-            bottom = bottomEdge - popup.displayHeight,
-            top = 144;
+        let right = bounds.rightEdge - popup.displayWidth,
+            bottom = bounds.bottomEdge - popup.displayHeight;
 
-        let x = scene.getRandomIntInclusive(left, right);
-        let y = scene.getRandomIntInclusive(bottom, top);
+        let x = scene.getRandomIntInclusive(bounds.left, right);
+        let y = scene.getRandomIntInclusive(bottom, bounds.top);
 
         popup.setPosition(x, y);
 
