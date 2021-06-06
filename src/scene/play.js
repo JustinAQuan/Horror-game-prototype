@@ -657,12 +657,14 @@ class play extends Phaser.Scene {
             });
 
             scene.time.delayedCall(6000, () => {
-                scene.static = scene.add.sprite(-200, -100, 'static1', 0).setOrigin(0, 0).setAlpha(.5);
+                scene.static = scene.add.sprite(-200, -100, 'static1', 0).setOrigin(0, 0).setAlpha(0.5).setScale(1.1);
                 scene.static.play('static1');
                 scene.sound.play('static_sfx');
                 scene.static.once('animationcomplete', () => {
+                    scene.static.setAlpha(0.76);
                     scene.static.play('static2');
                     scene.static.once('animationcomplete', () => {
+                        scene.static.setAlpha(1);
                         scene.static.play('static3');
                     });
                 });
