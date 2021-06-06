@@ -64,12 +64,8 @@ class preload extends Phaser.Scene {
         this.load.image('credits_folder', './assets/art/Desktop/credits_folder.png');
         this.load.image('credits_link1', './assets/art/Desktop/credits_link1.png');
         this.load.image('credits_link2', './assets/art/Desktop/credits_link2.png');
-        this.load.image('credits_page1', './assets/art/Desktop/credits.png');
-        this.load.image('text_doc1', './assets/art/Desktop/text_doc1.png');
-        this.load.image('text_doc2', './assets/art/Desktop/text_doc2.png');
-        this.load.image('text_doc3', './assets/art/Desktop/text_doc3.png');
-        this.load.image('text_doc4', './assets/art/Desktop/text_doc4.png');
-
+        this.load.image('credits_page1', './assets/art/Desktop/credits_page1.png');
+        this.load.image('credits_page2', './assets/art/Desktop/credits_page2.png');
 
         // load music
         this.load.audio('menu_music', './assets/sound/bgm/bg_2.wav');
@@ -91,12 +87,17 @@ class preload extends Phaser.Scene {
 
         // LOADS ROOM
         this.load.image('room', './assets/art/room.png');
+        this.load.image('light', './assets/art/light.png');
+
 
 
         // LOADS OUTSIDE
         this.load.image('window_background', './assets/art/window_background.png');
         this.load.image('angel', './assets/art/tall_lady.png');
-
+        this.load.image('window_people', './assets/art/window_people.png');
+        this.load.image('window_person1', './assets/art/far_bg_person.png');
+        this.load.image('window_person2', './assets/art/small_foreground_dude.png');
+        this.load.image('window_person3', './assets/art/big_foreground_dude.png');
 
         // LOADS DUMMY WINDOWS
         this.load.image('rb_window', './assets/art/Desktop/Recycle_binTemplate.png');
@@ -123,7 +124,6 @@ class preload extends Phaser.Scene {
         // LOADS PATH1_2
         this.load.image('webpage1_2', './assets/art/Webpages/page1_2.png');
         this.load.image('link1_2', './assets/art/Webpages/page1_2_link.png');
-        this.load.image('light_flash', './assets/art/light_flash.png');
 
         // LOADS PATH1_3
         this.load.image('webpage1_3.1', './assets/art/Webpages/page1_3_part1.png');
@@ -163,6 +163,16 @@ class preload extends Phaser.Scene {
         this.load.image('popup-advert_1', './assets/art/Webpages/page3_3-popup1.png');
         this.load.image('popup-advert_2', './assets/art/Webpages/page3_3-popup2.png');
         this.load.image('popup-advert_3', './assets/art/Webpages/page3_3-popup3.png');
+
+        // LOADS POPUPS 
+        this.load.image('text_doc1', './assets/art/Desktop/text_doc1.png');
+        this.load.image('text_doc2', './assets/art/Desktop/text_doc2.png');
+        this.load.image('text_doc3', './assets/art/Desktop/text_doc3.png');
+        this.load.image('text_doc4', './assets/art/Desktop/text_doc4.png');
+        this.load.image('virus_popup', './assets/art/Desktop/virus_popup_1.png');
+        this.load.image('critical_error', './assets/art/Desktop/critical_error.png');
+        this.load.image('fail_message', './assets/art/Desktop/fail_message.png');
+        this.load.image('fail_message_okay', './assets/art/Desktop/fail_message_okay.png');
 
         
         // LOADS AUDIO
@@ -205,6 +215,9 @@ class preload extends Phaser.Scene {
         this.load.audio('squeak', './assets/sound/event_sfx/squeak.wav');
         this.load.audio('scratching', './assets/sound/event_sfx/scratching.wav');
         this.load.audio('boom', './assets/sound/event_sfx/boom.wav');
+        this.load.audio('person_sfx', './assets/sound/event_sfx/person_sfx.wav');
+        this.load.audio('static_sfx', './assets/sound/event_sfx/static_sfx.wav');
+        this.load.audio('glitch_sfx', './assets/sound/event_sfx/glitch_sfx.wav');
         this.load.audio('popup', './assets/sound/event_sfx/sfx_popup.wav');
 
         // 3_1 web music 
@@ -225,10 +238,16 @@ class preload extends Phaser.Scene {
         this.load.atlas('KUKU_anims', './assets/art/Anims/KUKU.png', './assets/art/Anims/KUKU.json');
         this.load.atlas('Q-WALKER_anims', './assets/art/Anims/Q-WALKER.png', './assets/art/Anims/Q-WALKER.json');
         this.load.atlas('SKYNET_anims', './assets/art/Anims/SKYNET.png', './assets/art/Anims/SKYNET.json');
+        this.load.atlas('static1_anims', './assets/art/Anims/static1.png', './assets/art/Anims/static1.json');
+        this.load.atlas('static2_anims', './assets/art/Anims/static2.png', './assets/art/Anims/static2.json');
+        this.load.atlas('static3_anims', './assets/art/Anims/static3.png', './assets/art/Anims/static3.json');
         this.load.atlas('eye_anims', './assets/art/Anims/eye.png', './assets/art/Anims/eye.json');
         this.load.spritesheet('light_effect', './assets/art/Anims/light_effect.png', { frameWidth: 1024, frameHeight: 1024, startFrame: 0, endFrame: 8 });
         this.load.spritesheet('glitch_effect', './assets/art/Anims/glitch_effect.png', { frameWidth: 547, frameHeight: 367, startFrame: 0, endFrame: 4 });
         this.load.spritesheet('glitch_effect2', './assets/art/glitch_effect_2.png', { frameWidth: 732, frameHeight: 534, startFrame: 0, endFrame: 5 });
+        this.load.spritesheet('fog', './assets/art/Anims/fog.png', { frameWidth: 471, frameHeight: 250.5, startFrame: 0, endFrame: 23 });
+        this.load.spritesheet('room_person', './assets/art/Anims/room_person.png', { frameWidth: 283, frameHeight: 1024, startFrame: 0, endFrame: 36 });
+
 
     }
 }

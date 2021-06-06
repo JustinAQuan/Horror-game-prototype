@@ -81,7 +81,7 @@ class menu extends Phaser.Scene {
         this.credits_page1_con.add([this.credits_page1, this.close_credits1]);
 
         // credits page 2
-        this.credits_page2 = this.add.sprite(game.config.width / 2, game.config.height / 2 - 30, 'text_doc1').setOrigin(.5,.5);
+        this.credits_page2 = this.add.sprite(game.config.width / 2, game.config.height / 2 - 30, 'credits_page2').setOrigin(.5,.5);
         this.close_credits2 = new clickable(this, 593, 103, 'close_button');
 
         this.credits_page2_con.add([this.credits_page2, this.close_credits2]);
@@ -153,6 +153,11 @@ class menu extends Phaser.Scene {
     }
 
     update() {
+        // music reset 
+        if (restart) {
+            this.menu_bgm.play();
+            restart = false;
+        }
         // handles debug input
         if(Phaser.Input.Keyboard.JustDown(this.one) && pathInput != 0) {
             if (pathInput){

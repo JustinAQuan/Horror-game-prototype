@@ -6,6 +6,7 @@ class play extends Phaser.Scene {
     create() {
         let scene = this;
         this.curr = null;
+        this.cutscene = false;
         this.web3_3signal = true;
 
         this.emailFSD = this.cache.json.get('emailHeader');
@@ -150,6 +151,10 @@ class play extends Phaser.Scene {
 
         // EVENT SFX
 
+        this.laughing = this.sound.add(
+            'laughing',
+        );
+
         this.scratching = this.sound.add(
             'scratching',
         );
@@ -185,7 +190,6 @@ class play extends Phaser.Scene {
         //////////////////////////////
 
         // background music set up
-
         this.time.delayedCall(6000, () => {
             this.bg_1.play();
 
@@ -197,22 +201,47 @@ class play extends Phaser.Scene {
         // creates outside whenever we want
         this.window_background = this.add.sprite(570, 150, 'window_background').setOrigin(0, 0)
         this.angel = this.add.sprite(2000, 0, 'angel').setOrigin(0, 0);
+        this.window_people = this.add.sprite(2000, 0, 'window_people').setOrigin(0, 0);
+        this.window_person1 = this.add.sprite(2000, 0, 'window_person1').setOrigin(0, 0);
+        this.window_person2 = this.add.sprite(2000, 0, 'window_person2').setOrigin(0, 0);
+        this.window_person3 = this.add.sprite(2000, 0, 'window_person3').setOrigin(0, 0).setScale(4);
 
+        // fog anim setup
+        this.anims.create({
+            key: 'fog_effect',
+            frames: this.anims.generateFrameNumbers('fog', { start: 0, end: 23, first: 0 }),
+            frameRate: 6,
+            yoyo: true,
+            repeat: -1,
+        });
+        let fog = this.add.sprite(570, 370, 'fog_effect').setOrigin(0, 0);
+
+        // startup sound 
         this.sound.play('startup', { volume: 0.4 });
 
         // creates room
         this.room = this.add.sprite(-game.config.width / 5, -game.config.height / 20, 'room').setOrigin(0, 0);
+
+        // 1_3 light effect anim 
         this.anims.create({
             key: 'light_effect',
             frames: this.anims.generateFrameNumbers('light_effect', { start: 0, end: 8, first: 0 }),
-            frameRate: 8
+            frameRate: 8,
+            repeat: 1,
         });
 
-        let light_effect = scene.add.sprite(0, 0, 'light_effect').setAlpha(0).setOrigin(0, 0);
+        this.anims.create({
+            key: 'person_anim',
+            frames: this.anims.generateFrameNumbers('room_person', { start: 0, end: 36, first: 0 }),
+            frameRate: 21,
+        });
+
+        // adding window sprites 
+        this.light = this.add.sprite(-game.config.width / 5, -game.config.height / 20, 'light').setAlpha(0).setOrigin(0, 0);
+        let light_effect = scene.add.sprite(300, -30, 'light_effect').setAlpha(0).setOrigin(0, 0);
+        this.person_anim = this.add.sprite(200, 730, 'person_anim').setOrigin(0.5,0.5).setAlpha(1).setScale(1.5);
 
         
-            
-
         //////////////////////////////
         //      MONITOR SETUP       //
         //////////////////////////////
@@ -235,7 +264,21 @@ class play extends Phaser.Scene {
         //////////////////////////////
         //       ANIMS SETUP        //
         //////////////////////////////
-
+        this.anims.create({
+            key: 'static1',
+            frames: this.anims.generateFrameNames('static1_anims', {prefix: 'static1_', end: 11, zeroPad: 2}),
+            frameRate: 12
+        });
+        this.anims.create({
+            key: 'static2',
+            frames: this.anims.generateFrameNames('static2_anims', {prefix: 'static2_', end: 11, zeroPad: 2}),
+            frameRate: 12
+        });
+        this.anims.create({
+            key: 'static3',
+            frames: this.anims.generateFrameNames('static3_anims', {prefix: 'static3_', end: 11, zeroPad: 2}),
+            frameRate: 12
+        });
 
 
         //////////////////////////////
@@ -404,7 +447,6 @@ class play extends Phaser.Scene {
             scene.link1_2.clearTint();
         })
 
-
         // path1_3
         this.webpageUI1_3 = this.add.sprite(70, 100, 'ie_window').setOrigin(0, 0).setInteractive();
         this.webpage1_3_1 = this.add.sprite(77, 144, 'webpage1_3.1').setOrigin(0, 0);
@@ -429,6 +471,8 @@ class play extends Phaser.Scene {
             }
         });
 
+
+
         // LINK1_1 SETUP
         scene.link1_1.on('pointerdown', function() {
             scene.curr = scene.path1_2;
@@ -439,6 +483,13 @@ class play extends Phaser.Scene {
             scene.path1_1.setPosition(2000, 0);
 
             scene.boom.stop();
+
+            fog.setAlpha(1);
+            fog.anims.play('fog_effect');
+            fog.on('animationcomplete', () => { // callback after anim completes
+                fog.anims.play('fog_effect');
+                fog.destroy();
+            });
         });
 
         // LINK1_2 SETUP
@@ -448,7 +499,7 @@ class play extends Phaser.Scene {
             scene.computer.add(scene.path1_3);
 
             // light_effect anim tied to zoomed in camera 
-            let light_effect2 = scene.add.sprite(0, 0, 'light_effect').setOrigin(0, 0);
+            let light_effect2 = scene.add.sprite(0, -200, 'light_effect').setOrigin(0, 0);
             light_effect2.anims.play('light_effect');
             light_effect2.on('animationcomplete', () => { // callback after anim completes
                 light_effect2.anims.play('light_effect');
@@ -461,9 +512,10 @@ class play extends Phaser.Scene {
             light_effect.on('animationcomplete', () => { // callback after anim completes
                 light_effect.anims.play('light_effect');
                 light_effect.destroy();
+                fog.destroy();
             });
 
-
+            scene.window_people.setPosition(2000, 0);
             scene.sound.play('ufo');
 
             scene.computer.remove(scene.path1_2);
@@ -482,21 +534,62 @@ class play extends Phaser.Scene {
 
         // LINK1_3 SETUP
         scene.link1_3.on('pointerdown', function() {
-            scene.game.sound.stopAll();
+            scene.spaceKey.enabled = false;
+            scene.cutscene = true;
+            
+            scene.cameras.main.setBounds(-game.config.width / 5, // x: -160
+                -game.config.height / 20, // y: -30
+                game.config.width * 1.5, // width: 1200 (therefore, can scroll right until 1040 pixels)
+                game.config.height * 1.1 + 20); // height: 680 (therefore, can scroll down until 650 pixels)
 
-            scene.scene.stop();
-            scene.scene.launch("endScene", { ending: "PATH 1" });
+            scene.computer.setY(180);
+            scene.computer.setX(-150);
+            scene.computer.setScale(.75);
+
+            // light flashes 
+            let light_tween = scene.add.tween({
+                targets: [scene.light],
+                easeIn: 'Linear',
+                alpha: '-=0.5',
+                repeat: 2,
+                yoyo: true
+            });
+            light_tween.on('complete', function() {
+                // screen turns white 
+                scene.light.destroy();
+                scene.add.rectangle(-game.config.width / 5, -game.config.height / 20, 1200, 900, 0xffffff).setAlpha(0.9).setOrigin(0, 0);
+            });
+
+            if (scene.instructions) {
+                scene.instructions.destroy();
+            }
+
+            scene.time.delayedCall(10000, () =>{
+                scene.game.sound.stopAll();
+
+                scene.scene.stop();
+                scene.scene.launch("endScene", { ending: "PATH 1" });
+            });
         });
+
 
 
         // path2_1
         this.webpageUI2_1 = this.add.sprite(70, 100, 'ie_window').setOrigin(0, 0).setInteractive();
         this.webpage2_1 = this.add.sprite(77, 144, 'webpage2_1').setOrigin(0, 0);
-        this.link2_1 = new clickable(this, 157, 450, 'link2_1').setAlpha(0);
+        this.link2_1 = new clickable(this, 157, 450, 'link2_1').setAlpha(1);
         this.web2_1close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url2_1 = this.add.text(152, 127, "http://www.the-laundry-room.com/sammy39/", textStyle).setOrigin(0, 0);
         this.path2_1.add([this.webpageUI2_1, this.webpage2_1, this.link2_1, this.web2_1close, this.url2_1]);
 
+        // link blinks 
+        let link_tween = this.add.tween({
+            targets: [this.link2_1],
+            easeIn: 'Linear',
+            alpha: '-=0.5',
+            repeat: -1,
+            yoyo: true
+        });
 
         // path2_2
         this.webpageUI2_2 = this.add.sprite(70, 100, 'ie_window').setOrigin(0, 0).setInteractive();
@@ -513,7 +606,6 @@ class play extends Phaser.Scene {
         this.link2_2.on('pointerout', function() {
             scene.link2_2.clearTint();
         });
-
 
         // path2_3
         this.webpageUI2_3 = this.add.sprite(70, 100, 'ie_window').setOrigin(0, 0).setInteractive();
@@ -557,6 +649,8 @@ class play extends Phaser.Scene {
             scene.computer.add([scene.path2_2]);
             scene.computer.remove(scene.path2_1);
             scene.path2_1.setPosition(2000, 0);
+            scene.window_person1.setPosition(2000, 0);
+            scene.window_person2.setPosition(770, 495);
             scene.sound.play('breathing');
         });
 
@@ -567,6 +661,10 @@ class play extends Phaser.Scene {
             scene.computer.add([scene.path2_3]);
             scene.computer.remove(scene.path2_2);
             scene.path2_2.setPosition(2000, 0);
+            scene.window_people.setPosition(2000, 0);
+            scene.window_person2.setPosition(2000, 0);
+            scene.window_person3.setPosition(560, 530);
+            scene.sound.play('person_sfx');
             eye_tween.play();
 
             let eyes = scene.add.sprite(50, 70, 'eye_anims').setOrigin(0,0).setScale(0.5);
@@ -580,9 +678,59 @@ class play extends Phaser.Scene {
 
         // LINK2_3 SETUP
         scene.link2_3.on('pointerdown', function() {
-            scene.game.sound.stopAll();
-            scene.scene.stop();
-            scene.scene.launch("endScene", { ending: "PATH 2" });
+            scene.spaceKey.enabled = false;
+            scene.cutscene = true;
+            scene.window_person3.setPosition(2000, 0);
+            scene.person_anim.anims.play('person_anim');
+            
+            scene.cameras.main.setBounds(-game.config.width / 5, // x: -160
+                -game.config.height / 20, // y: -30
+                game.config.width * 1.5, // width: 1200 (therefore, can scroll right until 1040 pixels)
+                game.config.height * 1.1 + 20); // height: 680 (therefore, can scroll down until 650 pixels)
+
+            scene.computer.setY(180);
+            scene.computer.setX(-150);
+            scene.computer.setScale(.75);
+
+            if (scene.instructions) {
+                scene.instructions.destroy();
+            }
+
+            scene.homescreen.destroy();
+            scene.ie.destroy();
+            scene.ieCon.destroy();
+            scene.rb.destroy();
+            scene.rbCon.destroy();
+            scene.inbox.destroy();
+            scene.inboxCon.destroy();
+            scene.myPC.destroy();
+            scene.myPCCon.destroy();
+            scene.emailCon.destroy();
+            scene.path2_3.destroy();
+
+            scene.time.delayedCall(2000, () =>{
+                scene.laughing.setRate(.6);
+                scene.laughing.play();
+            });
+
+            scene.time.delayedCall(6000, () =>{
+                scene.static = scene.add.sprite(-200, -100, 'static1', 0).setOrigin(0,0).setAlpha(.5);
+                scene.static.play('static1');
+                scene.sound.play('static_sfx');
+                scene.static.once('animationcomplete', () =>{
+                    scene.static.play('static2');
+                    scene.static.once('animationcomplete', () =>{
+                        scene.static.play('static3');
+                    });
+                });
+            });
+
+            scene.time.delayedCall(10000, () =>{
+                scene.game.sound.stopAll();
+
+                scene.scene.stop();
+                scene.scene.launch("endScene", { ending: "PATH 2" });
+            });
         });
 
 
@@ -727,6 +875,10 @@ class play extends Phaser.Scene {
         this.clickhere = this.add.rectangle(153, 370, 100, 25, 0xffffff).setAlpha(0.01).setInteractive({ cursor: 'pointer' });
         this.dude = this.add.sprite(153, 400, 'dude').setAlpha(0).setScale(0.5).setOrigin(0, 0);
         this.url3_2 = this.add.text(152, 127, "https://www.madame-ferebi.com", textStyle).setOrigin(0, 0);
+        this.text_doc_con = this.add.container();
+        this.virus_con = this.add.container();
+        this.error_con = this.add.container();
+        this.fail_con = this.add.container();
         this.path3_2.add([this.webpageUI3_2, this.webpage3_2, this.death, this.tower, this.clickhere, this.web3_2close, this.dude, this.url3_2]);
 
         let death_tween = this.add.tween({
@@ -745,7 +897,6 @@ class play extends Phaser.Scene {
             repeat: -1,
             yoyo: true
         });
-    // TODO add tween for dude's alpha on clicking clickhere
 
         // path3_3
         this.webpageUI3_3 = this.add.sprite(70, 100, 'ie_window').setOrigin(0, 0).setInteractive();
@@ -754,6 +905,8 @@ class play extends Phaser.Scene {
         this.web3_3close = new clickable(this, 625, 104, 'close_button').setScale(.8);
         this.url3_3 = this.add.text(152, 127, "http://www.the-pantaloon-inquirer.net/feb_28_2002-AnHinY2/", textStyle).setOrigin(0, 0);
         this.path3_3.add([this.webpageUI3_3, this.webpage3_3, this.link3_3, this.web3_3close, this.url3_3]);
+
+            
 
         //path3_3 animation config
         this.anims.create({
@@ -819,6 +972,11 @@ class play extends Phaser.Scene {
             scene.computer.add([scene.path3_3]);
             scene.computer.remove(scene.path3_2);
             scene.path3_2.setPosition(2000, 0);
+            // destroys popups 
+            scene.text_doc_con.destroy();
+            scene.virus_con.destroy();
+            scene.error_con.destroy();
+            scene.fail_con.destroy();
 
             //link 3_2 setup acts like a constructor for page3_3
             //popus are initiated here after loading path3_3 container
@@ -826,17 +984,16 @@ class play extends Phaser.Scene {
             popupMaster();
 
             // plays glitch_effect when opening page 
-            // TODO fix x and y based on window position
             let glitch = scene.add.sprite(scene.webpage3_3.x, scene.webpage3_3.y, 'glitch_effect').setOrigin(0, 0);
             scene.path3_3.add(glitch);
             glitch.anims.play('glitch');
+            scene.sound.play('glitch_sfx');
             glitch.on('animationcomplete', () => { // callback after anim completes
                 glitch.anims.play('glitch');
                 glitch.destroy();
             });
 
             // plays glitch_effect_2 when opening page 
-            // TODO change when animation plays 
             let glitch2 = scene.add.sprite(monitorBorderX, monitorBorderY, 'glitch_effect2').setOrigin(0, 0);
             scene.computer.add(glitch2);
             glitch2.anims.play('glitch2');
@@ -848,9 +1005,30 @@ class play extends Phaser.Scene {
 
         // LINK3_3 SETUP
         scene.link3_3.on('pointerdown', function() {
-            scene.game.sound.stopAll();
-            scene.scene.stop();
-            scene.scene.launch("endScene", { ending: "PATH 3" });
+            scene.spaceKey.enabled = false;
+            scene.cutscene = true;
+            
+            scene.cameras.main.setBounds(-game.config.width / 5, // x: -160
+                -game.config.height / 20, // y: -30
+                game.config.width * 1.5, // width: 1200 (therefore, can scroll right until 1040 pixels)
+                game.config.height * 1.1 + 20); // height: 680 (therefore, can scroll down until 650 pixels)
+
+            scene.computer.setY(180);
+            scene.computer.setX(-150);
+            scene.computer.setScale(.75);
+
+            if (scene.instructions) {
+                scene.instructions.destroy();
+            }
+
+            
+
+            scene.time.delayedCall(10000, () =>{
+                scene.game.sound.stopAll();
+
+                scene.scene.stop();
+                scene.scene.launch("endScene", { ending: "PATH 3" });
+            });
         });
 
         //////////////////////////////
@@ -969,7 +1147,7 @@ class play extends Phaser.Scene {
 
             // path 1
             if (i == 0) {
-
+                scene.light.setAlpha(0.5);
                 // if first time
                 if (!once) {
                     // play bg_path1 and loops continuously
@@ -978,7 +1156,6 @@ class play extends Phaser.Scene {
                     // checks when one song is complete
                     scene.bg_path1.forEach(element => {
                         element.on('complete', function() {
-                            console.log(j);
                             j = scene.getRandomIntInclusive(0, 3);
                             scene.bg_path1[j].play();
                         })
@@ -1014,7 +1191,8 @@ class play extends Phaser.Scene {
 
             // path 2
             else if (i == 1) {
-
+                scene.window_people.setPosition(1013, 315);
+                scene.window_person1.setPosition(875, 405);
                 // if first time
                 if (!once) {
                     // play bg_path2 and loops continously
@@ -1023,7 +1201,6 @@ class play extends Phaser.Scene {
                     // checks when one song is complete
                     scene.bg_path2.forEach(element => {
                         element.on('complete', function() {
-                            console.log(j);
                             j = scene.getRandomIntInclusive(0, 3);
                             scene.bg_path2[j].play();
                         })
@@ -1046,11 +1223,7 @@ class play extends Phaser.Scene {
                 scene.path2_1.setRandomPosition(10, -50, 100, 50);
                 scene.computer.add([scene.path2_1]);
 
-                // after 20 seconds, show the link to next page
-                // TODO change to flashing loop 
-                scene.time.delayedCall(1, () => {
-                    scene.link2_1.setAlpha(1);
-                });
+                link_tween.play();
             }
 
             // path 3
@@ -1064,7 +1237,6 @@ class play extends Phaser.Scene {
                     // checks when one song is complete
                     scene.bg_path3.forEach(element => {
                         element.on('complete', function() {
-                            console.log(j);
                             j = scene.getRandomIntInclusive(0, 3);
                             scene.bg_path3[j].play();
                         })
@@ -1219,6 +1391,7 @@ class play extends Phaser.Scene {
 
                 if (i == 0) {
                     scene.boom.play();
+                    scene.window_people.setPosition(1013, 315);
                 }
 
                 // after 3 seconds of clicking on the email link for any path
@@ -1284,16 +1457,74 @@ class play extends Phaser.Scene {
             scene.computer.remove(scene.path3_2);
             scene.path3_2.setPosition(2000, 0);
             scene.webpage3_2.setTint(0xff0000);
+            scene.text_doc_con.setPosition(0, 0);
+            // random number determines which text doc pops up 
+            scene.text_val = Phaser.Math.Between(0, 3);
+            if (scene.text_val == 0){
+                scene.text_doc = scene.add.sprite(50, 50, 'text_doc1').setOrigin(0, 0);
+            }
+            else if (scene.text_val == 1){
+                scene.text_doc = scene.add.sprite(50, 50, 'text_doc2').setOrigin(0, 0);
+            }
+            else if (scene.text_val == 2){
+                scene.text_doc = scene.add.sprite(50, 50, 'text_doc3').setOrigin(0, 0);
+            }
+            else if (scene.text_val == 3){
+                scene.text_doc = scene.add.sprite(50, 50, 'text_doc4').setOrigin(0, 0);
+            }
+            scene.text_close = new clickable(scene, 442, 58, 'close_button');
+            scene.text_doc_con.add([scene.text_doc, scene.text_close]); 
+            // closes popup text box
+            scene.text_close.on('pointerdown', function() {
+                scene.text_doc_con.setPosition(2000, 0);
+            })
         });
 
         // when red "CLICK HERE" is clicked
         this.clickhere.on('pointerdown', function() {
             scene.sound.play('click');
             scene.sound.play('crackle');
-
             scene.room.setTint(0x110000);
+            scene.add.tween({
+                targets: [scene.dude],
+                ease: 'Linear',
+                alpha: '+=1',
+            });
+            // creates random popup upon clicking 'click here' 
+            scene.popup_val = Phaser.Math.Between(0, 2);
+            if (scene.popup_val == 0) {
+                // virus popup 
+                scene.virus_con.setPosition(0, 0);
+                scene.virus_popup = scene.add.sprite(300, 300, 'virus_popup');
+                scene.virus_close = new clickable(scene, 516, 285, 'close_button');
+                scene.virus_con.add([scene.virus_popup, scene.virus_close]);
 
-            scene.dude.setAlpha(1);
+                scene.virus_close.on('pointerdown', function() {
+                    scene.virus_con.setPosition(2000, 0);
+                })
+            }
+            else if (scene.popup_val == 1) {
+                // critical error
+                scene.error_con.setPosition(0, 0);
+                scene.critical_error = scene.add.sprite(300, 300, 'critical_error');
+                scene.error_close = new clickable(scene, 352, 289, 'close_button');
+                scene.error_con.add([scene.critical_error, scene.error_close]);
+
+                scene.error_close.on('pointerdown', function() {
+                    scene.error_con.setPosition(2000, 0);
+                })
+            }
+            else if (scene.popup_val == 2) {
+                // fail message
+                scene.fail_con.setPosition(0, 0);
+                scene.fail_message = scene.add.sprite(300, 300, 'fail_message');
+                scene.fail_message_okay = new clickable(scene, 300, 350, 'fail_message_okay');
+                scene.fail_con.add([scene.fail_message, scene.fail_message_okay]); 
+
+                scene.fail_message_okay.on('pointerdown', function() {
+                    scene.fail_con.setPosition(2000, 0);
+                })
+            }
         })
 
     }
@@ -1322,7 +1553,12 @@ class play extends Phaser.Scene {
         popup.setInteractive({ cursor: 'pointer' });
         path.add(popup);
 
-        scene.sound.play('popup');
+        scene.popup = this.sound.add(
+            'popup', {
+                volume: 0.3,
+            }
+        );
+        scene.popup.play();
 
         popup.on('pointerdown', function() {
             scene.sound.play('click');
@@ -1351,7 +1587,7 @@ class play extends Phaser.Scene {
             if (this.instructions) {
                 this.instructions.destroy();
             }
-        } else { // can only see screen monitor when not pressing space
+        } else if(this.cutscene == false) { // can only see screen monitor when not pressing space
             this.cameras.main.setBounds(
                 0, // x: 0
                 0, // y: 0

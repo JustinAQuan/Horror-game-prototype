@@ -35,8 +35,8 @@ class end extends Phaser.Scene {
                 frameRate: 12
             });
 
-            this.skynet = this.add.sprite(0, 0, 'SKYNET').setOrigin(0,0).setScale(1.5);
-            this.skynet.play('qwalker');
+            this.qwalker = this.add.sprite(0, 0, 'SKYNET').setOrigin(0,0).setScale(1.5);
+            this.qwalker.play('qwalker');
         }
 
         else if(this.ending == "PATH 3"){
@@ -47,8 +47,8 @@ class end extends Phaser.Scene {
                 frameRate: 12
             });
 
-            this.skynet = this.add.sprite(0, 0, 'SKYNET').setOrigin(0,0).setScale(1.5);
-            this.skynet.play('kuku');
+            this.kuku = this.add.sprite(0, 0, 'SKYNET').setOrigin(0,0).setScale(1.5);
+            this.kuku.play('kuku');
         }
 
         else{
@@ -60,17 +60,19 @@ class end extends Phaser.Scene {
         }
 
         this.retryblock = this.add.rectangle(game.config.width / 2, game.config.height / 2 + 160, 300, 60, 0x666666).setOrigin(.5,.5).setInteractive( {cursor: 'pointer'} );
-        this.retry = this.add.text(game.config.width / 2, game.config.height / 2 + 156, "PLAY AGAIN?", {fontFamily: 'VT323', fontSize: "50px", color: 0xffffff}).setOrigin(.5,.5).setInteractive( {cursor: 'pointer'} );
+        this.retry = this.add.text(game.config.width / 2, game.config.height / 2 + 156, "REBOOT?", {fontFamily: 'VT323', fontSize: "50px", color: 0xffffff}).setOrigin(.5,.5).setInteractive( {cursor: 'pointer'} );
     
         this.retryblock.on('pointerdown', function(){
             scene.sound.play('click');
             scene.scene.stop();
+            restart = true;
             scene.scene.wake("menuScene");
         });
 
         this.retry.on('pointerdown', function(){
             scene.sound.play('click');
             scene.scene.stop();
+            restart = true;
             scene.scene.wake("menuScene");
         });
     }
