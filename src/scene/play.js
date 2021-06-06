@@ -55,81 +55,26 @@ class play extends Phaser.Scene {
             }
         );
 
-        this.bg_path1_1 = this.sound.add(
-            'bg_path1_1', {
-                volume: .5,
-            }
-        );
+        this.bg_path1 = [
+            this.sound.add('bg_path1_1', { volume: .5 }),
+            this.sound.add('bg_path1_2', { volume: .5 }),
+            this.sound.add('bg_path1_3', { volume: .5 }),
+            this.sound.add('bg_path1_4', { volume: .5 }),
+        ];
 
-        this.bg_path1_2 = this.sound.add(
-            'bg_path1_2', {
-                volume: .5,
-            }
-        );
+        this.bg_path2 = [
+            this.sound.add('bg_path2_1', { volume: .5 }),
+            this.sound.add('bg_path2_2', { volume: 1 }),
+            this.sound.add('bg_path2_3', { volume: 1 }),
+            this.sound.add('bg_path2_4', { volume: .5 }),
+        ];
 
-        this.bg_path1_3 = this.sound.add(
-            'bg_path1_3', {
-                volume: .5,
-            }
-        );
-
-        this.bg_path1_4 = this.sound.add(
-            'bg_path1_4', {
-                volume: .5,
-            }
-        );
-
-        this.bg_path2_1 = this.sound.add(
-            'bg_path2_1', {
-                volume: .5,
-            }
-        );
-
-        this.bg_path2_2 = this.sound.add(
-            'bg_path2_2', {
-                volume: 1,
-            }
-        );
-
-        this.bg_path2_3 = this.sound.add(
-            'bg_path2_3', {
-                volume: 1,
-            }
-        );
-
-        this.bg_path2_4 = this.sound.add(
-            'bg_path2_4', {
-                volume: .5,
-            }
-        );
-
-        this.bg_path3_1 = this.sound.add(
-            'bg_path3_1', {
-                volume: .5,
-            }
-        );
-
-        this.bg_path3_2 = this.sound.add(
-            'bg_path3_2', {
-                volume: .5,
-            }
-        );
-
-        this.bg_path3_3 = this.sound.add(
-            'bg_path3_3', {
-                volume: .5,
-            }
-        );
-
-        this.bg_path3_4 = this.sound.add(
-            'bg_path3_4', {
-                volume: .5,
-            }
-        );
-
-        this.bg_path1 = [this.bg_path1_1, this.bg_path1_2, this.bg_path1_3, this.bg_path1_4];
-        this.bg_path2 = [this.bg_path2_1, this.bg_path2_2, this.bg_path2_3, this.bg_path2_4];
-        this.bg_path3 = [this.bg_path3_1, this.bg_path3_2, this.bg_path3_3, this.bg_path3_4];
+        this.bg_path3 = [
+            this.sound.add('bg_path3_1', { volume: .5 }),
+            this.sound.add('bg_path3_2', { volume: .5 }),
+            this.sound.add('bg_path3_3', { volume: .5 }),
+            this.sound.add('bg_path3_4', { volume: .5 }),
+        ];
 
         // 3_1 music 
         this.web_mus1 = this.sound.add(
@@ -1471,17 +1416,13 @@ class play extends Phaser.Scene {
             scene.path3_2.setPosition(2000, 0);
             scene.webpage3_2.setTint(0xff0000);
             scene.text_doc_con.setPosition(0, 0);
+
             // random number determines which text doc pops up 
-            scene.text_val = Phaser.Math.Between(0, 3);
-            if (scene.text_val == 0) {
-                scene.text_doc = scene.add.sprite(50, 50, 'text_doc1').setOrigin(0, 0);
-            } else if (scene.text_val == 1) {
-                scene.text_doc = scene.add.sprite(50, 50, 'text_doc2').setOrigin(0, 0);
-            } else if (scene.text_val == 2) {
-                scene.text_doc = scene.add.sprite(50, 50, 'text_doc3').setOrigin(0, 0);
-            } else if (scene.text_val == 3) {
-                scene.text_doc = scene.add.sprite(50, 50, 'text_doc4').setOrigin(0, 0);
-            }
+            let text_val = scene.getRandomIntInclusive(0, 3);
+            let textDocCollection = ['text_doc1', 'text_doc2', 'text_doc3', 'text_doc4'];
+            //populating the text_doc variable
+            scene.text_doc = scene.add.sprite(50, 50, textDocCollection[text_val]).setOrigin(0, 0);
+
             scene.text_close = new clickable(scene, 442, 58, 'close_button');
             scene.text_doc_con.add([scene.text_doc, scene.text_close]);
             // closes popup text box
@@ -1563,7 +1504,6 @@ class play extends Phaser.Scene {
         let y = scene.getRandomIntInclusive(bottom, bounds.top);
 
         popup.setPosition(x, y);
-
         popup.setInteractive({ cursor: 'pointer' });
         path.add(popup);
 
