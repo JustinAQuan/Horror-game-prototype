@@ -7,7 +7,7 @@ class play extends Phaser.Scene {
         let scene = this;
         this.curr = null;
         this.cutscene = false;
-        //this.web3_3signal = true;
+        this.web3_3signal = true;
 
         this.emailFSD = this.cache.json.get('emailHeader');
 
@@ -953,14 +953,14 @@ class play extends Phaser.Scene {
         });
 
         function popupMaster(clickable) {
-            //let signal_ = scene.web3_3signal;
-            if (clickable) {
+            let signal_ = scene.web3_3signal;
+            if (clickable && signal_) {
                 scene.time.delayedCall(2500, () => {
                     scene.createPopup(true, 'popup');
                     popupMaster(true);
                 });
             } else {
-                scene.time.delayedCall(1000, () => {
+                scene.time.delayedCall(100, () => {
                     scene.createPopup(false, 'popup_virus');
                     popupMaster(false);
                 });
@@ -983,7 +983,7 @@ class play extends Phaser.Scene {
 
             //link 3_2 setup acts like a constructor for page3_3
             //popus are initiated here after loading path3_3 container
-            //scene.web3_3signal = true;
+            scene.web3_3signal = true;
             popupMaster(true);
 
             // plays glitch_effect when opening page 
@@ -1012,19 +1012,18 @@ class play extends Phaser.Scene {
             scene.cutscene = true;
 
             scene.sound.play('virus_jingle');
+            scene.web3_3signal = false;
             popupMaster(false);
 
-            scene.time.delayedCall(12000, () => {
-                scene.cameras.main.setBounds(-game.config.width / 5, // x: -160
-                    -game.config.height / 20, // y: -30
-                    game.config.width * 1.5, // width: 1200 (therefore, can scroll right until 1040 pixels)
-                    game.config.height * 1.1 + 20); // height: 680 (therefore, can scroll down until 650 pixels)
+            scene.cameras.main.setBounds(-game.config.width / 5, // x: -160
+                -game.config.height / 20, // y: -30
+                game.config.width * 1.5, // width: 1200 (therefore, can scroll right until 1040 pixels)
+                game.config.height * 1.1 + 20); // height: 680 (therefore, can scroll down until 650 pixels)
 
-                scene.computer.setY(180);
-                scene.computer.setX(-150);
-                scene.computer.setScale(.75);
+            scene.computer.setY(180);
+            scene.computer.setX(-150);
+            scene.computer.setScale(.75);
 
-            });
 
             if (scene.instructions) {
                 scene.instructions.destroy();
