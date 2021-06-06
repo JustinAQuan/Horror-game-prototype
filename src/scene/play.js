@@ -479,6 +479,8 @@ class play extends Phaser.Scene {
         scene.link1_3.on('pointerdown', function() {
             scene.spaceKey.enabled = false;
             scene.cutscene = true;
+            scene.bg_1.stop();
+            scene.bg_1_2.stop();
 
             scene.cameras.main.setBounds(-game.config.width / 5, // x: -160
                 -game.config.height / 20, // y: -30
@@ -623,6 +625,9 @@ class play extends Phaser.Scene {
         scene.link2_3.on('pointerdown', function() {
             scene.spaceKey.enabled = false;
             scene.cutscene = true;
+            scene.bg_1.stop();
+            scene.bg_1_2.stop();
+            scene.bg_path2[j].stop();
             scene.window_person3.setPosition(2000, 0);
             scene.person_anim.anims.play('person_anim');
 
@@ -966,7 +971,9 @@ class play extends Phaser.Scene {
         scene.link3_3.on('pointerdown', function() {
             scene.spaceKey.enabled = false;
             scene.cutscene = true;
-            scene.bg_path3[j].pause();
+            scene.bg_1.stop();
+            scene.bg_1_2.stop();
+            scene.bg_path3[j].stop();
 
             scene.virus_jingle = scene.sound.add(
                 'virus_jingle', {
