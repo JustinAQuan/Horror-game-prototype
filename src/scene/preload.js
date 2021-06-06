@@ -174,7 +174,7 @@ class preload extends Phaser.Scene {
         this.load.image('fail_message', './assets/art/Desktop/fail_message.png');
         this.load.image('fail_message_okay', './assets/art/Desktop/fail_message_okay.png');
 
-        
+
         // LOADS AUDIO
 
         // music
@@ -219,6 +219,8 @@ class preload extends Phaser.Scene {
         this.load.audio('static_sfx', './assets/sound/event_sfx/static_sfx.wav');
         this.load.audio('glitch_sfx', './assets/sound/event_sfx/glitch_sfx.wav');
         this.load.audio('popup', './assets/sound/event_sfx/sfx_popup.wav');
+        this.load.audio('popup_virus', './assets/sound/event_sfx/virus_sfx.wav');
+        this.load.audio('virus_jingle', './assets/sound/event_sfx/virus_jingle.wav');
 
         // 3_1 web music 
         this.load.audio('web_mus1', './assets/sound/web_audio/web_mus1.wav');
@@ -229,10 +231,10 @@ class preload extends Phaser.Scene {
         // LOADS JSON
         this.load.json('emailHeader', './assets/json/email.json');
 
-        
+
         // LOAD STARTERS
         this.load.image('SKYNET', './assets/art/Anims/SKYNET_START.jpg');
-        
+
 
         // LOADS TEXTURE ATLAS
         this.load.atlas('KUKU_anims', './assets/art/Anims/KUKU.png', './assets/art/Anims/KUKU.json');
