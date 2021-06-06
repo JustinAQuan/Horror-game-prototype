@@ -49,7 +49,7 @@ class play extends Phaser.Scene {
 
         this.bg_1_2 = this.sound.add(
             'bg_1', {
-                volume: .5,
+                volume: .75,
                 loop: true,
                 rate: .35
             }
@@ -966,8 +966,14 @@ class play extends Phaser.Scene {
         scene.link3_3.on('pointerdown', function() {
             scene.spaceKey.enabled = false;
             scene.cutscene = true;
+            scene.bg_path3[j].pause();
 
-            scene.sound.play('virus_jingle');
+            scene.virus_jingle = scene.sound.add(
+                'virus_jingle', {
+                    volume: 0.75,
+                }
+            );
+            scene.virus_jingle.play();
             scene.web3_3signal = false;
             popupMaster(false);
 
