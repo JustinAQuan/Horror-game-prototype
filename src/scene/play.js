@@ -906,7 +906,7 @@ class play extends Phaser.Scene {
 
         function popupMaster(clickable) {
             let signal_ = scene.web3_3signal;
-            if (clickable && signal_) {
+            if (clickable || signal_) {
                 scene.time.delayedCall(2500, () => {
                     scene.createPopup(true, 'popup', {
                         left: 77,
